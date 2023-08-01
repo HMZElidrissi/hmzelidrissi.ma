@@ -62,7 +62,7 @@ export default function PostLayout({ children, frontMatter, next, prev }) {
                           <dd>
                             <Link
                               href={siteMetadata.twitter}
-                              className="text-blue-500 hover:text-blue-600 "
+                              className="text-purple-500 hover:text-purple-600 "
                             >
                               {siteMetadata.twitter.replace('https://twitter.com/', '@')}
                             </Link>
@@ -103,7 +103,7 @@ export default function PostLayout({ children, frontMatter, next, prev }) {
                         <h2 className="text-xs tracking-wide text-gray-500 uppercase ">
                           Previous Article
                         </h2>
-                        <div className="text-blue-500 hover:text-blue-600 ">
+                        <div className="text-purple-500 hover:text-purple-600 ">
                           <Link href={`/blog/${prev.slug}`}>{prev.title}</Link>
                         </div>
                       </div>
@@ -113,7 +113,7 @@ export default function PostLayout({ children, frontMatter, next, prev }) {
                         <h2 className="text-xs tracking-wide text-gray-500 uppercase ">
                           Next Article
                         </h2>
-                        <div className="text-blue-500 hover:text-blue-600 ">
+                        <div className="text-purple-500 hover:text-purple-600 ">
                           <Link href={`/blog/${next.slug}`}>{next.title}</Link>
                         </div>
                       </div>
@@ -122,7 +122,7 @@ export default function PostLayout({ children, frontMatter, next, prev }) {
                 )}
               </div>
               <div className="pt-4 xl:pt-8">
-                <Link href="/" className="text-blue-500 hover:text-blue-600 ">
+                <Link href="/" className="text-purple-500 hover:text-purple-600 ">
                   &larr; Back to the blog
                 </Link>
               </div>

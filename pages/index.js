@@ -25,7 +25,7 @@ export default function Home({ posts, initialDisplayPosts, pagination }) {
         description={siteMetadata.description}
         url={`${siteMetadata.siteUrl}`}
       />
-      <div className="max-w-xl font-bold mx-auto text-center m-4">
+      <div className="max-w-xl font-bold mx-auto text-center mt-3">
         <Image
           src="/static/images/avatar.png"
           alt="Picture of the author"

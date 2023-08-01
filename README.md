@@ -1,25 +1,19 @@
-# Using this repository
+# Personal Blog - hmzelidrissi.me
 
-You can run the website locally, or you can run it in a container runtime. We strongly recommend using the container runtime, as it gives deployment consistency with the live website.
+This is the source code for my personal blog hosted on Vercel at https://hmzelidrissi.me. The blog is based on an open-source blog template from [yezz123/Blog](https://github.com/yezz123/Blog), which I have adapted and customized to suit my needs and preferences.
 
-## Development
+## Blog Description
 
-First, run the development server:
+My personal blog is a platform where I share my thoughts, ideas, experiences, and insights on various topics that interest me. It serves as a space for me to express myself, connect with others, and contribute to meaningful discussions within the community.
 
-```bash
-npm start
-# or
-npm run dev
-```
+## Deployment
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The blog is automatically deployed to Vercel whenever changes are pushed to the `main` branch on GitHub. This ensures that the latest version of the blog is always live and accessible to visitors.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+---
 
-## Deploy
+Thank you for visiting my personal blog! I hope you find the content interesting and insightful. If you have any questions or would like to get in touch, feel free to reach out to me through the contact information provided on the blog.
 
-**Vercel**  
-The easiest way to deploy the template is to use the [Vercel Platform](https://vercel.com) from the creators of Next.js. Check out the [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Happy reading!
 
-**Netlify / Github Pages / Firebase etc.**  
-As the template uses `next/image` for image optimization, additional configurations has to be made to deploy on other popular static hosting websites like [Netlify](https://www.netlify.com/) or [Github Pages](https://pages.github.com/). An alternative image optimization provider such as Imgix, Cloudinary or Akamai has to be used. Alternatively, replace the `next/image` component with a standard `<img>` tag. See [`next/image` documentation](https://nextjs.org/docs/basic-features/image-optimization) for more details.
+~ Hamza

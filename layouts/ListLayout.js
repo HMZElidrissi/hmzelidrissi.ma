@@ -53,7 +53,10 @@ export default function ListLayout({ posts, title, initialDisplayPosts = [], pag
           {displayPosts.map((frontMatter) => {
             const { slug, date, title, summary, tags } = frontMatter
             return (
-              <li key={slug} className="py-4 hover:bg-gray-200">
+              <li
+                key={slug}
+                className="transition-colors duration-300 py-4 px-6 hover:bg-gray-200 "
+              >
                 <article className="space-y-2 xl:grid xl:grid-cols-4 xl:space-y-0 xl:items-baseline">
                   <dl>
                     <dt className="sr-only">Published on</dt>
@@ -80,6 +83,7 @@ export default function ListLayout({ posts, title, initialDisplayPosts = [], pag
                       {summary}
                     </div>
                   </div>
+                  <hr></hr>
                 </article>
               </li>
             )

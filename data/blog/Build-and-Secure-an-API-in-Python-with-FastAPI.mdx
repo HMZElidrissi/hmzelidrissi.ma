@@ -142,7 +142,7 @@ from sqlalchemy.orm import relationship
 - The Blogs Table :
 
 ```py
-class Blog(Base):
+class Index(Base):
     __tablename__ = "blogs"
     id = Column(Integer, primary_key=True, index=True)
     title = Column(String)
@@ -160,7 +160,7 @@ class User(Base):
     name = Column(String)
     email = Column(String)
     password = Column(String)
-    blogs = relationship("Blog", back_populates="creator")
+    blogs = relationship("Index", back_populates="creator")
 ```
 
 ### schemas :
@@ -182,7 +182,7 @@ class BlogBase(BaseModel):
     title: str
     body: str
 
-class Blog(BlogBase):
+class Index(BlogBase):
     class Config():
         orm_mode = True
 
@@ -194,7 +194,7 @@ class User(BaseModel):
 class ShowUser(BaseModel):
     name: str
     email: str
-    blogs: List[Blog] = []
+    blogs: List[Index] = []
 
     class Config():
         orm_mode = True
@@ -253,7 +253,7 @@ def get_all(db: Session):
 ```
 
 - Now lets Create the APi's for the `blog` where we gonna add the Requirements like `Create`, `update`, `Show`, `Delete`.
-- `Blog.py`:
+- `Index.py`:
 
 ```py
 from sqlalchemy.orm import Session
@@ -262,47 +262,47 @@ from models import models
 from fastapi import HTTPException, status
 
 def get_all(db: Session):
-    blogs = db.query(models.Blog).all()
+    blogs = db.query(models.Index).all()
     return blogs
 
-def create(request: schemas.Blog, db: Session):
-    new_blog = models.Blog(title=request.title, body=request.body, user_id=1)
+def create(request: schemas.Index, db: Session):
+    new_blog = models.Index(title=request.title, body=request.body, user_id=1)
     db.add(new_blog)
     db.commit()
     db.refresh(new_blog)
     return new_blog
 
 def destroy(id: int, db: Session):
-    blog_to_delete = db.query(models.Blog).filter(models.Blog.id == id)
+    blog_to_delete = db.query(models.Index).filter(models.Index.id == id)
 
     if not blog_to_delete.first():
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
-                            detail=f"Blog with id {id} not found.")
+                            detail=f"Index with id {id} not found.")
     blog_to_delete.delete(synchronize_session=False)
     db.commit()
     return {'done'}
 
-def update(id: int, request: schemas.Blog, db: Session):
-    blog = db.query(models.Blog).filter(models.Blog.id == id)
+def update(id: int, request: schemas.Index, db: Session):
+    blog = db.query(models.Index).filter(models.Index.id == id)
     if not blog.first():
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
-                            detail=f"Blog with id {id} not found")
+                            detail=f"Index with id {id} not found")
     blog.update(request.__dict__)
     db.commit()
     return 'updated'
 
 def show(id: int, db: Session):
-    blog = db.query(models.Blog).filter(models.Blog.id == id).first()
+    blog = db.query(models.Index).filter(models.Index.id == id).first()
     if blog:
         return blog
     else:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
-                            detail=f"Blog with the id {id} is not available")
+                            detail=f"Index with the id {id} is not available")
 ```
 
 ### Core :
 
-- In this folder we gonna Create 3 files `Auth.py` and `Blog.py` and `User.py`, all of this files are the routes for our API.
+- In this folder we gonna Create 3 files `Auth.py` and `Index.py` and `User.py`, all of this files are the routes for our API.
 - We are gonna Start by `User.py`, where we Create a routes for `create_user`, `get_users`, `get_user_by_id`.
 - `User.py`:
 
@@ -334,8 +334,8 @@ def get_user_by_id(id: int, db: Session = Depends(get_db)):
     return user.show(id, db)
 ```
 
-- Now we need to add the `Blog.py`, relate to the API where we provide all Requirements.
-- `Blog.py`:
+- Now we need to add the `Index.py`, relate to the API where we provide all Requirements.
+- `Index.py`:
 
 ```py
 from schema.oa2 import get_current_user
@@ -354,7 +354,7 @@ def get_all_blogs(db: Session = Depends(get_db), current_user: schemas.User = De
     return blog.get_all(db)
 
 @router.post("/", status_code=status.HTTP_201_CREATED)
-def create(request: schemas.Blog, db: Session = Depends(get_db), current_user: schemas.User = Depends(get_current_user)):
+def create(request: schemas.Index, db: Session = Depends(get_db), current_user: schemas.User = Depends(get_current_user)):
     return blog.create(request, db)
 
 @router.get("/{id}", status_code=status.HTTP_200_OK, response_model=schemas.ShowBlog)
@@ -366,7 +366,7 @@ def delete_blog(id: int, db: Session = Depends(get_db), current_user: schemas.Us
     return blog.destroy(id, db)
 
 @router.put("/{id}", status_code=status.HTTP_202_ACCEPTED)
-def update_blog(id: int, request: schemas.Blog, db: Session = Depends(get_db), current_user: schemas.User = Depends(get_current_user)):
+def update_blog(id: int, request: schemas.Index, db: Session = Depends(get_db), current_user: schemas.User = Depends(get_current_user)):
     return blog.update(id, request, db)
 ```
 
@@ -512,7 +512,7 @@ models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI(
     title="SecureAPI",
-    description="Hello thank you for reading my Blog UwU",
+    description="Hello thank you for reading my Index UwU",
     version="1.0.0",)
 
 app.include_router(blog.router)

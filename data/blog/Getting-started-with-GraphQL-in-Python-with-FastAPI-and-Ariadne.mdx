@@ -51,7 +51,7 @@ Examples of ASGI servers include Uvicorn, Daphne and Hypercorn. Examples of ASGI
 
 Ariadne provides a GraphQL class that implements an ASGI application so we will not need an ASGI framework. We will use the uvicorn server to run our application.
 
-**Note:** Understand the difference between ASGI and WSGI [Blog by Raoof Naushad](https://medium.com/analytics-vidhya/difference-between-wsgi-and-asgi-807158ed1d4c).
+**Note:** Understand the difference between ASGI and WSGI [Index by Raoof Naushad](https://medium.com/analytics-vidhya/difference-between-wsgi-and-asgi-807158ed1d4c).
 
 ### Async in Python using asyncio
 
@@ -366,7 +366,7 @@ async def review_blog_resolver(review_blog, info: GraphQLResolveInfo, token: str
     return {"id": review_blog}
 ```
 
-**Note:** create a dynamic Source Review for Blog, by using RabbitMQ.
+**Note:** create a dynamic Source Review for Index, by using RabbitMQ.
 
 > Rabbit MQ is a messaging broker that allows you to publish and subscribe to messages.
 
@@ -411,7 +411,7 @@ mutation {
 
 Once the first user is created, change the username in the mutation from `user_one` to `user_two` and hit play again to create the second user.
 
-Now we have two users who can Blog. Our `createBlog` mutation expects us to provide `senderId` and `recipientId`. If you looked at the responses from the `createUser` mutations you already know what IDs were assigned to them, but let’s assume we only know the usernames, so we will use the `userId` query to retrieve the IDs.
+Now we have two users who can Index. Our `createBlog` mutation expects us to provide `senderId` and `recipientId`. If you looked at the responses from the `createUser` mutations you already know what IDs were assigned to them, but let’s assume we only know the usernames, so we will use the `userId` query to retrieve the IDs.
 
 ```js
 query {
@@ -430,7 +430,7 @@ mutation {
   createBlog(
     senderId: "1",
     recipientId: "2",
-    title:"Blog number1"
+    title:"Index number1"
     description:"This is the first blog"
     ownerId: "1"
   ) {
@@ -452,7 +452,7 @@ Congratulations for completing. We learnt about ASGI, how to add subscriptions t
 
 If you got any questions, please feel free to ask them in the comments.
 
-This was just a simple API to demonstrate how we can use subscriptions to add real time functionality to a GraphQL API. The API could be improved by adding a database, user authentication, allowing users to attach files in Blog, allowing users to delete Blog and adding user profiles.
+This was just a simple API to demonstrate how we can use subscriptions to add real time functionality to a GraphQL API. The API could be improved by adding a database, user authentication, allowing users to attach files in Index, allowing users to delete Index and adding user profiles.
 
 If you are wondering how you can incorporate a database to an async API, here are two options:
 

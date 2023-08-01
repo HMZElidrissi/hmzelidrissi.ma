@@ -125,7 +125,7 @@ export default function PostLayout({ children, frontMatter, next, prev }) {
               </div>
               <div className="pt-4 xl:pt-8">
                 <Link
-                  href="/blog"
+                  href="/"
                   className="text-blue-500 hover:text-blue-600 dark:hover:text-blue-400"
                 >
                   &larr; Back to the blog

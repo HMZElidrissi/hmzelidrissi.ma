@@ -11,13 +11,13 @@ const About = () => {
         </h1>
       </div>
       <div className="max-w-lg">
-        <h1 className="text-gray-600 font-semibold text-3xl">👋 Hello!</h1>
+        <h1 className="font-mono text-gray-600 font-semibold text-3xl">👋 Hello!</h1>
         <br />
-        <p className="text-gray-600 font-semibold">{siteMetadata.description}</p>
+        <p className="font-mono text-gray-600 font-semibold">{siteMetadata.description}</p>
         <br />
-        <p className="text-gray-600 font-semibold">{siteMetadata.websiteDescription}</p>
+        <p className="font-mono text-gray-600 font-semibold">{siteMetadata.websiteDescription}</p>
         <br />
-        <p className="text-gray-600">{siteMetadata.contactInvite}</p>
+        <p className="font-mono text-gray-600">{siteMetadata.contactInvite}</p>
         <div className="mt-6 flex space-x-4">
           <SocialIcon kind="linkedin" href={siteMetadata.linkedin} />
           <SocialIcon kind="twitter" href={siteMetadata.twitter} />

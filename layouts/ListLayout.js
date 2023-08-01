@@ -83,6 +83,7 @@ export default function ListLayout({ posts, title, initialDisplayPosts = [], pag
                       {summary}
                     </div>
                   </div>
+                  <br></br>
                   <hr></hr>
                 </article>
               </li>

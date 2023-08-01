@@ -17,28 +17,7 @@ const ThemeSwitch = () => {
       type="button"
       className="w-8 h-8 p-1 ml-1 mr-1 rounded sm:ml-4"
       onClick={() => setTheme(defaultTheme)}
-    >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 20 20"
-        fill="currentColor"
-        className="text-gray-900 dark:text-gray-100"
-      >
-        {mounted && theme === 'dark' ? (
-          // SVG for dark mode
-          <path
-            fillRule="evenodd"
-            // ... (dark mode SVG path)
-          />
-        ) : (
-          // SVG for light mode and default
-          <path
-            fillRule="evenodd"
-            // ... (light mode and default SVG path)
-          />
-        )}
-      </svg>
-    </button>
+    ></button>
   )
 }
 

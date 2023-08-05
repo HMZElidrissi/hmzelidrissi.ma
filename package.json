@@ -39,7 +39,7 @@
     "@next/bundle-analyzer": "12.0.4",
     "@svgr/webpack": "^6.5.1",
     "cross-env": "^7.0.3",
-    "dedent": "^0.7.0",
+    "dedent": "^1.5.1",
     "eslint": "^7.32.0",
     "eslint-config-next": "12.0.4",
     "eslint-config-prettier": "^8.10.0",

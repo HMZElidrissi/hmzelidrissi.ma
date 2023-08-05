@@ -4,7 +4,9 @@ import SectionContainer from '@/components/SectionContainer'
 import { BlogSeo } from '@/components/SEO'
 import Image from '@/components/Image'
 import Tag from '@/components/Tag'
+import MyIcon from '@/components/BackIcon'
 import siteMetadata from '@/data/siteMetadata'
+import BackIcon from '@/components/BackIcon'
 
 const editUrl = (fileName) => `${siteMetadata.siteRepo}/blob/master/data/blog/${fileName}`
 const discussUrl = (slug) =>
@@ -88,7 +90,9 @@ export default function PostLayout({ children, frontMatter, next, prev }) {
               <div className="text-sm font-medium leading-5 divide-gray-200 xl:divide-y xl:col-start-1 xl:row-start-2">
                 {tags && (
                   <div className="py-4 xl:py-8">
-                    <h2 className="text-xs tracking-wide text-gray-500 uppercase">Tags</h2>
+                    <h2 className="text-xs font-semibold tracking-wide text-gray-500 uppercase">
+                      Tags
+                    </h2>
                     <div className="flex flex-wrap">
                       {tags.map((tag) => (
                         <Tag key={tag} text={tag} />
@@ -100,7 +104,7 @@ export default function PostLayout({ children, frontMatter, next, prev }) {
                   <div className="flex justify-between py-4 xl:block xl:space-y-8 xl:py-8">
                     {prev && (
                       <div>
-                        <h2 className="text-xs tracking-wide text-gray-500 uppercase ">
+                        <h2 className="text-xs font-semibold tracking-wide text-gray-500 uppercase ">
                           Previous Article
                         </h2>
                         <div className="text-purple-500 hover:text-purple-600 ">
@@ -110,7 +114,7 @@ export default function PostLayout({ children, frontMatter, next, prev }) {
                     )}
                     {next && (
                       <div>
-                        <h2 className="text-xs tracking-wide text-gray-500 uppercase ">
+                        <h2 className="text-xs font-semibold tracking-wide text-gray-500 uppercase ">
                           Next Article
                         </h2>
                         <div className="text-purple-500 hover:text-purple-600 ">
@@ -122,8 +126,8 @@ export default function PostLayout({ children, frontMatter, next, prev }) {
                 )}
               </div>
               <div className="pt-4 xl:pt-8">
-                <Link href="/" className="text-purple-500 hover:text-purple-600 ">
-                  &larr; Back to the blog
+                <Link href="/">
+                  <BackIcon />
                 </Link>
               </div>
             </footer>

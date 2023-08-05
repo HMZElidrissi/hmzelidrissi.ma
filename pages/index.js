@@ -32,10 +32,13 @@ export default function Home({ posts, initialDisplayPosts, pagination }) {
           width={160}
           height={160}
         ></Image>
-        <h1 className="font-sans text-3xl" style={{ color: '#121643' }}>
+        <h1 className="font-sans text-3xl text-blue-600">
           New post every&nbsp;<span className="text-green-400">sometimes</span>.
         </h1>
-        <h2 className="font-mono inline-flex mt-2 text-gray-900 text-opacity-50">
+        <h2
+          className="font-sans text-xl font-thin inline-flex mt-2 text-opacity-50"
+          style={{ color: '#121643' }}
+        >
           By {`${siteMetadata.author}`}
         </h2>
       </div>

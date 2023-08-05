@@ -24,7 +24,9 @@ module.exports = {
           400: '#9ae832',
           100: '#f2f2f2',
         },
-        blue: colors.sky,
+        blue: {
+          600: '#121643',
+        },
         code: {
           yellow: '#ffe484',
           purple: '#d9a9ff',

@@ -19,12 +19,11 @@ class MyDocument extends Document {
           />
           <link
             rel="stylesheet"
-            href="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.css"
             integrity="sha384-Um5gpz1odJg5Z4HAmzPtgZKdTBHZdw8S29IecapCSB31ligYPhHQZMIlWLYQGVoc"
             crossOrigin="anonymous"
           />
         </Head>
-        <body className="antialiased text-black bg-white">
+        <body className="antialiased text-black" style={{ backgroundColor: '#f2f2f2' }}>
           <Main />
           <NextScript />
         </body>

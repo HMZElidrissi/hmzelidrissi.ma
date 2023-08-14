@@ -66,7 +66,7 @@ export default function PostLayout({ children, frontMatter, next, prev }) {
                               href={siteMetadata.twitter}
                               className="text-purple-500 hover:text-purple-600 "
                             >
-                              {siteMetadata.twitter.replace('https://twitter.com/', '@')}
+                              {siteMetadata.twitter.replace('https://x.com/', '@')}
                             </Link>
                           </dd>
                         </>

@@ -23,7 +23,7 @@ class MyDocument extends Document {
             crossOrigin="anonymous"
           />
         </Head>
-        <body className="antialiased text-black" style={{ backgroundColor: '#f2f2f2' }}>
+        <body className="antialiased text-black" style={{ backgroundColor: '#ffffff' }}>
           <Main />
           <NextScript />
         </body>

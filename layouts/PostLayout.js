@@ -87,13 +87,18 @@ export default function PostLayout({ children, frontMatter, next, prev }) {
               </div>
             </div>
             <footer>
+              <div className="pt-4 xl:pt-8">
+                <Link href="/">
+                  <BackIcon />
+                </Link>
+              </div>
               <div className="text-sm font-medium leading-5 divide-gray-200 xl:divide-y xl:col-start-1 xl:row-start-2">
                 {tags && (
                   <div className="py-4 xl:py-8">
                     <h2 className="text-xs font-semibold tracking-wide text-gray-500 uppercase">
                       Tags
                     </h2>
-                    <div className="flex flex-wrap">
+                    <div className="flex flex-wrap space-x-0.5">
                       {tags.map((tag) => (
                         <Tag key={tag} text={tag} />
                       ))}
@@ -124,11 +129,6 @@ export default function PostLayout({ children, frontMatter, next, prev }) {
                     )}
                   </div>
                 )}
-              </div>
-              <div className="pt-4 xl:pt-8">
-                <Link href="/">
-                  <BackIcon />
-                </Link>
               </div>
             </footer>
           </div>

@@ -30,7 +30,7 @@ export default function ListLayout({ posts, title, initialDisplayPosts = [], pag
               type="text"
               onChange={(e) => setSearchValue(e.target.value)}
               placeholder="Search articles"
-              className="block w-full px-4 py-2 text-gray-900 bg-white border border-gray-300 rounded-md focus:ring-green-400 focus:border-green-400 "
+              className="block w-full px-4 py-2 text-gray-900 bg-white border border-gray-300 rounded-md focus:ring-green-400 focus:border-green-400"
             />
             <svg
               className="absolute w-5 h-5 text-gray-400 right-3 top-3"
@@ -48,41 +48,53 @@ export default function ListLayout({ posts, title, initialDisplayPosts = [], pag
             </svg>
           </div>
         </div>
-        <ul>
+        <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {!filteredBlogPosts.length && 'No posts found.'}
           {displayPosts.map((frontMatter) => {
-            const { slug, date, title, summary, tags } = frontMatter
+            const { slug, date, title, summary, tags, images } = frontMatter
+            // Use the first image from the images array as the thumbnail
+            const thumbnailImage = images[0]
+
             return (
               <li
                 key={slug}
-                className="transition-colors duration-300 py-4 px-6 hover:bg-gray-200 "
+                className="border border-gray-200 rounded-lg shadow-md hover:shadow-lg hover:bg-gray-200 transition duration-300 mt-5 bg-gray-100"
               >
-                <article className="space-y-2 xl:grid xl:grid-cols-4 xl:space-y-0 xl:items-baseline">
-                  <dl>
-                    <dt className="sr-only">Published on</dt>
-                    <dd className="text-base font-medium leading-6 text-gray-500 ">
-                      <time dateTime={date}>
-                        {new Date(date).toLocaleDateString(siteMetadata.locale, postDateTemplate)}
-                      </time>
-                    </dd>
-                  </dl>
-                  <div className="space-y-3 xl:col-span-3">
-                    <div>
-                      <h3 className="text-2xl font-bold leading-8 tracking-tight">
-                        <Link href={`/blog/${slug}`} className="text-gray-900 ">
-                          {title}
-                        </Link>
-                      </h3>
-                      <div className="flex flex-wrap">
-                        {tags.map((tag) => (
-                          <Tag key={tag} text={tag} />
-                        ))}
-                      </div>
-                    </div>
-                    <div className="prose text-gray-500 max-w-none">{summary}</div>
+                <article className="p-4 space-y-2">
+                  <div>
+                    {/* Display the thumbnail image */}
+                    <Link href={`/blog/${slug}`}>
+                      <img
+                        src={thumbnailImage}
+                        alt={title}
+                        className="w-full h-40 object-cover rounded-t-lg"
+                      />
+                    </Link>
                   </div>
-                  <br></br>
-                  <hr></hr>
+                  <div className="p-4">
+                    <p className="mt-2 block text-gray-500 text-xs">
+                      {new Date(date).toLocaleDateString(siteMetadata.locale, postDateTemplate)}
+                    </p>
+                    <h3 className="text-xl font-bold leading-8 tracking-tight mb-2">
+                      <Link href={`/blog/${slug}`} className="text-gray-900">
+                        {title}
+                      </Link>
+                    </h3>
+                    <div className="flex flex-wrap space-x-0.5 mb-2">
+                      {tags.map((tag) => (
+                        <Tag key={tag} text={tag} />
+                      ))}
+                    </div>
+                    <p className="text-gray-600 text-sm">{summary}</p>
+                  </div>
+                  <div>
+                    <Link
+                      href={`/blog/${slug}`}
+                      className="transition-colors duration-300 text-xs font-semibold bg-gray-300 hover:bg-gray-400 rounded-full ml-3 py-2 px-4"
+                    >
+                      Read More
+                    </Link>
+                  </div>
                 </article>
               </li>
             )

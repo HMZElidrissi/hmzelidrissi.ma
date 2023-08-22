@@ -4,7 +4,6 @@ import SectionContainer from '@/components/SectionContainer'
 import { BlogSeo } from '@/components/SEO'
 import Image from '@/components/Image'
 import Tag from '@/components/Tag'
-import MyIcon from '@/components/BackIcon'
 import siteMetadata from '@/data/siteMetadata'
 import BackIcon from '@/components/BackIcon'
 
@@ -57,14 +56,14 @@ export default function PostLayout({ children, frontMatter, next, prev }) {
                     />
                     <dl className="text-sm font-medium leading-5 whitespace-nowrap">
                       <dt className="sr-only">Name</dt>
-                      <dd className="text-gray-900 ">{siteMetadata.author}</dd>
+                      <dd className="text-gray-900 font-semibold">{siteMetadata.author}</dd>
                       {typeof siteMetadata.twitter === 'string' && (
                         <>
                           <dt className="sr-only">Twitter</dt>
                           <dd>
                             <Link
                               href={siteMetadata.twitter}
-                              className="text-purple-500 hover:text-purple-600 "
+                              className="text-purple-600 hover:text-purple-800"
                             >
                               {siteMetadata.twitter.replace('https://x.com/', '@')}
                             </Link>
@@ -112,7 +111,7 @@ export default function PostLayout({ children, frontMatter, next, prev }) {
                         <h2 className="text-xs font-semibold tracking-wide text-gray-500 uppercase ">
                           Previous Article
                         </h2>
-                        <div className="text-purple-500 hover:text-purple-600 ">
+                        <div className="text-purple-600 hover:text-purple-800">
                           <Link href={`/blog/${prev.slug}`}>{prev.title}</Link>
                         </div>
                       </div>
@@ -122,7 +121,7 @@ export default function PostLayout({ children, frontMatter, next, prev }) {
                         <h2 className="text-xs font-semibold tracking-wide text-gray-500 uppercase ">
                           Next Article
                         </h2>
-                        <div className="text-purple-500 hover:text-purple-600 ">
+                        <div className="text-purple-600 hover:text-purple-800">
                           <Link href={`/blog/${next.slug}`}>{next.title}</Link>
                         </div>
                       </div>

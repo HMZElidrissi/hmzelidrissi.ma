@@ -35,7 +35,7 @@ export default function Home({ posts, initialDisplayPosts, pagination }) {
         <h1 className="font-sans text-3xl text-blue-600">
           New post every&nbsp;<span className="text-green-400">sometimes</span>.
         </h1>
-        <h2 className="font-sans font-thin inline-flex mt-2 text-opacity-50 text-blue-600">
+        <h2 className="font-sans font-medium inline-flex mt-2 text-opacity-50 text-blue-600">
           By {`${siteMetadata.author}`}
         </h2>
       </div>

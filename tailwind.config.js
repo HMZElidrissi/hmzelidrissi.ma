@@ -17,7 +17,7 @@ module.exports = {
         14: '3.5rem',
       },
       fontFamily: {
-        sans: ['Inter', ...defaultTheme.fontFamily.sans],
+        sans: ['"Studio Feixen Sans"', ...defaultTheme.fontFamily.sans],
       },
       colors: {
         green: {

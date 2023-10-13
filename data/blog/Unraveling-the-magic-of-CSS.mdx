@@ -1,0 +1,77 @@
+---
+title: 'Unraveling the magic of CSS'
+date: '2023-10-13'
+lastmod: '2023-10-13'
+tags: ['CSS']
+draft: false
+summary: 'Imagine being well-versed in programming languages like Java, C++, or Python, where code follows strict rules and logical patterns. Now, picture entering the world of web development, where the language is CSS (Cascading Style Sheets). While CSS appears to be code, it operates under its own set of rules and peculiarities ...'
+images: ['/static/images/blog/05/05.jpg']
+---
+
+![CSS](/static/images/blog/05/05.jpg)
+
+# Unraveling the magic of CSS
+
+Imagine being well-versed in programming languages like Java, C++, or Python, where code follows strict rules and logical patterns. Now, picture entering the world of web development, where the language is CSS (Cascading Style Sheets). While CSS appears to be code, it operates under its own set of rules and peculiarities. It seemed very complicated at first, something as simple as centering a box on a webpage seemed like an unsolvable puzzle. The C programming concepts I knew didn't quite apply here. I had to learn about things like the "box model," "box-sizing," and "display" to understand how CSS works.
+
+In this article, I'm going to take you on the same journey I took, explaining CSS in a way that makes sense, especially if you're coming from a background like C coding. We'll explore the magic of CSS by unraveling its key elements, like the box model, flexbox, and grid layout.
+
+## 1. CSS Box Model:
+
+![box-model.png](/static/images/blog/05/box-model.png)
+
+1. **Content:** The "content" part of the box is like the actual data or information.
+2. **Padding:** It is used to generate space around an element’s content, inside of any defined borders.
+3. **Border:** The "border" is a boundary around the padding. It defines the edges of the box.
+4. **Margin:** The "margin" is the outermost layer, like a buffer zone. It separates this box from other elements on the page.
+
+## 2. **CSS Flexbox**:
+
+> **Flexbox = Flexible Box Layout**
+
+![flexbox-example.png](/static/images/blog/05/flexbox-example.png)
+
+CSS Flexbox is a way to manage the layout of elements within a container. Here's how it works:
+
+1. **The Container:** In CSS Flexbox, you have a container, which is like a box that holds your elements. You can think of it as an array in C. This container has its own properties, and you can set it to use Flexbox by simply adding **`display: flex;`** to its CSS.
+2. **The Elements:** Inside the container, you have elements. These are like variables in your C program, each with their unique properties. In Flexbox, these elements are often referred to as "flex items."
+3. **The Direction:** Flexbox operates along a single direction, either horizontally (in a row) or vertically (in a column).
+4. **The Flex Properties:** To control how these elements behave, you use properties like **`flex-grow`**, **`flex-shrink`**, and **`flex-basis`**. These are like adjusting the size and behavior of variables in your C code.
+
+So, why use Flexbox, Imagine you want to create a menu bar with buttons that should always stay evenly spaced, no matter the screen size. Instead of writing complex calculations like in C, you can use Flexbox properties to handle this automatically.
+
+## 3. **CSS Grid**:
+
+CSS grid layout is a two-dimensional layout system for the web, contrary to to flex which is one dimensional. It lets you organize content into rows and columns and offers many features to simplify the creation of complex layouts. It's a way to create grids, or tables if you will, for your webpage's layout.
+
+1. **Defining a Grid: The Container**
+
+In CSS Grid, you start by defining a grid container. Think of it as the canvas where you'll arrange your content. To create a grid container, you'll use CSS like this:
+
+```css
+.container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr; /* Creates 3 columns of equal width */
+  grid-template-rows: auto auto; /* Creates 2 rows, which adjust to the content */
+}
+```
+
+Here, **`grid-template-columns`** and **`grid-template-rows`** define how many columns and rows your grid should have and their sizes.
+
+1. **Placing Items: The Grid Elements**
+
+In CSS Grid, you have grid items. These are the elements (like divs or images) that you want to arrange within the grid. You can place them inside your grid container:
+
+```css
+.item {
+  grid-column: 2 / 4; /* This item spans from column 2 to 4 */
+  grid-row: 1; /* This item occupies the first row */
+}
+```
+
+---
+
+### **Resources:**
+
+- [W3schools](https://www.w3schools.com/css/default.asp)
+- [MDN](https://developer.mozilla.org/en-US/docs/Web/CSS)

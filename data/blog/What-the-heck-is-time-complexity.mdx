@@ -1,0 +1,69 @@
+---
+title: 'What the heck is time complexity??'
+date: '2023-12-30'
+lastmod: '2023-12-30'
+tags: ['Algorithms', 'Data Structures']
+draft: false
+summary: 'When we have more than an algorithm to solve a certain problem, in order to choose the best algorithm, we need to calculate the complexity of each one, and the algorithm with the lowest complexity is the one who has the best approach; but WHAT IS COMPLEXITY?'
+images: ['/static/images/blog/06/06.jpg']
+---
+
+![Time Complexity](/static/images/blog/06/06.jpg)
+
+When we have more than an algorithm to solve a certain problem, in order to choose the best algorithm, we need to calculate the complexity of each one, and the algorithm with the lowest complexity is the one who has the best approach; but **WHAT IS COMPLEXITY?**
+
+Complexity serves to quantify the necessary resources (time or space) for an algorithm to execute depending on the size of the data set; this process usually involves:
+
+1. **Time Complexity:** Analyzing how many steps (or operations) an algorithm takes in:
+1. The worst case-scenario: **Big O Notation (O)**
+1. The average case-scenario: **Big Theta Notation (Θ)**
+1. The best case-scenario: **Big Omega Notation (Ω)**
+
+In practice, Big O is the most commonly used notation because it provides a guarantee that the algorithm won’t perform any worse.
+
+2. **Space Complexity:** Evaluating the amount of memory space required by the algorithm.
+
+(But the computers nowadays do not have a problem in the size of memory (RAM), so we focus on time complexity)
+
+# Why should I care about complexity?
+
+For a given problem, it will help us make decisions about what data structures and algorithms to use. Knowing how they will perform can greatly help create the best possible program out there.
+
+# What is Big O?
+
+Big O is a way to categorize your algorithms time or memory requirements based on input. It is not meant to be an exact measurement. It will not tell you how many CPU cycles it takes, instead it is meant to generalize the growth of your algorithm.
+
+### Big O, said differently
+
+As your input grows, how fast does computation or memory grow?
+
+![big-o-types.png](/static/images/blog/06/big-o-types.png)
+
+# How to calculate complexity?
+
+For calculating algorithmic complexity, there are some basic rules and principles to follow:
+
+1. **Basic operations:** Simple operations like addition, subtraction, assignment, comparison or I/O operations are considered to have constant complexity O(1) because they execute in a constant amount of time, regardless of input size.
+2. **Loops:** The overall complexity of a loop is determined by the complexity of the operations inside the loop multiplied by the number of iterations of the loop.
+3. **If/Else:**
+   - **Condition Evaluation:**
+     - Evaluating the `if` condition usually takes constant time, O(1), as it involves simple comparisons and logical operations.
+   - **Branch Execution:**
+     - Only one of the `if` or `else` blocks will execute, so the overall time complexity is dominated by the more complex block.
+     - It's calculated as O(1) + Max(if, else).
+4. **Sum and Product Rules**:
+   - **Sum (O(max(f, g)))**: For two sequential blocks of code, the total complexity is the maximum of the complexities of the two blocks.
+   - **Product (O(f \* g))**: For two nested code blocks (e.g., a loop within another), the total complexity is the product of the complexities of the two blocks.
+5. **Simplification of Formulas**: When evaluating complexity, dominant terms are retained while less significant terms are disregarded. For example, O(2n + 5) is simplified to O(n).
+
+# Important concepts
+
+1. growth is with respect to the input
+2. Constants are dropped
+3. Worst case is *usually* the way we measure
+
+---
+
+[Time And Space – The Last Algorithms Course You'll Need](https://theprimeagen.github.io/fem-algos/lessons/algorithms-and-time-space-complexity/time-and-space-complexity)
+
+[Structure de données #1 : Complexité d'un programme O(1), O(log n), O(n), O(n!), ... | (Darija)](https://www.youtube.com/watch?v=zTbo2t5Man8&pp=ygUaaGFzc2FuIGVsIGJhaGkgY29tcGxleGl0w6k=)

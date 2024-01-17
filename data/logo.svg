@@ -1,25 +1,3 @@
-<svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="100" height="83" viewBox="0,0,256,256"
-     style="fill:#000000;">
-    <g fill="none" stroke-miterlimit="10" font-family="none" font-size="none" style="mix-blend-mode:normal">
-        <!-- Main head part -->
-        <path fill="#2C5282" d="m128 64-8 8 8 24 12-24z"></path>
-
-        <!-- Side face parts -->
-        <path fill="#4299E1" d="m84 56-8 20 12 12h12l12-8V68L96 56zM144 68l12-12h12l8 4v16l-12 12-20-8z"></path>
-
-        <!-- Top feathers -->
-        <path fill="#2B6CB0" d="m132 52 12-8 32-4 20-12-8 12-12 8-20 4-16 12-8-4zM124 52l-12-8-32-4-20-12 8 12 12 8 20 4 16 12 8-4z"></path>
-
-        <!-- Central parts -->
-        <path fill="#3182CE" d="m88 32 28-4h20l24 4-4 4-28 8-44-8zM112 84 96 96l32 24v-20l-12-16zM140 84l-8 12v24l16-11.5L164 96v-4z"></path>
-
-        <!-- Wings -->
-        <path fill="#2C5282" d="m56 92-12 16v36l20 44 32 28-4-72-20-40zM196 92l-16 16-12 32-8 48v32l28-24 24-48v-36l-8-20z"></path>
-
-        <!-- Eye areas -->
-        <path fill="#63B3ED" d="m64 88 8-4 20 12-8 8-20-12zM96 100l-12 8 12 28 8 8 12-16v-8zM188 80l4 4-4 8-12 16-12-8 12-12zM160 104l-16 12 4 20 8 8 16-32-8-8zM120 128l-4 12 12 12 16-16-4-12h-12z"></path>
-
-        <!-- Bottom details -->
-        <path fill="#2B6CB0" d="m112 144 12 12 4 16v20l-28-4v-36zM144 144l-12 20v28l20 4 4-12 4-32zM100 196l4 20 16 20 8 4 24-24v-12l-4-4zM72 52l-8 16v8h8l8-20zM180 56l4-4 4 20-4 4-4-4z"></path>
-    </g>
-</svg>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid meet" viewBox="344.5639097744361 330.27819548872174 111.73684210526318 91.21804511278197" width="53.87" height="43.61"><defs><path d="M453.3 331.28L453.3 359.85L388.64 418.5L388.64 388.42L453.3 331.28Z" id="aFZf6T5ED"></path><linearGradient id="gradientb2ThqnP5Op" gradientUnits="userSpaceOnUse" x1="420.97" y1="331.28" x2="420.97" y2="418.5"><stop style="stop-color: #06b6d4;stop-opacity: 1" offset="0%"></stop><stop style="stop-color: #67e8f9;stop-opacity: 1" offset="100%"></stop></linearGradient><path d="M410.23 331.28L410.23 359.85L345.56 418.5L345.56 388.42L410.23 331.28Z" id="a9fehgwfM"></path><linearGradient id="gradientk1wNV9Ostb" gradientUnits="userSpaceOnUse" x1="377.89" y1="331.28" x2="377.89" y2="418.5"><stop style="stop-color: #06b6d4;stop-opacity: 1" offset="0%"></stop><stop style="stop-color: #67e8f9;stop-opacity: 1" offset="100%"></stop></linearGradient></defs><g><g><use xlink:href="#aFZf6T5ED" opacity="1" fill="url(#gradientb2ThqnP5Op)"></use></g><g><use xlink:href="#a9fehgwfM" opacity="1" fill="url(#gradientk1wNV9Ostb)"></use></g></g></svg>

@@ -11,6 +11,8 @@ import siteMetadata from '@/data/siteMetadata'
 import { ThemeProviders } from './theme-providers'
 import { Metadata } from 'next'
 
+import { Analytics as VercelAnalytics } from '@vercel/analytics/react'
+
 const space_grotesk = Space_Grotesk({
   subsets: ['latin'],
   display: 'swap',
@@ -86,6 +88,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </div>
           </SectionContainer>
         </ThemeProviders>
+        <VercelAnalytics />
       </body>
     </html>
   )

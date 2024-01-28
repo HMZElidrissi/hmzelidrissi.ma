@@ -1,0 +1,53 @@
+---
+title: 'Fixing Sidekick for Apple Mail on OSX El Capitain and later'
+date: '2015-12-15'
+tags:
+  - 'apps'
+  - 'tips'
+draft: false
+summary:
+---
+
+**Update:** the below no longer works (as of ~2018?) given the Sidekick rebrand (to Hubspot Sales) and Apple Mail's plugin lockdown.
+
+[Sidekick](http://getsidekick.com/) is one of the best mail utilities out there. Especially on OSX, combining the power of Apple Mail, and the possibility to track your email opens, it's one of my favorite apps.
+
+Unfortunately, the Hubspot team dropped support for Sidekick for Apple Mail, starting at OSX El Capitain. That said, the current app only does support OSX 10.11.0; Sidekick will cease to work if you update to OSX 10.11.1 or later (_10.12 as of the time of this writing update, on the stable channel._)
+
+The video below explains exactly the steps to take to reactivate Sidekick for Apple Mail. Tested on OSX 10.11.0, 10.11.1, 10.11.2, 10.11.3, 10.11.4 (_respectively Apple Mail version 9.0, 9.1, 9.2, 9.3, and 9.4._)
+
+**For MacOS 10.12 / Sierra, read the update below.**
+
+_PS: If you're into the technical details, below the video is a brief explanation._
+
+<iframe
+  src="https://www.youtube.com/embed/OBrgJO_g4FE?rel=0"
+  width="640"
+  height="480"
+  frameborder="0"
+  allowfullscreen="allowfullscreen"
+></iframe>
+
+The **SupportedPluginCompatibilityUUIDs** key in the Sidekick Info.plist file, is sort of a manifest for the plugin, declaring itself compatible to Apple Mail client UUIDs (_Universally Unique Identifiers_.)
+
+What we did was simply get the system's current Apple Mail's UUID (from **/Applications/Mail.app/Content/Info.plist**), and add it to that list!
+
+### Download
+
+Sidekick removed the download section of their Apple Mail's plugin, but here's a direct download link: [https://s3.amazonaws.com/dl.getsidekick.com/applemail/index.html](https://s3.amazonaws.com/dl.getsidekick.com/applemail/index.html) (_no longer works_); [/static/images/2016/Sidekick.pkg](/static/images/Sidekick.pkg)
+
+### "Login URL is invalid" error
+
+If you get the "Login URL is invalid" while logging in using your Google account, try to set a password for your account, and login via your email/password (_creating a new email/password account is the easiest way to do so._) -- Restart Mail after you do this.
+
+Thanks to **Jonathan Wizman** and **Vinny Troia** for pointing this out.
+
+### Update: OS Sierra
+
+Thanks Spike for the suggestion and Elijah for testing.
+
+On MacOS Sierra, you should **ALSO** replace the **SupportedPluginCompatibilityUUIDs** key (inside Info.plist) with **Supported10.12PluginCompatibilityUUIDs**. And Voilà!
+
+### Stuck?
+
+Leave a comment - I'd be more than happy to help.

@@ -1,0 +1,117 @@
+---
+title: 'All the GoogleIO easter eggs (and how did I get them).'
+date: '2013-03-08'
+tags:
+  [
+    'GoogleIO Easter Eggs',
+    'Coding Skills',
+    'Chrome Extensions',
+    'JavaScript Exploration',
+    'Tech Gaming',
+    'Hidden Features',
+    'Easter Egg Codes',
+    'Web Development Tricks',
+    'Interactive Web Experiences',
+    'GoogleIO',
+  ]
+
+draft: false
+summary: "Unveiling the secrets behind GoogleIO'13's easter eggs, this post narrates the author's process of deciphering the hidden codes using coding skills and a Chrome extension. It provides a guide to accessing these easter eggs, showcasing the clever interplay between technology, gaming, and curiosity."
+---
+
+**UPDATE** : After the Google IO'13 started, the experiment has been moved to a new home : [https://developers.google.com/events/io/experiment](https://developers.google.com/events/io/experiment 'Google IO easter eggs experiment')
+
+If you just want the [GoogleIO'13](https://developers.google.com/events/io/) easter eggs codes, jump directly to the bottom if this post. If you're interested in how I got'em all, read along.
+
+So, the main codebase is located in the [/js/app.min.js](https://developers.google.com/events/io/js/app.min.js) of the site. But it's compiled and pretty much unreadable. Luckily, I have [Sight](https://chrome.google.com/webstore/detail/sight/epmaefhielclhlnmjofcdapbeepkmggh), a Chrome extension that indents/prettifies the code. But still, it's still not readable.
+
+I had to browse through the code to find some telltale signs, and what do you know, I find this :
+
+```js
+ww.mode.register('home', ww.mode.HomeMode, null)
+ww.mode.register('cat', ww.mode.CatMode, 231, 8)
+var isAndroid = navigator.userAgent.match(/Android/)
+isAndroid || ww.mode.register('space', ww.mode.SpaceMode, 42, 8)
+ww.mode.register('pong', ww.mode.PongMode, 129, 8)
+ww.mode.register('bacon', ww.mode.BaconMode, 144, 8)
+ww.mode.register('simone', ww.mode.SimoneMode, 211, 8)
+ww.mode.register('eightbit', ww.mode.EightBitMode, 83, 8)
+ww.util.getAudioContextConstructor() &&
+  (ww.mode.register('song', ww.mode.SongMode, 219, 8),
+  ww.mode.register('synth', ww.mode.SynthMode, 136, 8))
+ww.mode.register('ascii', ww.mode.AsciiMode, 127, 8)
+ww.mode.register('bowling', ww.mode.BowlingMode, 117, 8)
+ww.mode.register('rocket', ww.mode.RocketMode, 69, 8)
+ww.mode.register('burger', ww.mode.BurgerMode, 57, 8)
+```
+
+It doesn't say much, but at least there is some chance I could decipher this mess.
+
+Then I searched for the *ww.mode.register* function,  which is :
+
+```js
+ww.mode.register = function (a, b, c, d) {
+  ww.mode.modes[a] = {
+    klass: b,
+    pattern: c,
+    len: d,
+  }
+}
+```
+
+Klass, Pattern, and len. I looked for where is klass (easier and distinguishable) is called/located through the code, and I found this snippet, which unlocks pretty much everything :
+
+```js
+for (c in a)
+  a.hasOwnProperty(c) &&
+    a[c].pattern &&
+    ((d = a[c]),
+    (b[c] = {
+      klass: d.klass,
+      binaryPattern: ww.util.pad(d.pattern.toString(2), d.len),
+    }))
+```
+
+Three things : **ww.util.pad, d.pattern,** and **d.len.**
+
+ww.util.pad pretty much does an **d.len-bit** binary conversion  (code below), in our case, always 8bit, and d.pattern is the **c param** in the ww.mode.register function,
+
+```js
+ww.util.pad = function (a, b) {
+  for (var c = '' + a; c.length < b; ) c = '0' + c
+  return c
+}
+```
+
+Now everything is crystal clear - All I had to do is to rewrite the ww.util.pad as a standalone function :
+
+```js
+function io(a, b) {
+  for (var c = '' + a; c.length < b; ) c = '0' + c
+  return c
+}
+```
+
+And then, it's just a matter of calling io() with the different patterns converted to binary:
+
+```js
+var a = 219
+io(a.toString(2), 8) //outputs 11011011, which converts to IIOIIOII
+```
+
+# List of all the GoogleIO'13 easter eggs and codes
+
+Go to [GoogleIO'13 site](https://developers.google.com/events/io/), and enter one of the following codes :
+
+- **Cat : IIIOOIII**
+- **Space: OOIOIOIO**
+- **Pong : IOOOOOOI**
+- **Bacon : IOOIOOOO**
+- **Simone : IIOIOOII**
+- **Eightbit : OIOIOOII**
+- **Synth : IOOOIOOO**
+- **Song : IIOIIOII**
+- **ASCII : OIIIIIII**
+- **Bowling : OIIIOIOI**
+- **Rocket : OIOOOIOI**
+- **Burger : OOIIIOOI**

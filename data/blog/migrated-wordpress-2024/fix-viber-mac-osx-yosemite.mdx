@@ -1,0 +1,26 @@
+---
+title: 'How to fix Viber on Mac OS X Yosemite'
+date: '2014-08-25'
+tags:
+  - 'apps'
+  - 'tips'
+  - 'osx'
+  - 'viber'
+  - 'yosemite'
+draft: false
+summary:
+---
+
+As the time of writing this post, [Viber](http://www.viber.com/products/mac) didn't release an updated version that supports Mac OS X Yosemite.
+
+Chances are the app icon is marked with an **X** and you get an error message once you try to launch it.
+
+It's pretty easy to actually fix this issue; Just head to your **Applications** directory, right-click on the Viber icon then **Show package contents**. Navigate to the **Contents** folder and open **Info.plist** ; Note that you'd probably need a Plist file editor installed (or XCode) to edit this file. If it's not the case, just open it with your preferred text editor - and you'll get something like this:
+
+\[caption id="attachment_210" align="alignnone" width="611"\][![/Applications/Viber.app/Contents/Info.plist](images/Screenshot-2014-08-25-16.21.55.png)](/static/images/Screenshot-2014-08-25-16.21.55.png) /Applications/Viber.app/Contents/Info.plist\[/caption\]
+
+Notice the highlighted lines - all you need to do is change the values **4** and **4.0.0** to, respectively, **5** and **5.0.0**
+
+\[caption id="attachment_211" align="aligncenter" width="434"\][![After editing the file](images/Screenshot-2014-08-25-16.25.17.png)](/static/images/Screenshot-2014-08-25-16.25.17.png) After editing the file\[/caption\]
+
+Save your file. Relaunch Viber. You're good to go!

@@ -1,0 +1,53 @@
+---
+title: 'Fix Vagrant and VirtualBox'
+date: '2013-08-29'
+tags:
+  - 'code'
+  - 'tips'
+draft: false
+summary:
+---
+
+If you just started using [Vagrant](http://www.vagrantup.com 'Vagrant') (_which I highly recommend_), and on the last version of OSX (_or any other system as a matter of fact_) + VirtualBox, it's highly likely that you'll stumble on an error during your first \`vagrant up\` :
+
+```sh
+mount -t vboxsf -o uid=`id -u vagrant`,gid=`id -g vagrant` /vagrant /vagrant
+Stdout from the command:
+
+Stderr from the command:
+mount: unknown filesystem type 'vboxsf'
+```
+
+The sharing isn't setup. A bit frustrating. And you'll need to install Guest Additions on the box (and that's not straightforward if using Vagrant).
+
+Turns out, the fix is quite easy.
+
+First, download : [http://download.virtualbox.org/virtualbox/4.2.16/VBoxGuestAdditions_4.2.16.iso](http://download.virtualbox.org/virtualbox/4.2.16/VBoxGuestAdditions_4.2.16.iso 'VBoxGuestAdditions_4.2.16') (replace **4.2.16** by your VirtualBox version).
+
+Now fire up VirtualBox, select your virtual machine, **Command+F** to power it off, then **Command+S** for settings, select **Storage** then click on **_Add CD/DVD Device,_** then select the freshly downloaded ISO.
+
+Go back to your app directory (where you executed the **vagrant init** command), and launch vagrant :
+
+```sh
+vagrant up && vagrant ssh
+
+# First, install required dependencies.
+sudo yum install gcc -y
+sudo yum install kernel sources -y
+sudo yum install kernel-devel -y
+exit # exit from vagrant
+
+# Reload the machine and fire Vagrant
+vagrant halt && vagrant up && vagrant ssh
+
+# Mount the disk
+sudo mount /dev/cdrom /media/cdrom # Use /dev/cdrom2 if it's a second disk.
+cd /media/cdrom
+sudo ./VBoxLinuxAdditions.run # Follow the instructions
+
+exit
+vagrant reload
+vagrant ssh
+```
+
+Now you should be up and running !

@@ -13,19 +13,30 @@ export default function Projects() {
             Projects
           </h1>
           <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
-            Showcase your projects with a hero image (16 x 9)
+            Some of the things I help(ed) bring to life.
           </p>
         </div>
         <div className="container py-12">
-          <div className="-m-4 flex flex-wrap">
-            {projectsData.map((d) => (
-              <Card
-                key={d.title}
-                title={d.title}
-                description={d.description}
-                imgSrc={d.imgSrc}
-                href={d.href}
-              />
+          <div className="">
+            {Array.from(new Set(projectsData.map((project) => project.type))).map((type) => (
+              <>
+                <h2 className="text-2xl font-bold leading-7 text-gray-900 dark:text-gray-100 sm:truncate sm:text-3xl sm:leading-9">
+                  {type}
+                </h2>
+                <div className="m-8 flex flex-wrap">
+                  {projectsData
+                    .filter((project) => project.type === type)
+                    .map((d) => (
+                      <Card
+                        key={d.title}
+                        title={d.title}
+                        description={d.description}
+                        imgSrc={d.imgSrc}
+                        href={d.href}
+                      />
+                    ))}
+                </div>
+              </>
             ))}
           </div>
         </div>

@@ -1,26 +1,69 @@
 interface Project {
-  title: string,
-  description: string,
-  href?: string,
-  imgSrc?: string,
+  title: string
+  description: string
+  href?: string
+  imgSrc?: string
+  type?: string
 }
 
 const projectsData: Project[] = [
   {
-    title: 'A Search Engine',
-    description: `What if you could look up any information in the world? Webpages, images, videos
-    and more. Google has many features to help you find exactly what you're looking
-    for.`,
-    imgSrc: '/static/images/google.png',
-    href: 'https://www.google.com',
+    title: 'The AI Coach',
+    description: `....`,
+    imgSrc: '/static/images/time-machine.jpg',
+    href: 'https://theaicoach.com',
+    type: 'Products',
   },
   {
-    title: 'The Time Machine',
+    title: 'INK + PORCELAIN',
+    description: `....`,
+    imgSrc: '/static/images/time-machine.jpg',
+    href: 'https://www.inkandporcelain.com',
+    type: 'Products',
+  },
+  {
+    title: 'TalkAndComment',
+    description: `....`,
+    imgSrc: '/static/images/time-machine.jpg',
+    href: 'https://TalkAndComment.com',
+    type: 'Products',
+  },
+  {
+    title: 'Explain AI',
+    description: `....`,
+    imgSrc: '/static/images/time-machine.jpg',
+    href: 'https://xplnai.com',
+    type: 'Products',
+  },
+  {
+    title: 'Africa Deep Tech Community',
     description: `Imagine being able to travel back in time or to the future. Simple turn the knob
     to the desired date and press "Go". No more worrying about lost keys or
     forgotten headphones with this simple yet affordable solution.`,
     imgSrc: '/static/images/time-machine.jpg',
-    href: '/blog/the-time-machine',
+    href: 'https://adtc.substack.com',
+    type: 'Communities',
+  },
+  {
+    title: 'Idiot Mystic',
+    description: `...`,
+    imgSrc: '/static/images/time-machine.jpg',
+    href: 'https://idiotmystic.com',
+    type: 'Communities',
+  },
+  {
+    title: 'Libertweet',
+    description: `...`,
+    imgSrc: '/static/images/time-machine.jpg',
+    href: '#',
+    type: 'Archive',
+  },
+  {
+    title: 'VoIP Down',
+    description: `...`,
+    imgSrc: '/static/images/time-machine.jpg',
+    href: '#',
+    type: 'Archive',
   },
 ]
 

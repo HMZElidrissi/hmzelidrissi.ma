@@ -73,7 +73,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         href="/static/favicons/favicon-196x196.png"
         sizes="196x196"
       />
-      <link rel="icon" type="image/png" href="/static/favicons/favicon-128.png" sizes="128x128" />
+      <link
+        rel="icon"
+        type="image/png"
+        href="/static/favicons/favicon-128x128.png"
+        sizes="128x128"
+      />
       <meta name="application-name" content="&nbsp;" />
       <meta name="msapplication-TileColor" content="#FFFFFF" />
       <meta name="msapplication-TileImage" content="/static/favicons/mstile-144x144.png" />

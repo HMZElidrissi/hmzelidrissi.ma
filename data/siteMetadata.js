@@ -1,7 +1,7 @@
 /** @type {import("pliny/config").PlinyConfig } */
 const siteMetadata = {
   title: 'zakelfassi.com – Digital Meets Physical: Navigating the Convergence',
-  author: 'Zak El Fassi',
+  author: 'zak elfassi',
   headerTitle: 'zakelfassi.com',
   description:
     'from a Digital Being Having a Human Experience, navigating the convergence of Digital and Physical worlds.',

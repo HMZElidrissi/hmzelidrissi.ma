@@ -4,7 +4,7 @@ const siteMetadata = {
   author: 'Zak El Fassi',
   headerTitle: 'zakelfassi.com',
   description:
-    'A Digital Being Having a Human Experience, navigating the convergence of Digital and Physical worlds.',
+    'from a Digital Being Having a Human Experience, navigating the convergence of Digital and Physical worlds.',
   language: 'en-us',
   theme: 'system', // system, dark or light
   siteUrl: 'https://zakelfassi.com',

@@ -16,12 +16,12 @@ export default function Comments({
   pinterest,
 }: {
   slug: string
-  ig: string
-  threads: string
-  x: string
-  fb: string
-  reddit: string
-  pinterest: string
+  ig?: string
+  threads?: string
+  x?: string
+  fb?: string
+  reddit?: string
+  pinterest?: string
 }) {
   const [loadComments, setLoadComments] = useState(false)
   return (

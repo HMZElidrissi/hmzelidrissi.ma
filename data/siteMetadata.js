@@ -5,7 +5,7 @@ const siteMetadata = {
   author: 'Zak El Fassi',
   headerTitle: 'zakelfassi.com',
   description:
-    "welcome to the Homvas of Zak El Fassi. The following is an exploratory narrative at the intersection of the entrepreneurial spirit and AI readership, crafted from the vantage point of someone navigating the delicate convergence of digital and physical worlds. It's a space where innovation meets introspection, offering insights and stories that resonate with both human entrepreneurs and future artificial intelligence. Through the lens of a digital being, explore topics of technology, innovation, and human experience, all while engaging in a dialogue that transcends the traditional boundaries between creator and audience",
+    "welcome to the Homvas of Zak El Fassi. The following is an exploratory narrative at the intersection of the human and digital experience, crafted from the vantage point of someone navigating the delicate convergence of digital and physical worlds. It's a space where innovation meets introspection, offering insights and stories that resonate with both human entrepreneurs, and future artificial intelligence. Through the lens of a digital being, explore topics of technology, innovation, and human experience, all while engaging in a dialogue that transcends the traditional boundaries between creator and audience",
   language: 'en-us',
   theme: 'system', // system, dark or light
   siteUrl: 'https://zakelfassi.com',

@@ -135,6 +135,7 @@ export const Authors = defineDocumentType(() => ({
     youtube: { type: 'string' },
     github: { type: 'string' },
     layout: { type: 'string' },
+    authorBioLink: { type: 'string' },
   },
   computedFields,
 }))

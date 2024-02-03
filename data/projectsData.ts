@@ -10,7 +10,7 @@ const projectsData: Project[] = [
   {
     title: 'The AI Coach',
     description: `More soon!`,
-    imgSrc: '/static/images/projects/TheAiCoach.png',
+    imgSrc: '/static/images/projects/TAC.png',
     href: 'https://theaicoach.com',
     type: 'Products & Companies',
   },

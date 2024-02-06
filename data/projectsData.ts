@@ -16,7 +16,7 @@ const projectsData: Project[] = [
   },
   {
     title: 'INK + PORCELAIN',
-    description: `Artful Objects Designed by Women – An interior design and curation platform for creatives. Co-founder, advisor, and part-time CTO / CPO.`,
+    description: `Artful Objects Designed by Women – An interior design and curation platform for creatives. Co-founder, advisor, and part-time technologist and designer.`,
     imgSrc: '/static/images/projects/Inkandporcelain.png',
     href: 'https://www.inkandporcelain.com',
     type: 'Products & Companies',
@@ -53,6 +53,13 @@ const projectsData: Project[] = [
     title: 'JobFinder',
     description: `(2012 – 2016) was an aggregator job search engine and talent management platform focused on the Moroccan market. JobFinder listed more than 1M jobs and was used by 100K+ job seekers throughout its lifetime.`,
     imgSrc: '/static/images/projects/JobFinder.png',
+    href: '#',
+    type: 'Past',
+  },
+  {
+    title: 'Send.ma',
+    description: `(2013 – 2016) was a messaging marketing platform (Email, SMS, Social, etc.) designed for the mobile age. Hundreds of clients and tens of thousands of campaigns later, Send.ma was gone – some say like the Stig, but faster; just like the platform once was.`,
+    imgSrc: '/static/images/projects/send.png',
     href: '#',
     type: 'Past',
   },

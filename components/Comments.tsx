@@ -9,6 +9,7 @@ import SocialIcon from '@/components/social-icons'
 export default function Comments({
   slug,
   ig,
+  bsky,
   threads,
   x,
   fb,
@@ -17,6 +18,7 @@ export default function Comments({
 }: {
   slug: string
   ig?: string
+  bsky?: string
   threads?: string
   x?: string
   fb?: string
@@ -27,10 +29,11 @@ export default function Comments({
   return (
     <>
       {/* Share and Comment Section */}
-      {(ig || threads || x || fb || reddit || pinterest) && (
+      {(ig || threads || x || fb || reddit || pinterest || bsky) && (
         <div className="flex flex-row items-center justify-center space-x-8">
-          <h2 className="text-2xl font-bold leading-8 tracking-tight">Share and Comment:</h2>
+          <h2 className="text-2xl font-bold leading-8 tracking-tight">Share and Comment on</h2>
           {ig && <SocialIcon kind="instagram" href={ig} size={6} />}
+          {bsky && <SocialIcon kind="bsky" href={bsky} size={6} />}
           {threads && <SocialIcon kind="threads" href={threads} size={6} />}
           {x && <SocialIcon kind="twitter" href={x} size={6} />}
           {fb && <SocialIcon kind="facebook" href={fb} size={6} />}

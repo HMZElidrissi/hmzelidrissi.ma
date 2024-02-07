@@ -17,7 +17,7 @@ interface LayoutProps {
 }
 
 export default function PostLayout({ content, next, prev, children }: LayoutProps) {
-  const { path, slug, date, title, ig, threads, x, fb, reddit, pinterest } = content
+  const { path, slug, date, title, ig, bsky, threads, x, fb, reddit, pinterest } = content
 
   return (
     <SectionContainer>
@@ -53,6 +53,7 @@ export default function PostLayout({ content, next, prev, children }: LayoutProp
                   fb={fb}
                   reddit={reddit}
                   pinterest={pinterest}
+                  bsky={bsky}
                 />
               </div>
             )}

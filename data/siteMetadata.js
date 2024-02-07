@@ -1,10 +1,11 @@
 /** @type {import("pliny/config").PlinyConfig } */
 const siteMetadata = {
   title:
-    'zakelfassi.com – The Digital Home of Zak El Fassi, exploring the intersection of technology and humanity, through the lens of design, code, philosophy, and entrepreneurship.',
+    'zakelfassi.com – Explore Founder Ideas and Learnings at the cross of Design x Code x Philosophy x Entrepreneurship.',
   author: 'Zak El Fassi',
   headerTitle: 'zakelfassi.com',
-  description: 'design x code x philosophy x entrepreneurship x humanity x technology',
+  description:
+    'founder ideas and learnings at the cross of design x code x philosophy x entrepreneurship',
   language: 'en-us',
   theme: 'system', // system, dark or light
   siteUrl: 'https://zakelfassi.com',

@@ -8,8 +8,8 @@ interface Project {
 
 const projectsData: Project[] = [
   {
-    title: 'The AI Coach',
-    description: `More soon!`,
+    title: 'TAC – The AI Coach',
+    description: `Pioneering the intersection of AI and personal development, TAC (The AI Coach) offers a unique platform that empowers individuals to articulate and achieve their goals through a SMART goal-setting framework, dynamic goal visualization, and dynamic tasks and milestones. Blending cutting-edge Generative AI with an engaging user experience, TAC guides users towards realizing their full potential across various life domains—Career, Education, Finance, Wellness, and more. As a hub where technology meets human ambition, TAC is redefining personal success in the digital age.`,
     imgSrc: '/static/images/projects/TAC.png',
     href: 'https://theaicoach.com',
     type: 'Products & Companies',

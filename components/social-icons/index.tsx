@@ -8,6 +8,7 @@ import {
   Mastodon,
   Threads,
   Instagram,
+  Bsky,
   Pinterest,
   Reddit,
 } from './icons'
@@ -22,6 +23,7 @@ const components = {
   mastodon: Mastodon,
   threads: Threads,
   instagram: Instagram,
+  bsky: Bsky,
   reddit: Reddit,
   pinterest: Pinterest,
 }

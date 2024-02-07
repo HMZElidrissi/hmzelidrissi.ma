@@ -16,6 +16,7 @@ const siteMetadata = {
   threads: 'https://www.threads.net/@zakelfassi',
   instagram: 'https://www.instagram.com/zakelfassi/',
   twitter: 'https://x.com/zakelfassi',
+  bsky: 'https://bsky.app/profile/zakelfassi.bsky.social',
   linkedin: 'https://www.linkedin.com/in/zakelfassi/',
   github: 'https://github.com/zakelfassi',
   facebook: 'https://facebook.com/elfassi',

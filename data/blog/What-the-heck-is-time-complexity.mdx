@@ -1,7 +1,7 @@
 ---
 title: 'What the heck is time complexity??'
 date: '2023-12-30'
-lastmod: '2023-12-30'
+lastmod: '2024-04-20'
 tags: ['Algorithms', 'Data Structures']
 draft: false
 summary: 'When we have more than an algorithm to solve a certain problem, in order to choose the best algorithm, we need to calculate the complexity of each one, and the algorithm with the lowest complexity is the one who has the best approach; but WHAT IS COMPLEXITY?'
@@ -61,6 +61,54 @@ For calculating algorithmic complexity, there are some basic rules and principle
 1. growth is with respect to the input
 2. Constants are dropped
 3. Worst case is *usually* the way we measure
+
+# Common Time Complexities
+
+## O(1) - Constant Time:
+
+The algorithm takes the same amount of time to execute, regardless of the input size. for example:
+
+- Accessing an element in an array by index.
+- Inserting or deleting an element at the beginning of an array.
+- Pushing or popping an element from a stack.
+
+## O(log n) - Logarithmic Time:
+
+The algorithm's time complexity grows logarithmically in proportion to the input size. for example:
+
+- Binary search.
+- Finding the largest/smallest element in a binary search tree.
+- The divide-and-conquer approach.
+
+## O(n) - Linear Time:
+
+The algorithm's time complexity grows linearly in proportion to the input size. for example:
+
+- Linear search.
+- Traversing an array or linked list.
+
+## O(n log n) - Linearithmic Time:
+
+The algorithm's time complexity grows in proportion to n log n, where n is the input size. for example:
+
+- Merge sort.
+- Heap sort.
+- Quick sort.
+
+## O(n^2) - Quadratic Time:
+
+The algorithm's time complexity grows quadratically in proportion to the input size. for example:
+
+- Bubble sort.
+- Selection sort.
+- Insertion sort.
+
+## O(2^n) - Exponential Time:
+
+The algorithm's time complexity grows exponentially in proportion to the input size. for example:
+
+- Recursive calculation of Fibonacci numbers.
+- Recursive Calculations.
 
 ---
 

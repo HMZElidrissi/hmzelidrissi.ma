@@ -1,0 +1,37 @@
+---
+title: 'Process vs. Thread'
+date: '2024-04-21'
+lastmod: '2024-04-21'
+tags: ['System Design']
+draft: false
+summary: 'This is a summary of the blog post. It should be a few sentences and sum up the content of the post.'
+images: ['/static/images/blog/10/10.jpg']
+---
+
+![Distributed Systems](/static/images/blog/10/10.jpg)
+
+# WHAT IS A PROCESS?
+
+- **First What is a PROGRAM?**
+
+- A Program is an executable file that contains a set of instructions that are executed by the computer. A program is a passive entity, it is not doing anything until it is loaded into memory and executed by the computer. When a program is loaded into memory and executed by the processor, it becomes a **PROCESS**.
+
+- An active process includes also resources like memory, file descriptors, etc. These resources are allocated to the process by the operating system. A process is an instance of a program that is being executed by the computer. A process is an active entity, it is doing something.
+
+- Each process has its own memory space, its own file descriptors, its own environment variables, etc. A process is isolated from other processes. It cannot access the memory of other processes. It cannot access the file descriptors of other processes. It cannot access the environment variables of other processes. This means when a process crashes, it does not affect other processes.
+
+## Example of a Process: Browser Tabs
+
+- When you open a browser and you open multiple tabs, each tab is a separate process. Each tab has its own memory space, its own file descriptors, its own environment variables, etc. This means if one tab crashes, it does not affect the other tabs.
+
+# WHAT IS A THREAD?
+
+- A thread is the unit of execution within a process. A process is at least one thread. A process can have multiple threads. Each thread has its own stack, its own instruction pointer, its own program counter, etc. But all threads of a process share the same memory space, the same file descriptors, the same environment variables, etc. This means threads of a process can access the memory of other threads of the same process.
+
+- One miss-behaving thread can crash the entire process. This means threads of a process are not isolated from each other. If one thread crashes, it can crash the entire process.
+
+# HOW DOES THE OPERATING SYSTEM SCHEDULE PROCESSES AND THREADS?
+
+- The operating system schedules processes and threads on the CPU. The operating system uses a scheduler to decide which process or thread to run on the CPU. The scheduler uses different scheduling algorithms to decide which process or thread to run on the CPU.
+
+- The operating system can schedule processes and threads on the CPU in two ways: Preemptive Scheduling and Non-Preemptive Scheduling.

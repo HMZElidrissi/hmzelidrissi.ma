@@ -15,7 +15,7 @@ const Header = () => {
             <div className="mr-2">
               <Logo />
             </div>
-            <div className="hidden h-6 text-md font-semibold sm:block">
+            <div className="text-md hidden h-6 font-semibold sm:block">
               {siteMetadata.headerTitle}
             </div>
           </div>

@@ -8,20 +8,14 @@ const siteMetadata = {
     'hmzelidrissi.ma – A developer who aims to evolve, innovate, and inspire through technology.',
   language: 'en-us',
   theme: 'system', // system, dark or light
-  siteUrl: 'https://zakelfassi.com',
-  siteRepo: 'https://github.com/zakelfassi/zakelfassi.com',
-  siteLogo: '/static/images/logo.png',
+  siteUrl: 'https://hmzelidrissi.ma',
+  siteRepo: 'https://github.com/HMZElidrissi/hmzelidrissi.ma',
+  siteLogo: '/static/images/logo.svg',
   socialBanner: '/static/images/twitter-card.png',
-  // mastodon: 'https://mastodon.social/@mastodonuser',
-  // email: 'address@yoursite.com',
-  threads: 'https://www.threads.net/@zakelfassi',
-  instagram: 'https://www.instagram.com/zakelfassi/',
-  twitter: 'https://x.com/zakelfassi',
-  bsky: 'https://bsky.app/profile/zakelfassi.bsky.social',
-  linkedin: 'https://www.linkedin.com/in/zakelfassi/',
-  github: 'https://github.com/zakelfassi',
-  facebook: 'https://facebook.com/elfassi',
-  youtube: 'https://youtube.com/@zakelfassi',
+  email: 'hamza.ezzharelidrissi1@gmail.com',
+  github: 'https://github.com/HMZElidrissi',
+  twitter: 'https://x.com/HMZElidrissi',
+  linkedin: 'https://www.linkedin.com/in/hmzelidrissi',
   locale: 'en-US',
   analytics: {
     // If you want to use an analytics provider you have to add it to the
@@ -32,7 +26,7 @@ const siteMetadata = {
       umamiWebsiteId: process.env.NEXT_UMAMI_ID, // e.g. 123e4567-e89b-12d3-a456-426614174000
     },
     plausibleAnalytics: {
-      plausibleDataDomain: 'zakelfassi.com', // e.g. tailwind-nextjs-starter-blog.vercel.app
+      plausibleDataDomain: 'hmzelidrissi.ma', // e.g. tailwind-nextjs-starter-blog.vercel.app
     },
     // simpleAnalytics: {},
     // posthogAnalytics: {

@@ -1,6 +1,7 @@
 import Link from '@/components/Link'
 import { RoughNotation } from 'react-rough-notation'
 import { useRandomColorPair } from '@/components/useRandomColorPair'
+import siteMetadata from '@/data/siteMetadata'
 
 export default function Home() {
   const [aboutColor, contactColor] = useRandomColorPair()
@@ -11,7 +12,7 @@ export default function Home() {
       <p className="my-2 text-lg lg:my-4 lg:text-2xl">Software Developer</p>
       <p className="font-light lg:text-xl">
         Read more
-        <Link className="ml-2 mr-2 font-normal text-black" href="/about">
+        <Link className="ml-2 mr-2 font-normal text-black" href="/whoami">
           <RoughNotation
             show
             type="highlight"
@@ -23,7 +24,7 @@ export default function Home() {
           </RoughNotation>
         </Link>
         or
-        <Link className="ml-2 font-normal text-black" href="/contact">
+        <Link className="ml-2 font-normal text-black" href={`mailto:${siteMetadata.email}`}>
           <RoughNotation
             show
             type="highlight"

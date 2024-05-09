@@ -1,0 +1,309 @@
+---
+title: 'Data Structures Primer'
+date: '2024-01-06'
+lastmod: '2024-01-06'
+tags: ['Data Structures', 'Algorithms']
+draft: false
+summary: 'A data structure is a logical organization of data that simplifies or speeds up their processing, meaning it is a way that allow you to store and organize your data whether you are building a simple program or a complex system; data structures is a must.'
+images: ['/static/images/blog/07/07.jpg']
+---
+
+![Data Structures Primer](/static/images/blog/07/07.jpg)
+
+> “**_Bad programmers worry about the code. Good programmers worry about data structures and their relationships._**” - Linus Torvalds
+
+A data structure is a logical organization of data that simplifies or speeds up their processing, meaning it is a way that allow you to store and organize your data whether you're building a simple program or a complex system; data structures is a must.
+
+> At a more practical level, data structures are essential tools for developers because they allow for faster and more efficient computation, easier maintenance of code, and better use of system resources. Instead of trying to force-fit a generic structure, tailor your data structures to fit the unique demands of the problem. The right data structures significantly influence the efficiency and clarity of an algorithm, making it crucial to align them with the intricacies of the task at hand.
+
+In the next few sections of this article, we will discuss the different types of data structures:
+
+# **Linear Data Structures**
+
+A data structure in which data elements are arranged _sequentially_ or _linearly_, where each element is attached to its previous and next adjacent elements, is called a linear data structure. Examples are array, stack, queue, etc.
+
+## **Static data structure**
+
+Static data structure has a fixed memory size. It is easier to access the elements in a static data structure.
+
+### Array
+
+This is the **simplest Data Structure, Arrays provide a way to store a fixed number of elements of the same type in contiguous memory locations.**
+
+```cpp
+ int scores[100];
+```
+
+- **Advantages**: Fast access time, memory efficiency, ease of use for basic operations.
+- **Limitations**: Fixed size, difficulties in insertion and deletion, inefficient memory usage if not fully utilized.
+
+## **Dynamic data structure**
+
+In dynamic data structure, the size is not fixed. It can be randomly updated during the runtime which may be considered efficient concerning the memory (space) complexity of the code.
+
+### Linked list
+
+A linked list is a set of cells connected to each other by pointers. Each cell is a structure containing the following fields:
+
+- one or several data item(s)
+- a next pointer to the following cell.
+
+There are several types of linked lists depending on how one navigates through the list:
+
+- singly linked lists,
+- doubly linked lists,
+- circular lists.
+
+```cpp
+// Creating a List Node
+class listNode
+{
+	public:
+	int data;
+	listNode *next;
+	listNode(int val):data(val),next(NULL){}
+};
+
+// Creating List class
+class List
+{
+	public:
+	listNode *head;
+	List():head(NULL){}
+	void insertAtBegin(int val);
+	void insertAtEnd(int val);
+	void insertAtPos(int val);
+	void remove(int val);
+	void print();
+	~List();
+};
+```
+
+### Stacks & Queues
+
+Stacks and queues are dynamic data structures.
+
+For managing these structures, We use the following three elementary operations:
+
+- **test** if the structure is empty.
+- **add** an element to the structure.
+- **remove** an element from the structure.
+
+Stacks and queues are distinguished by the relationship between added and removed elements.
+
+### 1. Stacks
+
+- In the case of stacks: it is the **last element added that is removed first**. We say that the stack is a **LIFO** (last-in first-out) structure.
+- Think of a stack like a stack of plates in a cafeteria. When you add a new plate, you place it on top of the previous ones, and when someone comes to take a plate, they take the top one. This is the Last-In-First-Out (LIFO) principle.
+
+![stack.jpg](/static/images/blog/07/stack.jpg)
+
+```cpp
+// Creating a Stack Node
+class StackNode {
+	public:
+    int data;
+    StackNode* next;
+
+    StackNode(int val) : data(val), next(nullptr) {}
+};
+
+// Creating Stack class
+class Stack {
+	private:
+    StackNode* top;
+
+	public:
+    Stack() : top(nullptr) {}
+
+    // Push element onto stack
+    void push(int val) {
+        StackNode* newNode = new StackNode(val);
+        newNode->next = top;
+        top = newNode;
+    }
+
+    // Pop element from stack
+    int pop() {
+        if (top == nullptr) {
+            throw std::out_of_range("Stack Underflow");
+        }
+        StackNode* temp = top;
+        top = top->next;
+        int poppedValue = temp->data;
+        delete temp;
+        return poppedValue;
+    }
+
+    // Check if stack is empty
+    bool isEmpty() {
+        return top == nullptr;
+    }
+
+    ~Stack() {
+        while (top != nullptr) {
+            StackNode* temp = top;
+            top = top->next;
+            delete temp;
+        }
+    }
+};
+```
+
+### 2. Queues
+
+- In the case of queues: it is the **first element added that is removed first**. We say that the queue is a **FIFO** (first-in first-out) structure.
+- A queue operates like a line for a movie theater; people enter the line at the back and leave from the front.
+
+![queue.jpg](/static/images/blog/07/queue.jpg)
+
+```cpp
+// Creating a Queue Node
+class QueueNode {
+	public:
+    int data;
+    QueueNode* next;
+
+    QueueNode(int val) : data(val), next(nullptr) {}
+};
+
+// Creating Queue class
+class Queue {
+	private:
+    QueueNode *front, *rear;
+
+	public:
+    Queue() : front(nullptr), rear(nullptr) {}
+
+    // Enqueue element to queue
+    void enqueue(int val) {
+        QueueNode* newNode = new QueueNode(val);
+        if (rear == nullptr) {
+            front = rear = newNode;
+            return;
+        }
+        rear->next = newNode;
+        rear = newNode;
+    }
+
+    // Dequeue element from queue
+    int dequeue() {
+        if (front == nullptr) {
+            throw std::out_of_range("Queue Underflow");
+        }
+        QueueNode* temp = front;
+        front = front->next;
+        if (front == nullptr) {
+            rear = nullptr;
+        }
+        int dequeuedValue = temp->data;
+        delete temp;
+        return dequeuedValue;
+    }
+
+    // Check if queue is empty
+    bool isEmpty() {
+        return front == nullptr;
+    }
+
+    ~Queue() {
+        while (front != nullptr) {
+            QueueNode* temp = front;
+            front = front->next;
+            delete temp;
+        }
+    }
+};
+```
+
+# **Non-linear Data Structures**
+
+## **Trees**
+
+- Trees are very used in computer science because information is often hierarchized in an arborescent form.
+- Arborescent data structures allow for the storage of voluminous data in a way that their access is efficient.
+- A tree is a structure composed of nodes and leaves connected by branches.
+- Unlike linear data structures, there is no concept of a sequential order among elements.
+- It is generally represented with the **root** at the top and the **leaves** at the bottom.
+
+![Tree](/static/images/blog/07/Tree.png)
+
+- The node C is the root of the tree.
+- The nodes V, L, F, G, Q are the leaves of the tree.
+- The nodes A, B, and T are intermediate nodes.
+- The degree of a node is given by its number of children. The degree of node T is 3, and the degree of node B is 2.
+
+### **Basic Terminology:**
+
+- **Node**: A basic unit of a tree which contains data.
+- **Root**: The topmost node in a tree.
+- **Parent and Child**: Each node (excluding the root) in a tree has exactly one parent and zero or more children.
+- **Leaf**: A node without any children.
+- **Subtree**: A tree formed by a node and its descendants.
+- **Depth**: The distance from the root to a node.
+- **Height**: The distance from a node to the deepest leaf.
+- A tree has exactly one path between the root and each of the nodes. Otherwise, it is a graph.
+
+### **Common Types of Trees:**
+
+### 1. **Binary Trees**:
+
+Each node has at most two children, typically referred to as the left and right child. They are widely used due to their efficiency in various operations.
+
+### 2. **Binary Search Trees (BST)**:
+
+A special kind of binary tree where the left child of a node contains a value less than its parent, and the right child contains a value greater. This property provides efficient searching capabilities.
+
+![bst-21](/static/images/blog/07/bst-21.png)
+
+### 3. **Heaps**:
+
+- The simplest way to put it is a binary tree where every child and grandchild is smaller (MaxHeap), or larger (MinHeap) than the current node.
+  - Whenever a node is added, we must adjust the tree
+  - Whenever a node is deleted, we must adjust the tree
+  - There is no traversing the tree
+
+![MinHeapAndMaxHeap1](/static/images/blog/07/MinHeapAndMaxHeap1.png)
+
+### **Tree Traversals:**
+
+To process or search for data in a tree, we use traversal methods:
+
+- **In-Order Traversal**: Visit left subtree, root, right subtree.
+- **Pre-Order Traversal**: Visit root, left subtree, right subtree.
+- **Post-Order Traversal**: Visit left subtree, right subtree, root.
+- **Level-Order Traversal**: Visit nodes level by level.
+
+## **Graphs**
+
+- Graphs are another fundamental non-linear data structure. They are composed of a set of vertices (or nodes) and a set of edges connecting these vertices. Graphs are used to represent networks, such as social networks, computer networks, or even road maps.
+- Let's say, we have 6 cities. We mark them as 1, 2, 3, 4, 5, 6. Now we connect the cities that have roads between each other.
+
+![Graph](/static/images/blog/07/graph.png)
+
+- This is a simple graph where some cities are shown with the roads that are connecting them. In Graph Theory, we call each of these cities **Node** or **Vertex** and the roads are called **Edge**. Graph is simply a connection of these nodes and edges.
+- A **node** can represent a lot of things. In some graphs, nodes represent cities, some represent airports, some represent a square in a chessboard. **Edge** represents the relation between each nodes. That relation can be the time to go from one airport to another, the moves of a knight from one square to all the other squares etc.
+
+# **Use Cases**
+
+1. **Arrays for Static Data Storage**: Arrays are used in scenarios where the size of the dataset is known and doesn't change, like storing fixed configurations or lookup tables.
+2. **Linked Lists in Dynamic Applications**: Useful in applications where the size of the data set changes frequently, such as dynamic memory allocation.
+3. **Stacks for Undo Mechanisms**: Common in software that requires an undo feature, like text editors, where each action is pushed onto the stack and popped when an undo is requested.
+4. **Queues in Service Systems**: Used in scenarios like task scheduling in operating systems or request handling in web servers, where tasks are processed in the order they arrive.
+5. **Binary Search Trees for Efficient Search**: Ideal for database implementations where data is frequently inserted, deleted, and searched, as they offer efficient search, insert, and delete operations.
+6. **Heaps in Priority Queuing Systems**: Used in priority queues, which are essential in systems like job scheduling in printers or CPU task management.
+7. **Graphs in Network Routing**: Essential in network algorithms for finding the shortest path or analyzing connectivity in networks like social media or transportation grids.
+
+![10 Key Data Structures We Use Every Day](/static/images/blog/07/10-Key-Data-Structures-We-Use-Every-Day.webp)
+
+Image From — [10 Key Data Structures We Use Every Day](https://www.youtube.com/watch?v=ouipSd_5ivQ&ab_channel=ByteByteGo)
+
+---
+
+### **Resources:**
+
+- [**An introduction to Data Structures**](https://blog.sarahgerrard.me/an-introduction-to-data-structures)
+- [**GeeksForGeeks**](https://www.geeksforgeeks.org/data-structure-meaning/?ref=roadmap)
+- **[The Last Algorithms Course You'll Need](https://theprimeagen.github.io/fem-algos)**
+- **Algorithms Notes for professionals (book)**
+- [Structure de données #1 : Complexité d'un programme O(1), O(log n), O(n), O(n!), ... | (Darija)](https://www.youtube.com/watch?v=zTbo2t5Man8&pp=ygUaaGFzc2FuIGVsIGJhaGkgY29tcGxleGl0w6k=)

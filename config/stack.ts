@@ -68,6 +68,10 @@ export const StackInfo: Record<Stack, StackInfoMap> = {
     value: 'Go',
     color: Colors.go,
   },
+  [Stack.php]: {
+    value: 'PHP',
+    color: Colors.php,
+  },
   [Stack.javascript]: {
     value: 'JavaScript',
     color: Colors.javascript,

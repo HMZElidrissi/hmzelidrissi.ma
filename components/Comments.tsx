@@ -34,7 +34,6 @@ export default function Comments({
           <h2 className="text-2xl font-bold leading-8 tracking-tight">Share and Comment on</h2>
           {ig && <SocialIcon kind="instagram" href={ig} size={6} />}
           {bsky && <SocialIcon kind="bsky" href={bsky} size={6} />}
-          {threads && <SocialIcon kind="threads" href={threads} size={6} />}
           {x && <SocialIcon kind="twitter" href={x} size={6} />}
           {fb && <SocialIcon kind="facebook" href={fb} size={6} />}
           {reddit && <SocialIcon kind="reddit" href={reddit} size={6} />}

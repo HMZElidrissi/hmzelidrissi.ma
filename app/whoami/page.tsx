@@ -4,7 +4,7 @@ import AuthorLayout from '@/layouts/AuthorLayout'
 import { coreContent } from 'pliny/utils/contentlayer'
 import { genPageMetadata } from 'app/seo'
 
-export const metadata = genPageMetadata({ title: 'Who is Zak El Fassi?' })
+export const metadata = genPageMetadata({ title: 'Who is Hamza El Idrissi?' })
 
 export default function Page() {
   const author = allAuthors.find((p) => p.slug === 'default') as Authors

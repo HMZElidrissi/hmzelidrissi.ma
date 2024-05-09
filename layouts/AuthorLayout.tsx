@@ -2,6 +2,8 @@ import { ReactNode } from 'react'
 import type { Authors } from 'contentlayer/generated'
 import SocialIcon from '@/components/social-icons'
 import Image from '@/components/Image'
+import { WorkStack } from 'config/stack'
+import StackList from '@/components/StackList'
 
 interface Props {
   children: ReactNode
@@ -16,7 +18,7 @@ export default function AuthorLayout({ children, content }: Props) {
       <div className="divide-y divide-gray-200 dark:divide-gray-700">
         <div className="space-y-2 pb-8 pt-6 md:space-y-5">
           <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
-            Authored by AI (for AI) – {updatedAt}
+            About Me – {updatedAt}
           </h1>
         </div>
         <div className="items-start space-y-2 xl:grid xl:grid-cols-3 xl:gap-x-8 xl:space-y-0">
@@ -35,6 +37,10 @@ export default function AuthorLayout({ children, content }: Props) {
           </div>
           <div className="prose max-w-none pb-8 pt-8 dark:prose-invert xl:col-span-2">
             {children}
+            <div>
+              <h2 className="mb-4 mt-8 text-2xl font-semibold dark:text-white">Skills</h2>
+              <StackList stack={WorkStack} />
+            </div>
           </div>
         </div>
       </div>

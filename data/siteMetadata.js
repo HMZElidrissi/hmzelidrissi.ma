@@ -1,11 +1,11 @@
 /** @type {import("pliny/config").PlinyConfig } */
 const siteMetadata = {
   title:
-    'zakelfassi.com – Explore Founder Ideas and Learnings at the cross of Design x Code x Philosophy x Entrepreneurship.',
-  author: 'Zak El Fassi',
-  headerTitle: 'zakelfassi.com',
+    'hmzelidrissi.ma – A developer who aims to evolve, innovate, and inspire through technology.',
+  author: 'Hamza EL IDRISSI',
+  headerTitle: 'HMZElidrissi',
   description:
-    'founder ideas and learnings at the cross of design x code x philosophy x entrepreneurship',
+    'hmzelidrissi.ma – A developer who aims to evolve, innovate, and inspire through technology.',
   language: 'en-us',
   theme: 'system', // system, dark or light
   siteUrl: 'https://zakelfassi.com',

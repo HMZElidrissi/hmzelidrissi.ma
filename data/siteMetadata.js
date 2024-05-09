@@ -3,7 +3,7 @@ const siteMetadata = {
   title:
     'hmzelidrissi.ma – A developer who aims to evolve, innovate, and inspire through technology.',
   author: 'Hamza EL IDRISSI',
-  headerTitle: 'HMZElidrissi',
+  headerTitle: 'hmzelidrissi.ma',
   description:
     'hmzelidrissi.ma – A developer who aims to evolve, innovate, and inspire through technology.',
   language: 'en-us',

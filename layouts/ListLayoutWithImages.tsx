@@ -111,7 +111,7 @@ export default function ListLayoutWithImages({
             return (
               <li
                 key={slug}
-                className="mt-5 rounded-lg border border-gray-200 bg-gray-50 pt-5 shadow-md transition duration-300 hover:bg-gray-200 hover:shadow-lg dark:border-0 dark:bg-gray-800/80 dark:hover:bg-gray-700/80"
+                className="mt-5 rounded-lg border border-gray-200 bg-gray-50 pt-5 shadow-md transition duration-300 hover:bg-gray-200 hover:shadow-lg dark:border-0 dark:bg-gray-900/80 dark:hover:bg-gray-800/80"
               >
                 <article className="space-y-2 p-4">
                   <div>

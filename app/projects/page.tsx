@@ -16,28 +16,21 @@ export default function Projects() {
             (a non-comprehensive list of) some of the things I help(ed) bring to life.
           </p>
         </div>
-        <div className="container py-12">
+        <div className="container py-8">
           <div className="">
-            {Array.from(new Set(projectsData.map((project) => project.type))).map((type) => (
-              <>
-                <h2 className="text-2xl font-bold leading-7 text-gray-900 dark:text-gray-100 sm:truncate sm:text-3xl sm:leading-9">
-                  {type}
-                </h2>
-                <div className="m-8 flex flex-wrap">
-                  {projectsData
-                    .filter((project) => project.type === type)
-                    .map((d) => (
-                      <Card
-                        key={d.title}
-                        title={d.title}
-                        description={d.description}
-                        imgSrc={d.imgSrc}
-                        href={d.href}
-                      />
-                    ))}
-                </div>
-              </>
-            ))}
+            <div className="m-8 flex flex-wrap">
+              {projectsData.map((d) => (
+                <Card
+                  key={d.title}
+                  title={d.title}
+                  description={d.description}
+                  tasks={d.tasks}
+                  imgSrc={d.imgSrc}
+                  href={d.href}
+                  technos={d.technos}
+                />
+              ))}
+            </div>
           </div>
         </div>
       </div>

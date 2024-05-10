@@ -1,7 +1,7 @@
 import Image from './Image'
 import Link from './Link'
 
-const Card = ({ title, description, imgSrc, href }) => (
+const Card = ({ title, description, tasks, imgSrc, href, technos }) => (
   <div className="md max-w-[544px] p-4 md:w-1/2">
     <div
       className={`${
@@ -38,7 +38,26 @@ const Card = ({ title, description, imgSrc, href }) => (
             title
           )}
         </h2>
-        <p className="prose mb-3 max-w-none text-gray-500 dark:text-gray-400">{description}</p>
+        <p className="prose mb-2 max-w-none text-gray-900 dark:text-gray-400">{description}</p>
+        {tasks && (
+          <ul className="prose mb-4 list-disc text-gray-900 dark:text-gray-400">
+            {tasks.map((task) => (
+              <li key={task}>{task}</li>
+            ))}
+          </ul>
+        )}
+        {technos && (
+          <div className="flex flex-wrap">
+            {technos.map((techno) => (
+              <span
+                key={techno}
+                className="mb-4 mr-2 rounded-sm bg-primary-400 px-2 py-2 text-xs font-medium text-white"
+              >
+                {techno}
+              </span>
+            ))}
+          </div>
+        )}
         {href && href.search('#') === -1 && (
           <div className="flex justify-end">
             <Link

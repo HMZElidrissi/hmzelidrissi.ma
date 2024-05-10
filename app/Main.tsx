@@ -1,6 +1,6 @@
 import Link from '@/components/Link'
 import { RoughNotation } from 'react-rough-notation'
-import { useRandomColorPair } from '@/components/useRandomColorPair'
+import { useRandomColorPair } from 'utils/useRandomColorPair'
 import siteMetadata from '@/data/siteMetadata'
 
 export default function Home() {

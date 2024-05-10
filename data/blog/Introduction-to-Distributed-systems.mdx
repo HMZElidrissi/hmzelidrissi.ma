@@ -12,7 +12,8 @@ images: ['/static/images/blog/10/10.jpg']
 
 # WHAT IS A DISTRIBUTED SYSTEM?
 
-> “**_A distributed system is a collection of autonomous computing elements that appears to its users as a single coherent system._**” - Andrew S. Tanenbaum
+> “**A distributed system is a collection of autonomous computing elements that appears to its users as a single coherent system.**” - Andrew S. Tanenbaum
+>
 
 An important goal of a distributed system is to make it easy for users (and applications) to access and share remote resources. Resources can be anything from files, databases, and services to computational power. The computers in a distributed system communicate with each other using various communication media, such as a network. The computers in a distributed system are called nodes, and the network that connects them is called the communication network.
 
@@ -26,11 +27,13 @@ An important goal of a distributed system is to make it easy for users (and appl
 
 Distributed systems offer several advantages over centralized systems, including:
 
-1. _SCALABILITY_: Distributed systems can scale horizontally by adding more nodes to the system, enabling it to handle a large number of users and requests.
-2. _FAULT TOLERANCE_: They are designed to remain operational even if some nodes fail, usually achieved through data replication and service redundancy.
-3. _Reliability_: They are reliable because they continue to operate despite failures in some nodes, ensuring that data and services are replicated across multiple nodes.
-   > Although fault tolerance and reliability are related, they have nuanced differences. Fault tolerance focuses on system stability despite failures, while reliability encompasses broader aspects of system continuity.
-4. _GEO-DISTRIBUTION_: They can be geographically distributed, allowing users to access resources from various locations. This enhances accessibility and reduces latency by locating resources closer to users.
+1. *SCALABILITY*: Distributed systems can scale horizontally by adding more nodes to the system, enabling it to handle a large number of users and requests.
+2. *FAULT TOLERANCE*: They are designed to remain operational even if some nodes fail, usually achieved through data replication and service redundancy.
+3. *Reliability*: They are reliable because they continue to operate despite failures in some nodes, ensuring that data and services are replicated across multiple nodes.
+
+ > Although fault tolerance and reliability are related, they have nuanced differences. Fault tolerance focuses on system stability despite failures, while reliability encompasses broader aspects of system continuity.
+    >
+4. *GEO-DISTRIBUTION*: They can be geographically distributed, allowing users to access resources from various locations. This enhances accessibility and reduces latency by locating resources closer to users.
 
 # COMPLEXITY OF DISTRIBUTED SYSTEMS
 
@@ -65,20 +68,33 @@ Peter Deutsch, a computer scientist, identified eight fallacies of distributed c
 ## THEOREMS OF DISTRIBUTED SYSTEMS
 
 1. **CAP THEOREM**: The CAP theorem states that in a distributed system, it is impossible to simultaneously achieve consistency, availability, and partition tolerance. A system can only guarantee two out of the three properties at any given time.
-   - **Consistency**: All nodes in the system have the same data at the same time.
-   - **Availability**: The system remains operational and responsive to user requests.
-   - **Partition Tolerance**: The system can tolerate network partitions and communication failures. (network partitions are when nodes in a distributed system are unable to communicate with each other i.e. the network is partitioned)
-     > **CAP Theorem**: Consistency, Availability, and Partition Tolerance are the three properties of a distributed system. A system can only guarantee two out of the three properties at any given time.
-     > When there is a network partition, a distributed system must choose between consistency and availability. It can either be consistent and unavailable or available and inconsistent until the partition is resolved.
+ - **Consistency**: All nodes in the system have the same data at the same time.
+ - **Availability**: The system remains operational and responsive to user requests.
+ - **Partition Tolerance**: The system can tolerate network partitions and communication failures. (network partitions are when nodes in a distributed system are unable to communicate with each other i.e. the network is partitioned)
 
-### Example:
+ > **CAP Theorem:** Consistency, Availability, and Partition Tolerance are the three properties of a distributed system. A system can only guarantee two out of the three properties at any given time.
+When there is a network partition, a distributed system must choose between consistency and availability. It can either be consistent and unavailable or available and inconsistent until the partition is resolved.
+    >
+
+    ### Example:
 
 Let's say we have a tiny bank with 2 ATMs connected over a network. The ATMs support 3 operations: deposit, withdraw, and check balance. The bank wants to ensure that the ATMs are always available to customers and that the account balance is consistent across both ATMs. However, if the network between the ATMs fails, the bank must choose between consistency and availability. If it prioritizes consistency, the ATMs will be unavailable until the network is restored. If it prioritizes availability, the ATMs will remain operational but may have inconsistent account balances.
 
-2. **PACELC THEOREM**: The PACELC theorem extends the CAP theorem by introducing latency and consistency trade-offs. In a distributed system, developers must choose between consistency and latency when handling network partitions.
-   - **PACELC**: Consistency, Latency, and Availability in the presence of network partitions, Latency, and Consistency trade-offs.
-     > **PACELC Theorem**: Partition Tolerance, Availability, Consistency, Else, Latency, Consistency trade-offs. Developers must choose between consistency and latency when handling network partitions.
+![cap-theorem.webp](/static/images/blog/10/cap-theorem.webp)
 
-### Example:
+2. **PACELC THEOREM**: The PACELC theorem extends the CAP theorem by introducing latency and consistency trade-offs. In a distributed system, developers must choose between consistency and latency when handling network partitions.
+ - **PACELC**: Consistency, Latency, and Availability in the presence of network partitions, Latency, and Consistency trade-offs.
+
+ > **PACELC Theorem:** Partition Tolerance, Availability, Consistency, Else, Latency, Consistency trade-offs. Developers must choose between consistency and latency when handling network partitions.
+    >
+
+    ### Example:
 
 Let's say we have a social media platform where users can post updates and comments. The platform wants to ensure that posts are consistent across all users' feeds and that comments are displayed in real-time. However, if there is a network partition, the platform must choose between consistency and latency. If it prioritizes consistency, posts will be delayed until the partition is resolved. If it prioritizes latency, posts will be displayed immediately but may be inconsistent across users' feeds.
+
+![pacelc-theorem.webp](/static/images/blog/10/pacelc-theorem.webp)
+
+ > **PACELC** extends the CAP theorem by introducing latency (L) as an additional attribute of a distributed system. The theorem states that else (E), even when the system is running normally in the absence of partitions, one has to choose between latency (L) and consistency (C).
+    >
+
+    For example, according to the CAP theorem, a database can be considered available if a query returns a response after 30 days. Obviously, such latency would be unacceptable for any real-world application.

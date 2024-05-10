@@ -42,7 +42,9 @@ const Card = ({ title, description, tasks, imgSrc, href, technos }) => (
         {tasks && (
           <ul className="prose mb-4 list-disc text-gray-900 dark:text-gray-400">
             {tasks.map((task) => (
-              <li className="ml-4" key={task}>{task}</li>
+              <li className="ml-4" key={task}>
+                {task}
+              </li>
             ))}
           </ul>
         )}

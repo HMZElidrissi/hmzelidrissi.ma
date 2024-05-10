@@ -4,7 +4,6 @@
 import { usePathname } from 'next/navigation'
 import { slug } from 'github-slugger'
 import { RoughNotation } from 'react-rough-notation'
-import { useRandomColorPair } from '@/components/useRandomColorPair'
 import { CoreContent } from 'pliny/utils/contentlayer'
 import type { Blog } from 'contentlayer/generated'
 import Link from '@/components/Link'

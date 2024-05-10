@@ -1,5 +1,8 @@
 import { useMemo } from 'react'
-import { Tuple } from 'types'
+
+export type Maybe<T> = T | null
+
+export type Tuple<T> = [T, T]
 
 export function useRandomColorPair(): Tuple<string> {
   const colors: Tuple<string>[] = [

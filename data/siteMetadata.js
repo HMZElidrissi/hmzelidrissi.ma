@@ -16,6 +16,7 @@ const siteMetadata = {
   github: 'https://github.com/HMZElidrissi',
   twitter: 'https://x.com/HMZElidrissi',
   linkedin: 'https://www.linkedin.com/in/hmzelidrissi',
+  spotify: 'https://open.spotify.com/user/offnvr16bsi0bvnpkrel36eyi',
   locale: 'en-US',
   analytics: {
     // If you want to use an analytics provider you have to add it to the

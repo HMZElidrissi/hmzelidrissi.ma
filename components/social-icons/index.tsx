@@ -11,6 +11,7 @@ import {
   Bsky,
   Pinterest,
   Reddit,
+  Spotify,
 } from './icons'
 
 const components = {
@@ -26,6 +27,7 @@ const components = {
   bsky: Bsky,
   reddit: Reddit,
   pinterest: Pinterest,
+  spotify: Spotify,
 }
 
 type SocialIconProps = {

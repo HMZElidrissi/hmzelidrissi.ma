@@ -54,6 +54,13 @@ const projectsData: Project[] = [
     ],
     href: 'https://tabaro3.vercel.app/',
   },
+  {
+    title: 'Moroccan Resume Parser',
+    description: `Moroccan Resume Parser is a customized tool for parsing resumes specifically tailored to the Moroccan job market. It is built upon the pyresparser library with specific adjustments to handle Moroccan education, job titles, and other relevant details.`,
+    imgSrc: '/static/images/projects/resume.png',
+    technos: ['Python'],
+    href: 'https://github.com/HMZElidrissi/moroccan_resume_parser',
+  },
 ]
 
 export default projectsData

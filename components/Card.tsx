@@ -2,7 +2,7 @@ import Image from './Image'
 import Link from './Link'
 
 const Card = ({ title, description, tasks, imgSrc, href, technos }) => (
-  <div className="md max-w-[544px] p-4 md:w-1/2">
+  <div className="md max-w-[544px] p-4 transition-transform duration-300 hover:scale-105 md:w-1/2">
     <div
       className={`${
         imgSrc && 'h-full'
@@ -61,13 +61,13 @@ const Card = ({ title, description, tasks, imgSrc, href, technos }) => (
           </div>
         )}
         {href && href.search('#') === -1 && (
-          <div className="flex justify-end">
+          <div className="mt-auto">
             <Link
               href={href}
-              className="text-base font-medium leading-6 text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+              className="block rounded-lg bg-zinc-100 px-4 py-2 text-center text-zinc-800 transition-colors duration-300 hover:bg-zinc-200 dark:bg-zinc-800 dark:text-white dark:hover:bg-zinc-700"
               aria-label={`Link to ${title}`}
             >
-              visit project &rarr;
+              Visit Project
             </Link>
           </div>
         )}

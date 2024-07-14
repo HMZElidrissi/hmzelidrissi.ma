@@ -47,13 +47,13 @@ export default function PostLayout({ content, next, prev, children }: LayoutProp
               <div className="pb-6 pt-6 text-center text-gray-700 dark:text-gray-300" id="comment">
                 <Comments
                   slug={slug}
-                  ig={ig}
-                  threads={threads}
-                  x={x}
-                  fb={fb}
-                  reddit={reddit}
-                  pinterest={pinterest}
-                  bsky={bsky}
+                  ig={content.ig}
+                  threads={content.threads}
+                  x={content.x}
+                  fb={content.fb}
+                  reddit={content.reddit}
+                  pinterest={content.pinterest}
+                  bsky={content.bsky}
                 />
               </div>
             )}

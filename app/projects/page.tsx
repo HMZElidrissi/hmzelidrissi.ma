@@ -17,20 +17,18 @@ export default function Projects() {
           </p>
         </div>
         <div className="container py-8">
-          <div className="">
-            <div className="m-8 flex flex-wrap">
-              {projectsData.map((d) => (
-                <Card
-                  key={d.title}
-                  title={d.title}
-                  description={d.description}
-                  tasks={d.tasks}
-                  imgSrc={d.imgSrc}
-                  href={d.href}
-                  technos={d.technos}
-                />
-              ))}
-            </div>
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+            {projectsData.map((d) => (
+              <Card
+                key={d.title}
+                title={d.title}
+                description={d.description}
+                tasks={d.tasks}
+                imgSrc={d.imgSrc}
+                href={d.href}
+                technos={d.technos}
+              />
+            ))}
           </div>
         </div>
       </div>

@@ -110,7 +110,7 @@ export default function ListLayoutWithImages({
             return (
               <li
                 key={slug}
-                className="mt-5 rounded-lg border border-gray-200 bg-gray-50 pt-5 shadow-md transition duration-300 hover:bg-gray-200 hover:shadow-lg dark:border-0 dark:bg-gray-900/80 dark:hover:bg-gray-800/80"
+                className="mt-5 rounded-lg border border-gray-200 bg-gray-50 pt-5 shadow-md transition duration-300 hover:bg-gray-200 hover:shadow-lg dark:border-0 dark:bg-gray-800/80 dark:hover:bg-gray-700/70"
               >
                 <article className="space-y-2 p-4">
                   <div>
@@ -144,7 +144,7 @@ export default function ListLayoutWithImages({
                   <div>
                     <Link
                       href={`/blog/${slug}`}
-                      className="ml-3 rounded-full bg-gray-300 px-4 py-2 text-xs font-semibold transition-colors duration-300 hover:bg-gray-400 dark:bg-gray-400 dark:hover:bg-gray-500"
+                      className="ml-3 rounded-full bg-gray-300 px-4 py-2 text-xs font-semibold transition-colors duration-300 hover:bg-gray-400 dark:bg-gray-500 dark:hover:bg-gray-600"
                     >
                       Read More
                     </Link>

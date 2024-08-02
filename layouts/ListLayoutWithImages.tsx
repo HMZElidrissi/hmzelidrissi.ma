@@ -74,7 +74,11 @@ export default function ListLayoutWithImages({
   const tagKeys = Object.keys(tagCounts)
   const sortedTags = tagKeys.sort((a, b) => tagCounts[b] - tagCounts[a])
 
-  const displayPosts = initialDisplayPosts.length > 0 ? initialDisplayPosts : posts
+  const nonDraftPosts = posts.filter((post) => !post.draft)
+  const nonDraftInitialDisplayPosts = initialDisplayPosts.filter((post) => !post.draft)
+
+  const displayPosts =
+    nonDraftInitialDisplayPosts.length > 0 ? nonDraftInitialDisplayPosts : nonDraftPosts
 
   const postDateTemplate: Intl.DateTimeFormatOptions = {
     year: 'numeric',
@@ -84,10 +88,9 @@ export default function ListLayoutWithImages({
   return (
     <div className="flex dark:text-white sm:space-x-24">
       <div>
-        <div className="border-b border-gray-100 pb-10 pt-6 text-center dark:border-black">
-          <p className="ml-2 mr-2 text-3xl font-extrabold text-black dark:text-white lg:text-5xl">
-            New post <br />
-            every&nbsp;
+        <div className="space-y-4 border-b border-gray-100 pb-10 pt-6 text-center dark:border-black">
+          <p className="mx-2 text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
+            new post every&nbsp;
             <span className="text-black">
               <RoughNotation
                 show={true}
@@ -100,6 +103,9 @@ export default function ListLayoutWithImages({
               </RoughNotation>
             </span>
           </p>
+          <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
+            learnings, thoughts, and other musings.
+          </p>
         </div>
         <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3">
           {displayPosts.map((frontMatter) => {
@@ -110,7 +116,7 @@ export default function ListLayoutWithImages({
             return (
               <li
                 key={slug}
-                className="mt-5 rounded-lg border border-gray-200 bg-gray-50 pt-5 shadow-md transition duration-300 hover:bg-gray-200 hover:shadow-lg dark:border-0 dark:bg-gray-800/80 dark:hover:bg-gray-700/70"
+                className="mt-5 rounded-lg border border-gray-200 bg-gray-50 pt-5 shadow-md transition duration-300 ease-in-out hover:-translate-y-1 hover:shadow-lg dark:border-0 dark:bg-gray-900/80"
               >
                 <article className="space-y-2 p-4">
                   <div>
@@ -144,7 +150,7 @@ export default function ListLayoutWithImages({
                   <div>
                     <Link
                       href={`/blog/${slug}`}
-                      className="ml-3 rounded-full bg-gray-300 px-4 py-2 text-xs font-semibold transition-colors duration-300 hover:bg-gray-400 dark:bg-gray-500 dark:hover:bg-gray-600"
+                      className="ml-3 rounded-full bg-gray-300 px-4 py-2 text-xs font-semibold transition-colors duration-300 hover:bg-gray-300/80 dark:bg-gray-700 dark:text-gray-100 dark:hover:bg-gray-700/80"
                     >
                       Read More
                     </Link>

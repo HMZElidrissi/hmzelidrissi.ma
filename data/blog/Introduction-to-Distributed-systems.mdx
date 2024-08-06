@@ -37,12 +37,17 @@ Distributed systems offer several advantages over centralized systems, including
 
 # COMPLEXITY OF DISTRIBUTED SYSTEMS
 
-- **ASYNCHRONOUS NETWORKING**: In a distributed system, nodes communicate with each other asynchronously, meaning that messages can be sent and received at different times. This can lead to issues such as message loss, duplication, and out-of-order delivery.
-- **PARTIAL FAILURE**: Nodes in a distributed system can fail independently, leading to partial failures. Handling partial failures requires mechanisms such as fault detection, recovery, and replication.
-- **CONCURRENCY CONTROL**: Multiple nodes in a distributed system can access shared resources concurrently.
-- **STATE MANAGEMENT**: Distributed systems must manage the state of the system across multiple nodes, ensuring consistency and synchronization.
-- **STATEFUL SYSTEMS**: Stateful systems maintain the state of the system across multiple requests, requiring mechanisms to manage stateful interactions.
-- **STATELESS SYSTEMS**: Stateless systems do not maintain the state of the system across requests, simplifying scalability and fault tolerance.
+- **ASYNCHRONOUS NETWORKING**: In a distributed system, nodes communicate with each other asynchronously, meaning that messages can be sent and received at different times. This can lead to issues such as message loss, duplication, and out-of-order delivery. For example, in a distributed chat application, messages might arrive out of order due to network delays.
+
+- **PARTIAL FAILURE**: Nodes in a distributed system can fail independently, leading to partial failures. Handling partial failures requires mechanisms such as fault detection, recovery, and replication. For instance, in a distributed database, if one node fails, the system should be able to continue operating using the remaining nodes.
+
+- **CONCURRENCY CONTROL**: Multiple nodes in a distributed system can access shared resources concurrently. For example, in a distributed banking system, multiple transactions might try to modify the same account balance simultaneously, requiring mechanisms to ensure consistency.
+
+- **STATE MANAGEMENT**: Distributed systems must manage the state of the system across multiple nodes, ensuring consistency and synchronization. For instance, in a distributed online game, the game state must be synchronized across all players' devices.
+
+- **STATEFUL SYSTEMS**: Stateful systems maintain the state of the system across multiple requests, requiring mechanisms to manage stateful interactions. An example is a user session in a web application that persists across multiple page loads.
+
+- **STATELESS SYSTEMS**: Stateless systems do not maintain the state of the system across requests, simplifying scalability and fault tolerance. RESTful APIs are an example of stateless systems, where each request contains all the information needed to process it.
 
 # DISTRIBUTED SYSTEMS ARCHITECTURE
 
@@ -56,14 +61,21 @@ Distributed systems can be classified based on their architecture, which defines
 
 Peter Deutsch, a computer scientist, identified eight fallacies of distributed computing that developers often overlook when designing distributed systems. These fallacies highlight common misconceptions about distributed systems:
 
-1. **THE NETWORK IS RELIABLE**: Developers often assume that the network is reliable and that messages sent between nodes will be delivered without errors. In reality, networks can experience latency, packet loss, and outages.
-2. **LATENCY IS ZERO**: Developers often assume that network latency is zero and that messages are delivered instantaneously. In reality, network latency can vary based on factors such as distance, congestion, and network conditions.
-3. **BANDWIDTH IS INFINITE**: Developers often assume that network bandwidth is infinite and that messages can be sent and received without limitations. In reality, network bandwidth is limited and can be affected by congestion and other factors. (bandwidth means the maximum rate of data transfer across a network)
-4. **THE NETWORK IS SECURE**: Developers often assume that the network is secure and that messages sent between nodes are encrypted and protected from eavesdropping. In reality, networks can be vulnerable to security threats
-5. **TOPOLOGY DOESN'T CHANGE**: Developers often assume that the network topology is static and that nodes are always connected. In reality, network topologies can change dynamically due to node failures, network partitions, and other factors.
-6. **THERE IS ONE ADMINISTRATOR**: Developers often assume that there is a single administrator responsible for managing the entire network. In reality, distributed systems can have multiple administrators with different levels of control and authority.
-7. **TRANSPORT COST IS ZERO**: Developers often assume that the cost of transporting messages across the network is zero. In reality, transporting messages can incur costs such as bandwidth usage, network fees, and processing overhead.
-8. **THE NETWORK IS HOMOGENEOUS**: Developers often assume that the network is homogeneous and that all nodes have similar capabilities and performance. In reality, networks can be heterogeneous, with nodes having different hardware, software, and configurations.
+1. **THE NETWORK IS RELIABLE**: Developers often assume that the network is reliable and that messages sent between nodes will be delivered without errors. In reality, networks can experience latency, packet loss, and outages. For example, a mobile app might fail to sync data with its server due to intermittent cellular network connectivity.
+
+2. **LATENCY IS ZERO**: Developers often assume that network latency is zero and that messages are delivered instantaneously. In reality, network latency can vary based on factors such as distance, congestion, and network conditions. For instance, a real-time multiplayer game might experience lag when players are geographically distant from each other.
+
+3. **BANDWIDTH IS INFINITE**: Developers often assume that network bandwidth is infinite and that messages can be sent and received without limitations. In reality, network bandwidth is limited and can be affected by congestion and other factors. For example, a video streaming service might need to adapt its video quality based on the available bandwidth of the user's internet connection.
+
+4. **THE NETWORK IS SECURE**: Developers often assume that the network is secure and that messages sent between nodes are encrypted and protected from eavesdropping. In reality, networks can be vulnerable to security threats. For instance, sensitive data transmitted over an unsecured Wi-Fi network could be intercepted by malicious actors.
+
+5. **TOPOLOGY DOESN'T CHANGE**: Developers often assume that the network topology is static and that nodes are always connected. In reality, network topologies can change dynamically due to node failures, network partitions, and other factors. For example, in a mobile ad-hoc network (MANET), the network topology can change as devices move in and out of range of each other.
+
+6. **THERE IS ONE ADMINISTRATOR**: Developers often assume that there is a single administrator responsible for managing the entire network. In reality, distributed systems can have multiple administrators with different levels of control and authority. For instance, in a cloud-based system, responsibilities might be shared between the cloud provider and the customer's IT team.
+
+7. **TRANSPORT COST IS ZERO**: Developers often assume that the cost of transporting messages across the network is zero. In reality, transporting messages can incur costs such as bandwidth usage, network fees, and processing overhead. For example, a mobile app that frequently syncs large amounts of data might consume excessive cellular data, leading to additional costs for users.
+
+8. **THE NETWORK IS HOMOGENEOUS**: Developers often assume that the network is homogeneous and that all nodes have similar capabilities and performance. In reality, networks can be heterogeneous, with nodes having different hardware, software, and configurations. For instance, a web application might need to support various browsers and devices with different capabilities and screen sizes.
 
 ## THEOREMS OF DISTRIBUTED SYSTEMS
 

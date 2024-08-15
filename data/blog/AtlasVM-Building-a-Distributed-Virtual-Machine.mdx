@@ -291,7 +291,7 @@ In this project, all of our nodes (individual parts of our distributed system) a
 - **Protocol Buffers** is a language-agnostic data serialization format, meaning you can define your data structures once and generate code for multiple languages.It is developed by Google and allows you to define the structure of your data in a `.proto` file and generate code for serialization and deserialization in various languages. In the context of AtlasVM it helps us define the messages exchanged between nodes.
 - **gRPC** is a high-performance, open-source framework developed by Google for efficient and language-agnostic communication between distributed systems. In AtlasVM, we use gRPC to facilitate communication between nodes in our distributed virtual machine.
 
-### Protocol Buffers: Structured Data Definition
+## Protocol Buffers: Structured Data Definition
 
 Protocol Buffers help us define our data structures in a clear, efficient way. In our `atlas.proto` file, we describe the format of messages that our nodes will exchange:
 
@@ -305,7 +305,7 @@ message VMState {
 
 This defines a `VMState` message with three fields: `memory`, `pc`, and `acc`.
 
-#### The Protocol Buffers Compiler (protoc)
+### The Protocol Buffers Compiler (protoc)
 
 We use the `protoc` compiler to generate Go code from our `.proto` file:
 
@@ -319,7 +319,7 @@ This creates Go structs and methods that match our Protocol Buffer definitions. 
 2. **Type Safety**: The generated code ensures we're using the correct types for each field.
 3. **Efficient Serialization**: Protocol Buffers provide a compact binary format for data exchange.
 
-### gRPC: High-Performance RPC Framework
+## gRPC: High-Performance RPC Framework
 
 gRPC is a system for making remote procedure calls (RPC). In simpler terms, it allows one Go program to call functions on another Go program, even if they're running on different machines.
 

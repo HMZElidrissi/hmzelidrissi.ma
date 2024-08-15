@@ -1,19 +1,379 @@
 ---
 title: 'AtlasVM: Building a Distributed Virtual Machine - Lessons in Compilers and Distributed Systems'
-date: '2024-08-06'
-lastmod: '2024-08-06'
+date: '2024-08-15'
+lastmod: '2024-08-15'
 tags: ['Compilers', 'Distributed systems', 'Virtual machines']
-draft: true
+draft: false
 summary: 'Building a distributed virtual machine is a challenging task. In this blog post, we will discuss the challenges and lessons learned while building AtlasVM, a distributed virtual machine.'
 images: ['/static/images/blog/11/11.jpg']
 ---
 
 ![cover](/static/images/blog/11/11.jpg)
 
+This project is part of the [Missing Semester cohort](https://www.missingsemester.io/) initiative  that explores practical computer science concepts often overlooked in traditional curricula. Through this cohort, I learned a lot about compilers, distributed systems, and I also discovered the Go programming language, which became the foundation of my implementation.
 
+## Introduction
+
+This project proposes the development of a distributed virtual machine (VM) capable of executing programs written in a basic programming language. The VM will operate in a distributed system, where multiple nodes collaborate to run a program and reach a consensus on the final output. This project aims to explore the challenges and benefits of distributed computing through a simplified virtual machine framework.
+
+## Goals
+
+- **Develop a small virtual machine:** Design and implement a VM with a limited set of basic instructions suitable for educational or research purposes.
+- **Implement a basic programming language:** Create a user-friendly language allowing programmers to write instructions for the VM.
+- **Distribute the VM across a network:** Design a system where multiple nodes in a network can collaborate to execute a single program.
+- **Implement a consensus mechanism:** Develop a protocol where participating nodes agree on the final output of a program, even in the presence of potential network failures or node malfunctions.
+
+# COMPILERS
+
+When I hear the word 'compiler' I instantly get intimidated. The idea of a compiler is surrounded by a lot of complexity and mystery. And actually they are complex, for example the LLVM & Clang projects currently consist of around 3 million lines of code. The GNU Compiler Collection, GCC, is even bigger. 15 million lines of code. So WHAT IS A COMPILER?
+
+## WHAT IS A COMPILER?
+
+“A compiler is computer software that transforms computer code written in one programming language (the source language) into another computer language (the target language). Compilers are a type of translator that support digital devices, primarily computers. The name compiler is primarily used for programs that translate source code from a high-level programming language to a lower level language (e.g., assembly language, object code, or machine code) to create an executable program.” - Wikipedia
+
+![compiler](/static/images/blog/11/what-is-compiler.png)
+
+### EXAMPLES OF COMPILERS
+
+- **GCC (GNU Compiler Collection):** GCC is a powerful compiler that compiles code written in C, C++, and other languages to machine code.
+- **Babel:** Babel is a JavaScript compiler that converts ECMAScript 2015+ code into a backwards-compatible version of JavaScript in current and older browsers or environments.
+- **TypeScript:** TypeScript is a superset of JavaScript that compiles to plain JavaScript.
+- **Java Compiler:** The Java compiler converts Java code into Java bytecode, which is then executed by the Java Virtual Machine (JVM).
+
+### HOW DO COMPILERS WORK?
+
+1. **Lexical Analysis:** The compiler breaks the source code into tokens (e.g., keywords, identifiers, operators).
+2. **Syntax Analysis:** The compiler checks the syntax of the code to ensure it follows the rules of the programming language.
+3. **Semantic Analysis:** The compiler checks the meaning of the code to ensure it is semantically correct.
+4. **Intermediate Code (IR) Generation:** The compiler generates an intermediate representation of the code.
+5. **Code Optimization:** The compiler optimizes the intermediate code to improve performance.
+6. **Code Generation:** The compiler generates machine code or bytecode from the optimized intermediate code.
+
+![compiler](/static/images/blog/11/how-compiler-works.png)
+
+# VIRTUAL MACHINES
+
+A virtual machine is a computer built with software. It’s a software entity that mimics how a computer works. And by software entity I mean it can be anything. A function, a struct, an object, a module, or even a whole program. What matters is what it does.
+
+A virtual machine has a run loop that goes through the fetch-decode-execute cycle, just like a computer. It has a program counter; it fetches instructions; it decodes and executes them. It also has a stack, just like a real computer. Sometimes it has a call stack and sometimes even registers. All built in software.
+
+In the context of this project, the Atlas Specifications are as follows:
+
+- **Memory:** The VM will have a memory space where it can store data and instructions with the size of 1024 bytes, divided into:
+    - **Data Segment**: 512 bytes (addressable from 0 to 511) where the program can store variables and data.
+    - **Code Segment**: 512 bytes (addressable from 512 to 1023) where the program instructions are stored.
+    - **Addressing**: The VM will use a 8-bit addressing system to access memory locations.
+- **Registers:** The VM will have a set of registers to store temporary data and addresses.
+    - **Program Counter (PC)**: A 8-bit register that points to the current instruction being executed.
+    - **Accumulator (ACC)**: A 8-bit register used to store intermediate results.
+- **Stack:** The VM will have a stack to store return addresses and local variables. It will be implemented using a portion of the data segment. using LIFO (Last In, First Out) order.
+
+## Instruction Set
+
+AtlasVM uses a simple instruction set designed to support basic programming constructs. Each instruction is 1 byte long, with the first 4 bits representing the opcode and the remaining bits used for operands or addressing.
+
+| Opcode (Hex) | Instruction | Description |
+| --- | --- | --- |
+| 0x00 | ADD | Add value at memory address to ACC |
+| 0x01 | SUB | Subtract value at memory address from ACC |
+| 0x02 | MUL | Multiply ACC by value at the memory address |
+| 0x03 | DIV | Divide ACC by value at memory address (remainder ignored) |
+| 0x04 | AND | Perform bitwise AND between ACC and value at memory address |
+| 0x05 | OR | Perform bitwise OR between ACC and value at memory address |
+| 0x06 | XOR | Perform bitwise XOR between ACC and value at memory address |
+| 0x07 | LOAD | Load value from memory address to ACC |
+| 0x08 | STORE | Store value from ACC to memory address |
+| 0x09 | JUMP | Unconditionally jump to the address specified in the next byte |
+| 0x0A | JZ | Jump to the address specified in the next byte if ACC is zero |
+| 0x0B | JNZ | Jump to the address specified in the next byte if ACC is not zero |
+| 0x0C | IN | Read input from users and store it in ACC |
+| 0x0D | OUT | Write value from ACC to output |
+| 0x0E | HALT | Terminate program execution |
+
+## Programming Language: AtlasPL
+
+AtlasPL is a simple, C-like programming language designed to compile to AtlasVM bytecode. It supports basic arithmetic operations, variables, conditionals, and loops.
+
+Example AtlasPL code:
+
+```c
+@ This program checks if a number is even.
+var number: int;
+
+number = 10; @ Assign a value to number
+
+if ((number & 1) == 0) { @ Check if last bit is 0 (even)
+  return (0);
+} else {
+  return (1);
+}
+```
+
+## Bytecode Compilation
+
+The AtlasPL compiler translates high-level code into bytecode for the AtlasVM. Here's an example of how the above code might be compiled:
+
+```
+LOAD 0x00  // Load value 10 into ACC
+AND 0x01   // Perform bitwise AND with 1
+JZ 0x0A    // Jump to end if ACC is zero
+LOAD 0x01  // Load value 1 into ACC
+HALT       // Terminate program execution
+LOAD 0x02  // Load value 0 into ACC
+HALT       // Terminate program execution
+```
+
+## VM Implementation
+
+The AtlasVM is implemented as a Go struct with methods for executing instructions. Here's an overview of the key components:
+
+```go
+type VM struct {
+    Memory    *Memory
+    Registers *Registers
+    Stack     *Stack
+    running   bool
+    input     io.Reader
+    output    io.Writer
+}
+```
+
+The VM struct encapsulates the core components of our virtual machine:
+- Memory: Represents the VM's memory space
+- Registers: Holds the Program Counter (PC) and Accumulator (ACC)
+- Stack: Implements a stack for function calls and local variables
+- Input/Output: Allows for I/O operations
+
+The `Run` method implements the main execution loop:
+
+```go
+func (vm *VM) Run() {
+    vm.running = true
+    for vm.running {
+        instruction := DecodeInstruction(vm.Memory.Read(uint16(vm.Registers.PC)))
+        vm.Registers.PC++
+        vm.executeInstruction(instruction)
+    }
+}
+```
+
+This loop fetches, decodes, and executes instructions until the `HALT` instruction is encountered. The `executeInstruction` method handles the execution of each instruction:
+
+```go
+func (vm *VM) executeInstruction(instruction Instruction) {
+	switch instruction.Opcode {
+	case ADD:
+		vm.Registers.ACC += int8(vm.Memory.Read(uint16(instruction.Operand)))
+	case SUB:
+		vm.Registers.ACC -= int8(vm.Memory.Read(uint16(instruction.Operand)))
+	case MUL:
+        vm.Registers.ACC *= int8(vm.Memory.Read(uint16(instruction.Operand)))
+    // Handle other instructions...
+    case HALT:
+		vm.running = false
+	default:
+		panic(fmt.Sprintf("Unknown opcode: %d", instruction.Opcode))
+	}
+}
+```
+
+This method dispatches the execution of each instruction based on its opcode. The VM's state (memory, registers, stack) is updated accordingly.
+
+## Distributed Execution
+
+To distribute execution across multiple nodes, we divide the program into segments. Each node is responsible for executing a portion of the program and sharing its state with other nodes.
+
+1. **Program Distribution**: The bytecode is divided into equal segments and distributed to all nodes.
+2. **State Synchronization**: After executing each instruction, nodes broadcast their VM state (PC, ACC, relevant memory) to all other nodes.
+3. **Execution Coordination**: Nodes take turns executing instructions, with a designated leader node coordinating the turns.
+
+The distributed nature of AtlasVM is implemented through a network package that handles communication between nodes. Each node runs an instance of the VM and participates in a consensus protocol to agree on the VM's state.
+
+```go
+type Node struct {
+	ID        string
+	Address   string
+	Peers     map[string]*NodeClient
+	VM        *vm.VM
+	consensus *Consensus
+	mu        sync.Mutex
+}
+
+type NodeClient struct {
+	ID     string
+	Client pb.NodeServiceClient
+}
+```
+
+The `Node` struct represents a single node in the network, with fields for its ID, address, peers, VM instance, and consensus protocol. The `NodeClient` struct is used to communicate with other nodes in the network.
+
+```go
+func (n *Node) Run() {
+    for {
+        n.mu.Lock()
+        if n.VM.Running() {
+            instruction := n.VM.FetchInstruction()
+            n.VM.ExecuteInstruction(instruction)
+            n.consensus.BroadcastState(n.VM.State())
+        }
+        n.mu.Unlock()
+    }
+}
+```
+
+The `Run` method of the `Node` struct represents the main execution loop of a node. It fetches and executes instructions from the VM, broadcasting its state to other nodes through the consensus protocol.
+
+## Consensus Mechanism
+
+We implement a simplified version of the Raft consensus algorithm to ensure all nodes agree on the program's output:
+
+1. **Leader Election**: Nodes elect a leader responsible for coordinating execution.
+2. **Log Replication**: Each instruction execution is treated as a log entry, replicated across all nodes.
+3. **Commit**: An instruction's result is considered final when a majority of nodes have acknowledged it.
+
+```go
+type ConsensusState int
+
+const (
+	PrePrepare ConsensusState = iota
+	Prepare
+	Commit
+	Finalize
+)
+
+type Consensus struct {
+	node           *Node
+	state          ConsensusState
+	currentView    int64
+	prepareCount   map[string]int
+	commitCount    map[string]int
+	mu             sync.Mutex
+	decidedValue   *pb.ConsensusMessage
+	decisionQuorum int
+}
+```
+
+The `Consensus` struct represents the consensus protocol's state, including the current view, prepare and commit counts, and the decided value. The protocol ensures that nodes agree on the final output of the program.
+
+```go
+func (c *Consensus) BroadcastState(state *pb.VMState) {
+    // Broadcast VM state to all peers
+}
+
+func (c *Consensus) HandleMessage(msg *pb.ConsensusMessage) {
+    // Handle incoming consensus messages
+}
+
+func (c *Consensus) StartElection() {
+    // Start leader election process
+}
+
+func (c *Consensus) ExecuteInstruction(instruction *pb.Instruction) {
+    // Execute instruction and update consensus state
+}
+```
+
+The `Consensus` struct provides methods for broadcasting state updates, handling incoming messages, starting leader elections, and executing instructions while maintaining consensus.
+
+## Protocol Overview
+
+1. **Leader Election**: Nodes exchange messages to elect a leader responsible for coordinating execution.
+2. **Instruction Execution**: The leader sends instructions to nodes, which execute them and broadcast their state.
+3. **State Synchronization**: Nodes exchange state updates and acknowledge each other's progress.
+4. **Commitment**: An instruction is considered committed when a majority of nodes have acknowledged it.
+
+The consensus protocol ensures that all nodes agree on the final output of the program, even in the presence of network failures or node malfunctions.
+
+# COMMUNICATION BETWEEN NODES
+
+In this project, all of our nodes (individual parts of our distributed system) are written in Go. Even though we're using just one language, we use Protocol Buffers and gRPC. Let's explore why we use these technologies and how they help us build a robust distributed system.
+
+- **Protocol Buffers** is a language-agnostic data serialization format, meaning you can define your data structures once and generate code for multiple languages.It is developed by Google and allows you to define the structure of your data in a `.proto` file and generate code for serialization and deserialization in various languages. In the context of AtlasVM it helps us define the messages exchanged between nodes.
+- **gRPC** is a high-performance, open-source framework developed by Google for efficient and language-agnostic communication between distributed systems. In AtlasVM, we use gRPC to facilitate communication between nodes in our distributed virtual machine.
+
+### Protocol Buffers: Structured Data Definition
+
+Protocol Buffers help us define our data structures in a clear, efficient way. In our `atlas.proto` file, we describe the format of messages that our nodes will exchange:
+
+```protobuf
+message VMState {
+  bytes memory = 1;
+  uint32 pc = 2;
+  int32 acc = 3;
+}
+```
+
+This defines a `VMState` message with three fields: `memory`, `pc`, and `acc`.
+
+#### The Protocol Buffers Compiler (protoc)
+
+We use the `protoc` compiler to generate Go code from our `.proto` file:
+
+```shell
+protoc --go_out=. --go-grpc_out=. proto/atlas.proto
+```
+
+This creates Go structs and methods that match our Protocol Buffer definitions. The benefits include:
+
+1. **Automatic Code Generation**: We don't have to manually write structs and serialization code.
+2. **Type Safety**: The generated code ensures we're using the correct types for each field.
+3. **Efficient Serialization**: Protocol Buffers provide a compact binary format for data exchange.
+
+### gRPC: High-Performance RPC Framework
+
+gRPC is a system for making remote procedure calls (RPC). In simpler terms, it allows one Go program to call functions on another Go program, even if they're running on different machines.
+
+In our `atlas.proto` file, we define our gRPC service:
+
+```protobuf
+service NodeService {
+  rpc ReceiveMessage(ConsensusMessage) returns (Empty);
+}
+```
+
+This tells gRPC that our nodes can receive `ConsensusMessage` type messages.
+
+The benefits of using gRPC in our Go project include:
+
+1. **Code Generation**: gRPC generates client and server code, saving us from writing boilerplate networking code.
+2. **Efficient Communication**: gRPC uses HTTP/2, which is faster and more efficient than older protocols.
+3. **Streaming Support**: gRPC allows for advanced features like bi-directional streaming, which could be useful for continuous data exchange between nodes.
+
+## How It Works in AtlasVM
+
+1. We define our message structures and services in `atlas.proto`.
+2. We use `protoc` to generate Go code (`atlas.pb.go` and `atlas_grpc.pb.go`).
+3. In our node implementation, we use the generated code to create and handle messages:
+
+```go
+type NodeService struct {
+    node *Node
+    pb.UnimplementedNodeServiceServer
+}
+
+func (s *NodeService) ReceiveMessage(ctx context.Context, msg *pb.ConsensusMessage) (*pb.Empty, error) {
+    // Handle the received message
+    // ...
+    return &pb.Empty{}, nil
+}
+```
+
+4. When one node needs to send a message to another, it uses the generated client code:
+
+```go
+client := pb.NewNodeServiceClient(grpcConnection)
+response, err := client.ReceiveMessage(context.Background(), consensusMessage)
+```
+
+By using gRPC and Protocol Buffers, we simplify the communication between nodes in our distributed virtual machine, making it easier to build a robust and efficient system.
+
+---
+
+The project is still a work in progress, but it has been a great learning experience in compilers, virtual machines, and distributed systems. You can find the full source code and documentation on [GitHub](https://github.com/HMZElidrissi/atlas-virtual-machine).
 
 ---
 
 ### **Resources:**
 
-- [placeholder](https://www.placeholder.com)
+- [Missing Semester - Spring 2024 Cohort](https://www.youtube.com/playlist?list=PL7RELWF0lcJ_6J0Y3HH-5sqbWejfskfwp)
+- [Building a compiler in Go - Thorsten Ball](https://compilerbook.com/)

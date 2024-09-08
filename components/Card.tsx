@@ -1,5 +1,6 @@
 import Image from './Image'
 import Link from './Link'
+import { SquareArrowOutUpRightIcon } from 'lucide-react'
 
 interface CardProps {
   title: string
@@ -60,6 +61,7 @@ const Card: React.FC<CardProps> = ({ title, description, tasks, imgSrc, href, te
           aria-label={`Link to ${title}`}
         >
           Visit Project
+          <SquareArrowOutUpRightIcon className="ml-2 inline-block h-4 w-4" />
         </Link>
       )}
     </div>

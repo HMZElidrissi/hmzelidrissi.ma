@@ -5,6 +5,7 @@ import { usePathname } from 'next/navigation'
 import { slug } from 'github-slugger'
 import { RoughNotation } from 'react-rough-notation'
 import { CoreContent } from 'pliny/utils/contentlayer'
+import { Calendar } from 'lucide-react'
 import type { Blog } from 'contentlayer/generated'
 import Link from '@/components/Link'
 import Tag from '@/components/Tag'
@@ -132,9 +133,12 @@ export default function ListLayoutWithImages({
                     </Link>
                   </div>
                   <div className="p-4">
-                    <p className="text-md mt-2 block font-medium text-gray-500 dark:text-gray-400">
-                      {new Date(date).toLocaleDateString(siteMetadata.locale, postDateTemplate)}
-                    </p>
+                    <div className="mb-2 flex items-center text-sm text-gray-500 dark:text-gray-400">
+                      <Calendar size={16} className="mr-2" />
+                      <time dateTime={date}>
+                        {new Date(date).toLocaleDateString(siteMetadata.locale, postDateTemplate)}
+                      </time>
+                    </div>
                     <h3 className="mb-2 text-xl font-bold leading-8 tracking-tight">
                       <Link href={`/blog/${slug}`} className="text-gray-900 dark:text-gray-100">
                         {title}
@@ -152,7 +156,7 @@ export default function ListLayoutWithImages({
                       href={`/blog/${slug}`}
                       className="ml-3 rounded-full bg-gray-300 px-4 py-2 text-xs font-semibold transition-colors duration-300 hover:bg-gray-300/80 dark:bg-gray-700 dark:text-gray-100 dark:hover:bg-gray-700/80"
                     >
-                      Read More
+                      Read more
                     </Link>
                   </div>
                 </article>

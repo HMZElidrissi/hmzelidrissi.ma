@@ -6,6 +6,7 @@ import { slug } from 'github-slugger'
 import { formatDate } from 'pliny/utils/formatDate'
 import { CoreContent } from 'pliny/utils/contentlayer'
 import type { Blog } from 'contentlayer/generated'
+import { Calendar } from 'lucide-react'
 import Link from '@/components/Link'
 import Tag from '@/components/Tag'
 import siteMetadata from '@/data/siteMetadata'
@@ -80,7 +81,7 @@ export default function ListLayoutWithTags({
     <>
       <div>
         <div className="pb-6 pt-6">
-          <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:hidden sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
+          <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
             {title}
           </h1>
         </div>
@@ -120,45 +121,53 @@ export default function ListLayoutWithTags({
               </ul>
             </div>
           </div>
-          <div>
-            <ul>
+          <div className="w-full">
+            <ul className="space-y-8">
               {displayPosts.map((post) => {
                 const { path, date, title, summary, tags, images } = post
                 return (
-                  <li key={path} className="py-5">
-                    <article className="flex flex-col space-y-2 xl:space-y-0">
-                      <dl>
-                        <dt className="sr-only">Published on</dt>
-                        <dd className="text-base font-medium leading-6 text-gray-500 dark:text-gray-400">
+                  <li
+                    key={path}
+                    className="rounded-lg bg-white shadow-md transition-all hover:-translate-y-1 hover:shadow-lg dark:bg-gray-800"
+                  >
+                    <article className="overflow-hidden rounded-lg">
+                      {images && images[0] && images[0].search('twitter-card') === -1 && (
+                        <Link href={`/${path}`} className="block overflow-hidden">
+                          <Image
+                            src={images[0]}
+                            alt={title}
+                            width={800}
+                            height={400}
+                            className="h-64 w-full object-cover object-center transition duration-300 ease-in-out hover:scale-105"
+                          />
+                        </Link>
+                      )}
+                      <div className="p-6">
+                        <div className="flex items-center text-sm text-gray-500 dark:text-gray-400">
+                          <Calendar size={16} className="mr-2" />
                           <time dateTime={date}>{formatDate(date, siteMetadata.locale)}</time>
-                        </dd>
-                      </dl>
-                      <div className="space-y-3">
-                        <div>
-                          <h2 className="text-2xl font-bold leading-8 tracking-tight">
-                            <Link href={`/${path}`} className="text-gray-900 dark:text-gray-100">
-                              {title}
-                            </Link>
-                          </h2>
-                          <div className="flex flex-wrap">
-                            {tags?.map((tag) => <Tag key={tag} text={tag} />)}
-                          </div>
                         </div>
-                        {images && images[0] && images[0].search('twitter-card') === -1 && (
-                          <div className="my-4">
-                            <Image
-                              src={images[0]}
-                              alt={title}
-                              className="rounded-lg"
-                              layout="responsive"
-                              width={1200}
-                              height={900}
-                            />
-                          </div>
-                        )}
-                        <div className="prose max-w-none text-gray-700 dark:text-gray-400">
+                        <h2 className="mb-3 mt-2 text-2xl font-bold leading-8 tracking-tight">
+                          <Link
+                            href={`/${path}`}
+                            className="text-gray-900 hover:text-primary-500 dark:text-gray-100 dark:hover:text-primary-400"
+                          >
+                            {title}
+                          </Link>
+                        </h2>
+                        <div className="mb-4 flex flex-wrap">
+                          {tags?.map((tag) => <Tag key={tag} text={tag} />)}
+                        </div>
+                        <p className="prose mb-4 max-w-none text-gray-500 dark:text-gray-400">
                           {summary}
-                        </div>
+                        </p>
+                        <Link
+                          href={`/${path}`}
+                          className="ml-3 rounded-full bg-gray-300 px-4 py-2 text-xs font-semibold transition-colors duration-300 hover:bg-gray-300/80 dark:bg-gray-700 dark:text-gray-100 dark:hover:bg-gray-700/80"
+                          aria-label={`Read "${title}"`}
+                        >
+                          Read more
+                        </Link>
                       </div>
                     </article>
                   </li>

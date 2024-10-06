@@ -2,7 +2,9 @@ interface Project {
   title: string
   description: string
   tasks?: string[]
-  href?: string
+  blog?: string
+  github?: string
+  link?: string
   imgSrc?: string
   technos?: string[]
 }
@@ -19,7 +21,7 @@ const projectsData: Project[] = [
     ],
     imgSrc: '/static/images/projects/mobdie.jpg',
     technos: ['Laravel', 'Livewire', 'Tailwind CSS', 'Chart.js', 'MySQL'],
-    href: 'https://mobdie.ma/',
+    link: 'https://mobdie.ma/',
   },
   {
     title: 'Evento',
@@ -31,7 +33,7 @@ const projectsData: Project[] = [
     ],
     imgSrc: '/static/images/projects/evento.png',
     technos: ['Laravel', 'React', 'Vite.js', 'Tailwind CSS', 'PostgreSQL'],
-    href: 'https://github.com/HMZElidrissi/Evento-API',
+    github: 'https://github.com/HMZElidrissi/Evento-API',
   },
   {
     title: 'tabaro3',
@@ -52,7 +54,7 @@ const projectsData: Project[] = [
       'Vercel',
       'GitHub Actions',
     ],
-    href: 'https://tabaro3.vercel.app/',
+    link: 'https://tabaro3.vercel.app/',
   },
   {
     title: 'Moroccan Resume Parser',
@@ -63,7 +65,7 @@ const projectsData: Project[] = [
     ],
     imgSrc: '/static/images/projects/resume.png',
     technos: ['Python'],
-    href: 'https://github.com/HMZElidrissi/moroccan_resume_parser',
+    github: 'https://github.com/HMZElidrissi/moroccan_resume_parser',
   },
 ]
 

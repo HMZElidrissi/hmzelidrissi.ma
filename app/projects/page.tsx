@@ -25,7 +25,9 @@ export default function Projects() {
                 description={d.description}
                 tasks={d.tasks}
                 imgSrc={d.imgSrc}
-                href={d.href}
+                link={d.link}
+                github={d.github}
+                blog={d.blog}
                 technos={d.technos}
               />
             ))}

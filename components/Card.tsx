@@ -10,7 +10,7 @@ interface CardProps {
   github?: string
   link?: string
   blog?: string
-  technos?: string[]
+  technologies?: string[]
 }
 
 const Card: React.FC<CardProps> = ({
@@ -21,7 +21,7 @@ const Card: React.FC<CardProps> = ({
   github,
   link,
   blog,
-  technos,
+  technologies,
 }) => {
   const primaryLink = link || github || blog
 
@@ -61,9 +61,9 @@ const Card: React.FC<CardProps> = ({
             ))}
           </ul>
         )}
-        {technos && technos.length > 0 && (
+        {technologies && technologies.length > 0 && (
           <div className="mb-4 flex flex-wrap">
-            {technos.map((techno) => (
+            {technologies.map((techno) => (
               <span
                 key={techno}
                 className="mb-2 mr-2 rounded-sm bg-primary-400 px-2 py-1 text-xs font-medium text-white"

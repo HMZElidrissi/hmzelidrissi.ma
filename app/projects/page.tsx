@@ -28,7 +28,7 @@ export default function Projects() {
                 link={d.link}
                 github={d.github}
                 blog={d.blog}
-                technos={d.technos}
+                technologies={d.technologies}
               />
             ))}
           </div>

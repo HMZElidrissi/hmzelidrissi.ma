@@ -57,16 +57,20 @@ export default function Home() {
           <Image
             src="/static/images/orbit.png"
             alt="Orbiting technologies"
-            layout="fill"
-            objectFit="contain"
+            fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            style={{ objectFit: 'contain' }}
             className="animate-spin-slow"
+            priority
           />
           <div className="absolute left-1/2 top-1/2 h-3/5 w-3/5 -translate-x-1/2 -translate-y-1/2 transform">
             <Image
               src="/static/images/stylish-owl.png"
               alt="Owl mascot"
-              layout="fill"
-              objectFit="contain"
+              fill
+              sizes="(max-width: 768px) 60vw, (max-width: 1200px) 40vw, 20vw"
+              style={{ objectFit: 'contain' }}
+              loading="lazy"
             />
           </div>
         </div>

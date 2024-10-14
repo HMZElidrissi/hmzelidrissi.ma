@@ -34,7 +34,7 @@ const projectsData: Project[] = [
       'Implemented a matching algorithm for donors and recipients based on blood type and location',
       'Created a real-time notification system to alert potential donors',
     ],
-    link: 'https://tabaro3.ma',
+    link: 'https://tabarro3.ma',
     github: 'https://github.com/HMZElidrissi/tabarro3',
     imgSrc: '/static/images/projects/tabaro3.svg',
     technologies: [

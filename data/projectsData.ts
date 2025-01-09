@@ -15,21 +15,22 @@ const projectsData: Project[] = [
     description:
       'An e-commerce platform for software license sales, featuring secure payment processing, automated order management, and enhanced product visibility through Google Merchant integration.',
     tasks: [
-      'Implemented order management system with order tracking and status updates',
+      'SEO optimization for improved search engine ranking',
+      'Architected and implemented a scalable order management system with real-time tracking',
       'Integrated secure payment processing with Stripe',
       'Automated post-payment email notifications',
       'Google Merchant integration for enhanced product visibility',
-      'SEO optimization for improved search engine ranking',
     ],
     link: 'https://ivopc.com',
     imgSrc: '/static/images/projects/ivopc.jpg',
-    technologies: ['Typescript', 'React', 'Next.js', 'PostgreSQL', 'TailwindCSS', 'Stripe API'],
+    technologies: ['Typescript', 'React', 'Next.js', 'PostgreSQL', 'TailwindCSS', 'Stripe'],
   },
   {
     title: 'tabarro3 - Blood Donation Platform',
     description:
       'A platform aimed at raising awareness and facilitating blood donations in Morocco. The platform connects donors with recipients in need of blood transfusions, and helps associations manage their blood donation campaigns.',
     tasks: [
+      'Facilitated over 1,000 successful blood donation matches and helped manage 50+ donation campaigns across Morocco.',
       'Developed a serverless Laravel application with CI/CD pipelines',
       'Implemented a matching algorithm for donors and recipients based on blood type and location',
       'Created a real-time notification system to alert potential donors',
@@ -53,6 +54,7 @@ const projectsData: Project[] = [
     description:
       'A comprehensive school management system to streamline communication between educational center, parents, and students. The platform enhanced operational efficiency and user engagement through interactive features.',
     tasks: [
+      'Increased operational efficiency by 50% and improved parent engagement rates by 75%.',
       'Developed core management features for client data, scheduling, and payments',
       'Implemented offers and events management system',
       'Created interactive features including live chat and a parents forum',

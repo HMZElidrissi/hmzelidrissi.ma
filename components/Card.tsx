@@ -26,58 +26,73 @@ const Card: React.FC<CardProps> = ({
   const primaryLink = link || github || blog
 
   return (
-    <div className="flex flex-col overflow-hidden rounded-lg bg-white shadow-lg transition-transform duration-300 hover:scale-105 dark:bg-gray-800">
+    <div className="group flex h-full flex-col overflow-hidden rounded-xl border border-gray-200 bg-white shadow-lg transition-all duration-300 hover:shadow-xl dark:border-gray-700 dark:bg-gray-800/95">
       {imgSrc && (
-        <div className="h-48 overflow-hidden">
+        <div className="relative h-48 overflow-hidden">
           <Image
             alt={title}
             src={imgSrc}
-            className="h-full w-full object-cover object-center"
+            className="h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-110"
             width={544}
             height={306}
           />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
         </div>
       )}
       <div className="flex flex-1 flex-col p-6">
-        <h2 className="mb-3 text-xl font-bold leading-8 tracking-tight">
-          {primaryLink ? (
-            <Link
-              href={primaryLink}
-              aria-label={`Link to ${title}`}
-              className="hover:text-primary-500"
-            >
-              {title}
-            </Link>
-          ) : (
-            title
-          )}
-        </h2>
-        <div className="mb-4 h-1 w-20 bg-primary-500"></div>
-        <p className="mb-4 text-sm text-gray-900 dark:text-gray-400">{description}</p>
-        {tasks && tasks.length > 0 && (
-          <ul className="mb-4 list-disc pl-5 text-sm text-gray-900 dark:text-gray-400">
-            {tasks.map((task, index) => (
-              <li key={index}>{task}</li>
-            ))}
-          </ul>
-        )}
-        {technologies && technologies.length > 0 && (
-          <div className="mb-4 flex flex-wrap">
-            {technologies.map((techno) => (
-              <span
-                key={techno}
-                className="mb-2 mr-2 rounded-sm bg-primary-400 px-2 py-1 text-xs font-medium text-white"
+        <div className="mb-6">
+          <h2 className="mb-3 text-xl font-bold leading-8 tracking-tight">
+            {primaryLink ? (
+              <Link
+                href={primaryLink}
+                aria-label={`Link to ${title}`}
+                className="text-gray-900 transition-colors duration-300 hover:text-primary-500 dark:text-gray-100 dark:hover:text-primary-400"
               >
-                {techno}
-              </span>
-            ))}
-          </div>
-        )}
-        <div className="mt-auto flex space-x-2">
+                {title}
+              </Link>
+            ) : (
+              title
+            )}
+          </h2>
+          <div className="mb-4 h-1 w-20 rounded-full bg-primary-500 transition-all duration-300 group-hover:w-32" />
+          <p className="prose prose-sm line-clamp-3 text-gray-600 dark:text-gray-300">
+            {description}
+          </p>
+        </div>
+
+        <div className="flex-1 space-y-6">
+          {tasks && tasks.length > 0 && (
+            <div className="scrollbar-thin scrollbar-track-gray-100 scrollbar-thumb-gray-300 dark:scrollbar-track-gray-700 dark:scrollbar-thumb-gray-500 max-h-48 overflow-y-auto">
+              <ul className="list-none space-y-2 text-sm text-gray-600 dark:text-gray-300">
+                {tasks.map((task, index) => (
+                  <li key={index} className="flex items-start">
+                    <span className="mr-2 mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-primary-500" />
+                    {task}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {technologies && technologies.length > 0 && (
+            <div className="flex flex-wrap gap-2">
+              {technologies.map((techno) => (
+                <span
+                  key={techno}
+                  className="dark:bg-primary-900/30 dark:text-primary-300 mb-1 mr-1 inline-flex items-center rounded-full bg-primary-400 px-3 py-1 text-xs font-medium text-white"
+                >
+                  {techno}
+                </span>
+              ))}
+            </div>
+          )}
+        </div>
+
+        <div className="mt-6 flex flex-wrap gap-2">
           {github && (
             <Link
               href={github}
-              className="flex items-center rounded-lg bg-zinc-100 px-4 py-2 text-sm text-zinc-800 transition-colors duration-300 hover:bg-zinc-200 dark:bg-zinc-600 dark:text-white dark:hover:bg-zinc-500"
+              className="inline-flex items-center rounded-lg bg-gray-100 px-4 py-2 text-sm font-medium text-gray-800 transition-colors duration-300 hover:bg-gray-200 dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600"
               aria-label={`GitHub repository for ${title}`}
             >
               <Github className="mr-2 h-4 w-4" />
@@ -87,7 +102,7 @@ const Card: React.FC<CardProps> = ({
           {link && (
             <Link
               href={link}
-              className="flex items-center rounded-lg bg-zinc-100 px-4 py-2 text-sm text-zinc-800 transition-colors duration-300 hover:bg-zinc-200 dark:bg-zinc-600 dark:text-white dark:hover:bg-zinc-500"
+              className="inline-flex items-center rounded-lg bg-primary-500 px-4 py-2 text-sm font-medium text-white transition-colors duration-300 hover:bg-primary-600 dark:hover:bg-primary-400"
               aria-label={`Live demo for ${title}`}
             >
               <ExternalLink className="mr-2 h-4 w-4" />
@@ -97,7 +112,7 @@ const Card: React.FC<CardProps> = ({
           {blog && (
             <Link
               href={blog}
-              className="flex items-center rounded-lg bg-zinc-100 px-4 py-2 text-sm text-zinc-800 transition-colors duration-300 hover:bg-zinc-200 dark:bg-zinc-600 dark:text-white dark:hover:bg-zinc-500"
+              className="inline-flex items-center rounded-lg bg-gray-100 px-4 py-2 text-sm font-medium text-gray-800 transition-colors duration-300 hover:bg-gray-200 dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600"
               aria-label={`Blog post about ${title}`}
             >
               <BookOpen className="mr-2 h-4 w-4" />

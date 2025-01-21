@@ -1,0 +1,154 @@
+---
+title: 'You need to ditch your JWT authentication filter: Spring Boot authentication using JWT'
+date: '2025-01-21'
+lastmod: '2025-01-21'
+tags: ['Java', 'Spring Boot', 'Spring Security', 'JWT']
+draft: false
+summary: 'I think it is time to ditch your JWT authentication filter. I know, I know, it has been working fine for you so far. But hear me out. Last month I had a conversation with my colleague Abdel about securing REST APIs in spring boot with JWT, and we noticed that the tutorials have a different approach than the philosophy of the framework...'
+images: ['/static/images/blog/13/13.jpg']
+---
+
+![cover](/static/images/blog/13/13.jpg)
+
+# You need to ditch your JWT authentication filter: Spring Boot authentication using JWT
+
+I think it's time to ditch your JWT authentication filter. I know, I know, it's been working fine for you so far. But hear me out. Last month I had a conversation with my friend [Abdeljabar](https://www.linkedin.com/in/abdeljabar-aitayoub) about securing REST APIs in spring boot with JWT, and we noticed that the tutorials have a different approach than the philosophy of the framework. It uses a custom JWTAuthenticationFilter and JWTService while the docs talk about OAuth2 Resource Server, we had a long debate, it was confusing, and we decided to investigate further, I emailed **Daniel Garnier-Moiroux** one of the active contributors to Spring Security, and he confirmed that all those tutorials are rather outdated and should be updated! The correct way would using resource-server, with any of the configuration options available (https://docs.spring.io/spring-security/reference/servlet/oauth2/resource-server/jwt.html#_specifying_the_authorization_server).
+
+# Show me the code
+
+Let's see how we can implement a simple resource server with Spring Security.
+
+## Set up dependencies
+
+```xml
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
+</dependency>
+```
+
+## Configure Cookies
+
+Create a CookieUtil class to manage JWT cookies:
+
+```java
+@Component
+public class CookieUtil {
+    // Configure cookie properties
+    private String cookieName = "jwt-token";
+    private int cookieExpiry = 86400;  // 24 hours
+
+    // Method to create a secure cookie
+    public void createCookie(HttpServletResponse response, String token) {
+        ResponseCookie cookie = ResponseCookie.from(cookieName, token)
+            .httpOnly(true)   // Prevents JavaScript access
+            .secure(true)     // HTTPS only
+            .path("/")
+            .maxAge(cookieExpiry)
+            .build();
+        response.addHeader(HttpHeaders.SET_COOKIE, cookie.toString());
+    }
+}
+```
+
+## Configure Security
+
+### BearTokenResolver
+
+```java
+@Bean
+public BearerTokenResolver cookieBearerTokenResolver() {
+    return cookieUtil::extractToken;
+}
+```
+
+- Customizes how spring security extracts the token from the request.
+- Instead of looking for the token in the Authorization header, we will extract it from the cookie.
+- Using Cookies for JWT is more secure than storing it in the local storage, because cookies are not accessible by JavaScript.
+
+### JwtDecoder
+
+```java
+@Bean
+public JwtDecoder jwtDecoder() {
+    return NimbusJwtDecoder.withPublicKey(publicKey).build();
+}
+```
+
+- Decodes and verifies the JWT token.
+- The public key is used to verify the signature of the token.
+
+### JwtEncoder
+
+```java
+@Bean
+public JwtEncoder jwtEncoder() {
+    JWK jwk = new RSAKey.Builder(publicKey)
+        .privateKey(privateKey)
+        .build();
+    JWKSource<SecurityContext> jwks = new ImmutableJWKSet<>(new JWKSet(jwk));
+    return new NimbusJwtEncoder(jwks);
+}
+```
+
+- Creates new JWT tokens during authentication.
+- Uses the private key to sign the token.
+- Sets up the RSA key pair for token signing.
+- Creates a JWK (JSON Web Key) source for the encoder.
+
+### JwtAuthenticationConverter
+
+```java
+@Bean
+public JwtAuthenticationConverter jwtAuthenticationConverter() {
+    JwtGrantedAuthoritiesConverter authoritiesConverter =
+        new JwtGrantedAuthoritiesConverter();
+    authoritiesConverter.setAuthoritiesClaimName("role");
+    authoritiesConverter.setAuthorityPrefix("ROLE_");
+
+    JwtAuthenticationConverter converter = new JwtAuthenticationConverter();
+    converter.setJwtGrantedAuthoritiesConverter(authoritiesConverter);
+    return converter;
+}
+```
+
+- Converts JWT claims into Spring Security authorities.
+- Configures how roles are extracted from the token.
+
+### Security Configuration
+
+```java
+public class SecurityConfig {
+    private final CookieUtil cookieUtil;
+    @Value("${spring.security.oauth2.resourceserver.jwt.private-key}")
+    private RSAPrivateKey privateKey;
+
+    @Value("${spring.security.oauth2.resourceserver.jwt.public-key}")
+    private RSAPublicKey publicKey;
+
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
+        httpSecurity
+                .sessionManagement(session -> session.sessionCreationPolicy(STATELESS))
+                .oauth2ResourceServer(oauth2 -> {
+                    oauth2.bearerTokenResolver(cookieBearerTokenResolver());
+                    oauth2.jwt(jwt -> jwt
+                            .decoder(jwtDecoder())
+                            .jwtAuthenticationConverter(jwtAuthenticationConverter())
+                    );
+                });
+
+        return httpSecurity.build();
+    }
+}
+```
+
+- Disables session management.
+- Configures the resource server with the custom token resolver, decoder, and authentication converter.
+
+## JWT Authentication and Authorization flow
+
+![JWT Authentication and Authorization flow](/static/images/blog/13/security-flow-diagram.png)
+
+> **Note:** This is a basic example to get you started. You can customize the security configuration further based on your requirements.
+> You can always check my implementation in the [Spring Security JWT Resource Server](https://github.com/HMZElidrissi/spring-security-jwt-boilerplate) repository.

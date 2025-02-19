@@ -46,7 +46,7 @@ const Card: React.FC<CardProps> = ({
               <Link
                 href={primaryLink}
                 aria-label={`Link to ${title}`}
-                className="text-gray-900 transition-colors duration-300 hover:text-primary-500 dark:text-gray-100 dark:hover:text-primary-400"
+                className="text-gray-900 transition-colors duration-300 hover:text-primary-500 dark:text-gray-100 dark:hover:text-teal-400"
               >
                 {title}
               </Link>
@@ -54,7 +54,7 @@ const Card: React.FC<CardProps> = ({
               title
             )}
           </h2>
-          <div className="mb-4 h-1 w-20 rounded-full bg-primary-500 transition-all duration-300 group-hover:w-32" />
+          <div className="mb-4 h-1 w-20 rounded-full bg-primary-500 transition-all duration-300 group-hover:w-32 dark:bg-teal-500" />
           <p className="prose prose-sm line-clamp-3 text-gray-600 dark:text-gray-300">
             {description}
           </p>
@@ -66,7 +66,7 @@ const Card: React.FC<CardProps> = ({
               <ul className="list-none space-y-2 text-sm text-gray-600 dark:text-gray-300">
                 {tasks.map((task, index) => (
                   <li key={index} className="flex items-start">
-                    <span className="mr-2 mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-primary-500" />
+                    <span className="mr-2 mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-primary-500 dark:bg-teal-500" />
                     {task}
                   </li>
                 ))}
@@ -79,7 +79,7 @@ const Card: React.FC<CardProps> = ({
               {technologies.map((techno) => (
                 <span
                   key={techno}
-                  className="dark:bg-primary-900/30 dark:text-primary-300 mb-1 mr-1 inline-flex items-center rounded-full bg-primary-400 px-3 py-1 text-xs font-medium text-white"
+                  className="mb-1 mr-1 inline-flex items-center rounded-full bg-primary-400 px-3 py-1 text-xs font-medium text-white dark:bg-teal-900/30 dark:text-teal-300"
                 >
                   {techno}
                 </span>
@@ -102,7 +102,7 @@ const Card: React.FC<CardProps> = ({
           {link && (
             <Link
               href={link}
-              className="inline-flex items-center rounded-lg bg-primary-500 px-4 py-2 text-sm font-medium text-white transition-colors duration-300 hover:bg-primary-600 dark:hover:bg-primary-400"
+              className="inline-flex items-center rounded-lg bg-primary-500 px-4 py-2 text-sm font-medium text-white transition-colors duration-300 hover:bg-primary-600 dark:bg-teal-600 dark:hover:bg-teal-500"
               aria-label={`Live demo for ${title}`}
             >
               <ExternalLink className="mr-2 h-4 w-4" />

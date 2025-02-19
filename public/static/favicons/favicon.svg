@@ -1,25 +1,27 @@
 <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.dev/svgjs" width="100" height="83"><svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="100" height="83" viewBox="0,0,256,256" style="fill:#000000;">
-    <g fill="none" stroke-miterlimit="10" font-family="none" font-size="none" style="mix-blend-mode:normal">
-        <!-- Main head part -->
-        <path fill="#2C5282" d="m128 64-8 8 8 24 12-24z"></path>
-
-        <!-- Side face parts -->
-        <path fill="#4299E1" d="m84 56-8 20 12 12h12l12-8V68L96 56zM144 68l12-12h12l8 4v16l-12 12-20-8z"></path>
-
-        <!-- Top feathers -->
-        <path fill="#2B6CB0" d="m132 52 12-8 32-4 20-12-8 12-12 8-20 4-16 12-8-4zM124 52l-12-8-32-4-20-12 8 12 12 8 20 4 16 12 8-4z"></path>
-
-        <!-- Central parts -->
-        <path fill="#3182CE" d="m88 32 28-4h20l24 4-4 4-28 8-44-8zM112 84 96 96l32 24v-20l-12-16zM140 84l-8 12v24l16-11.5L164 96v-4z"></path>
-
-        <!-- Wings -->
-        <path fill="#2C5282" d="m56 92-12 16v36l20 44 32 28-4-72-20-40zM196 92l-16 16-12 32-8 48v32l28-24 24-48v-36l-8-20z"></path>
-
-        <!-- Eye areas -->
-        <path fill="#63B3ED" d="m64 88 8-4 20 12-8 8-20-12zM96 100l-12 8 12 28 8 8 12-16v-8zM188 80l4 4-4 8-12 16-12-8 12-12zM160 104l-16 12 4 20 8 8 16-32-8-8zM120 128l-4 12 12 12 16-16-4-12h-12z"></path>
-
-        <!-- Bottom details -->
-        <path fill="#2B6CB0" d="m112 144 12 12 4 16v20l-28-4v-36zM144 144l-12 20v28l20 4 4-12 4-32zM100 196l4 20 16 20 8 4 24-24v-12l-4-4zM72 52l-8 16v8h8l8-20zM180 56l4-4 4 20-4 4-4-4z"></path>
+    <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-size="none" style="mix-blend-mode: normal">
+        <g transform="scale(4,4)">
+            <path d="M32,16l-2,2l2,6l3,-6z" fill="#12386E"></path>
+            <path d="M21,14l-2,5l3,3h3l3,-2v-3l-4,-3z" fill="#D1D5DB"></path>
+            <path d="M36,17l3,-3h3l2,1v4l-3,3l-5,-2z" fill="#D1D5DB"></path>
+            <path d="M33,13l3,-2l8,-1l5,-3l-2,3l-3,2l-5,1l-4,3l-2,-1z" fill="#12386E"></path>
+            <path d="M31,13l-3,-2l-8,-1l-5,-3l2,3l3,2l5,1l4,3l2,-1z" fill="#12386E"></path>
+            <path d="M22,8l7,-1h5l6,1l-1,1l-7,2l-11,-2z" fill="#114997"></path>
+            <path d="M28,21l-4,3l8,6v-5l-3,-4z" fill="#114997"></path>
+            <path d="M35,21l-2,3v6l4,-2.875l4,-3.125v-1z" fill="#114997"></path>
+            <path d="M14,23l-3,4v9l5,11l8,7l-1,-18l-5,-10z" fill="#12386E"></path>
+            <path d="M49,23l-4,4l-3,8l-2,12v8l7,-6l6,-12v-9l-2,-5z" fill="#12386E"></path>
+            <path d="M16,22l2,-1l5,3l-2,2l-5,-3z" fill="#3b6183"></path>
+            <path d="M24,25l-3,2l3,7l2,2l3,-4v-2z" fill="#3b6183"></path>
+            <path d="M47,20l1,1l-1,2l-3,4l-3,-2l3,-3z" fill="#3b6183"></path>
+            <path d="M40,26l-4,3l1,5l2,2l4,-8l-2,-2z" fill="#3b6183"></path>
+            <path d="M30,32l-1,3l3,3l4,-4l-1,-3h-3z" fill="#3b6183"></path>
+            <path d="M28,36l3,3l1,4v5l-7,-1v-9z" fill="#114997"></path>
+            <path d="M36,36l-3,5v7l5,1l1,-3l1,-8z" fill="#114997"></path>
+            <path d="M25,49l1,5l4,5l2,1l6,-6v-3l-1,-1z" fill="#114997"></path>
+            <path d="M18,13l-2,4v2h2l2,-5z" fill="#114997"></path>
+            <path d="M45,14l1,-1l1,5l-1,1l-1,-1z" fill="#114997"></path>
+        </g>
     </g>
 </svg><style>@media (prefers-color-scheme: light) { :root { filter: none; } }
 @media (prefers-color-scheme: dark) { :root { filter: none; } }

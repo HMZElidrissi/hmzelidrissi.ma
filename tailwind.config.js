@@ -15,8 +15,16 @@ module.exports = {
   darkMode: 'class',
   theme: {
     extend: {
+      keyframes: {
+        loadingDots: {
+          '0%': { opacity: 0.2 },
+          '20%': { opacity: 1 },
+          '100%': { opacity: 0.2 },
+        },
+      },
       animation: {
         'spin-slow': 'spin-slow 20s linear infinite',
+        'loading-dot': 'loadingDots 1.4s infinite',
       },
       lineHeight: {
         11: '2.75rem',
@@ -29,15 +37,20 @@ module.exports = {
       },
       colors: {
         primary: {
-          400: '#B84B44',
-          500: '#A0222A',
-          600: '#8A1D23',
+          100: '#5198FB',
+          200: '#066CF9',
+          300: '#2980FA',
+          400: '#12386E',
+          500: '#114997',
+          600: '#0C57C1',
         },
         gray: {
+          100: '#EDF2F7',
+          200: '#E2E8F0',
           300: '#E5E5E5',
-          400: '#A48170',
-          500: '#937056',
-          600: '#815F4C',
+          400: '#D1D5DB',
+          500: '#9CA3AF',
+          600: '#6B7280',
         },
         /*        primary: {
           400: '#B84B44',

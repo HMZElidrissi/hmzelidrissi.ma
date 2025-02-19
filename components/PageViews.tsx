@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react'
 
+// https://elazizi.com/posts/add-views-counter-to-your-astro-blog-posts/
 const PageViews = ({ slug }: { slug: string }) => {
   const [viewCount, setViewCount] = useState('...')
 

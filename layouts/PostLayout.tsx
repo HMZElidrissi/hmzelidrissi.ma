@@ -9,6 +9,8 @@ import Image from '@/components/Image'
 import Tag from '@/components/Tag'
 import siteMetadata from '@/data/siteMetadata'
 import ScrollTopAndComment from '@/components/ScrollTopAndComment'
+import PageViews from '@/components/PageViews'
+import { formatDate } from 'pliny/utils/formatDate'
 
 const editUrl = (path) => `${siteMetadata.siteRepo}/blob/main/data/${path}`
 const discussUrl = (path) =>
@@ -39,16 +41,16 @@ export default function PostLayout({ content, authorDetails, next, prev, childre
       <ScrollTopAndComment />
       <article>
         <div className="xl:divide-y xl:divide-gray-200 xl:dark:divide-gray-700">
-          <header className="pt-6 xl:pb-6">
-            <div className="space-y-1 text-center">
-              <dl className="space-y-10">
-                <div>
+          <header>
+            <div className="space-y-1 border-b border-gray-200 pb-10 text-center dark:border-gray-700">
+              <dl>
+                <div className="flex items-center justify-center space-x-2">
                   <dt className="sr-only">Published on</dt>
                   <dd className="text-base font-medium leading-6 text-gray-500 dark:text-gray-400">
-                    <time dateTime={date}>
-                      {new Date(date).toLocaleDateString(siteMetadata.locale, postDateTemplate)}
-                    </time>
+                    <time dateTime={date}>{formatDate(date, siteMetadata.locale)}</time>
                   </dd>
+                  <span className="text-gray-500 dark:text-gray-400">•</span>
+                  <PageViews slug={slug} />
                 </div>
               </dl>
               <div>
@@ -78,7 +80,7 @@ export default function PostLayout({ content, authorDetails, next, prev, childre
                           by{' '}
                           <Link
                             href={`/${author.authorBioLink}`}
-                            className="text-primary-500 hover:text-primary-600 dark:text-primary-400 dark:hover:text-primary-500"
+                            className="text-primary-500 hover:text-primary-600 dark:text-teal-400 dark:hover:text-teal-500"
                           >
                             {author.name}
                           </Link>
@@ -121,7 +123,7 @@ export default function PostLayout({ content, authorDetails, next, prev, childre
                     </h2>
                     <div className="flex flex-wrap">
                       {tags.map((tag) => (
-                        <Tag key={tag} text={tag} />
+                        <Tag key={tag} text={tag} className="mb-0.5" />
                       ))}
                     </div>
                   </div>
@@ -133,7 +135,7 @@ export default function PostLayout({ content, authorDetails, next, prev, childre
                         <h2 className="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">
                           Previous Article
                         </h2>
-                        <div className="text-primary-500 hover:text-primary-600 dark:text-primary-400 dark:hover:text-primary-500">
+                        <div className="text-primary-500 hover:text-primary-600 dark:text-teal-400 dark:hover:text-teal-500">
                           <Link href={`/${prev.path}`}>{prev.title}</Link>
                         </div>
                       </div>
@@ -143,7 +145,7 @@ export default function PostLayout({ content, authorDetails, next, prev, childre
                         <h2 className="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">
                           Next Article
                         </h2>
-                        <div className="text-primary-500 hover:text-primary-600 dark:text-primary-400 dark:hover:text-primary-500">
+                        <div className="text-primary-500 hover:text-primary-600 dark:text-teal-400 dark:hover:text-teal-500">
                           <Link href={`/${next.path}`}>{next.title}</Link>
                         </div>
                       </div>
@@ -154,7 +156,7 @@ export default function PostLayout({ content, authorDetails, next, prev, childre
               <div className="pt-4 xl:pt-8">
                 <Link
                   href={`/${basePath}`}
-                  className="text-primary-500 hover:text-primary-600 dark:text-primary-400 dark:hover:text-primary-500"
+                  className="text-primary-500 hover:text-primary-600 dark:text-teal-400 dark:hover:text-teal-500"
                   aria-label="Back to the blog"
                 >
                   &larr; Back to the blog

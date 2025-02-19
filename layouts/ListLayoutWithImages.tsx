@@ -2,7 +2,6 @@
 'use client'
 
 import { usePathname } from 'next/navigation'
-import { slug } from 'github-slugger'
 import { RoughNotation } from 'react-rough-notation'
 import { CoreContent } from 'pliny/utils/contentlayer'
 import { Calendar } from 'lucide-react'
@@ -10,13 +9,13 @@ import type { Blog } from 'contentlayer/generated'
 import Link from '@/components/Link'
 import Tag from '@/components/Tag'
 import siteMetadata from '@/data/siteMetadata'
-import tagData from 'app/tag-data.json'
 import Image from 'next/image'
 
 interface PaginationProps {
   totalPages: number
   currentPage: number
 }
+
 interface ListLayoutProps {
   posts: CoreContent<Blog>[]
   title: string
@@ -42,6 +41,7 @@ function Pagination({ totalPages, currentPage }: PaginationProps) {
           <Link
             href={currentPage - 1 === 1 ? `/${basePath}/` : `/${basePath}/page/${currentPage - 1}`}
             rel="prev"
+            className="text-primary-500 hover:text-primary-600 dark:text-teal-500 dark:hover:text-teal-400"
           >
             Previous
           </Link>
@@ -55,11 +55,72 @@ function Pagination({ totalPages, currentPage }: PaginationProps) {
           </button>
         )}
         {nextPage && (
-          <Link href={`/${basePath}/page/${currentPage + 1}`} rel="next">
+          <Link
+            href={`/${basePath}/page/${currentPage + 1}`}
+            rel="next"
+            className="text-primary-500 hover:text-primary-600 dark:text-teal-500 dark:hover:text-teal-400"
+          >
             Next
           </Link>
         )}
       </nav>
+    </div>
+  )
+}
+
+function FeaturedArticle({ post }: { post: CoreContent<Blog> }) {
+  const { slug, date, title, summary, tags, images } = post
+  const postDateTemplate: Intl.DateTimeFormatOptions = {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  }
+
+  return (
+    <div className="mb-12 overflow-hidden rounded-xl bg-gradient-to-br from-gray-50 to-white shadow-xl transition duration-300 ease-in-out hover:shadow-2xl dark:border-gray-800 dark:from-gray-900 dark:to-gray-800">
+      <article className="grid grid-cols-1 gap-0 md:grid-cols-2">
+        <Link href={`/blog/${slug}`} className="group relative h-72 overflow-hidden md:h-96">
+          <Image
+            src={images[0]}
+            alt={title}
+            className="absolute h-full w-full transform object-cover transition duration-500 group-hover:scale-105"
+            width={800}
+            height={600}
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 transition duration-300 group-hover:opacity-100" />
+        </Link>
+        <div className="flex flex-col justify-between p-8 md:p-10">
+          <div>
+            <div className="mb-4 flex flex-wrap gap-2">
+              {tags.map((tag) => (
+                <Tag key={tag} text={tag} />
+              ))}
+            </div>
+            <h2 className="mb-4 text-3xl font-bold leading-tight tracking-tight">
+              <Link
+                href={`/blog/${slug}`}
+                className="text-gray-900 hover:text-primary-500 dark:text-gray-100 dark:hover:text-teal-400"
+              >
+                {title}
+              </Link>
+            </h2>
+            <div className="mb-4 flex items-center text-sm text-gray-500 dark:text-gray-400">
+              <Calendar size={16} className="mr-2" />
+              <time dateTime={date}>
+                {new Date(date).toLocaleDateString(siteMetadata.locale, postDateTemplate)}
+              </time>
+            </div>
+            <p className="prose mb-6 line-clamp-3 text-gray-600 dark:text-gray-300">{summary}</p>
+          </div>
+          <Link
+            href={`/blog/${slug}`}
+            className="group inline-flex items-center space-x-2 font-medium text-primary-500 hover:text-primary-600 dark:text-teal-500 dark:hover:text-teal-400"
+          >
+            <span>Read Featured Article</span>
+            <span className="transform transition-transform group-hover:translate-x-1">→</span>
+          </Link>
+        </div>
+      </article>
     </div>
   )
 }
@@ -70,26 +131,22 @@ export default function ListLayoutWithImages({
   initialDisplayPosts = [],
   pagination,
 }: ListLayoutProps) {
-  const pathname = usePathname()
-  const tagCounts = tagData as Record<string, number>
-  const tagKeys = Object.keys(tagCounts)
-  const sortedTags = tagKeys.sort((a, b) => tagCounts[b] - tagCounts[a])
-
   const nonDraftPosts = posts.filter((post) => !post.draft)
   const nonDraftInitialDisplayPosts = initialDisplayPosts.filter((post) => !post.draft)
-
   const displayPosts =
     nonDraftInitialDisplayPosts.length > 0 ? nonDraftInitialDisplayPosts : nonDraftPosts
+  const [featuredPost, ...otherPosts] = displayPosts
 
   const postDateTemplate: Intl.DateTimeFormatOptions = {
     year: 'numeric',
     month: 'long',
     day: 'numeric',
   }
+
   return (
     <div className="flex dark:text-white sm:space-x-24">
-      <div>
-        <div className="space-y-4 border-b border-gray-100 pb-10 pt-6 text-center dark:border-black">
+      <div className="w-full">
+        <div className="space-y-4 pb-10 pt-6 text-center">
           <p className="mx-2 text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
             new post every&nbsp;
             <span className="text-black">
@@ -108,62 +165,68 @@ export default function ListLayoutWithImages({
             learnings, thoughts, and other musings.
           </p>
         </div>
-        <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3">
-          {displayPosts.map((frontMatter) => {
-            const { slug, date, title, summary, tags, images } = frontMatter
-            // Use the first image from the images array as the thumbnail
-            const thumbnailImage = images[0]
 
-            return (
-              <li
-                key={slug}
-                className="mt-5 rounded-lg border border-gray-200 bg-gray-50 pt-5 shadow-md transition duration-300 ease-in-out hover:-translate-y-1 hover:shadow-lg dark:border-0 dark:bg-gray-900/80"
-              >
-                <article className="space-y-2 p-4">
-                  <div>
-                    {/* Display the thumbnail image */}
-                    <Link href={`/blog/${slug}`}>
-                      <Image
-                        src={thumbnailImage}
-                        alt={title}
-                        className="h-40 w-full rounded-t-lg object-cover"
-                        width={400}
-                        height={200}
-                      />
-                    </Link>
-                  </div>
-                  <div className="p-4">
-                    <div className="mb-2 flex items-center text-sm text-gray-500 dark:text-gray-400">
+        <FeaturedArticle post={featuredPost} />
+
+        <div className="mt-12">
+          <h2 className="mb-8 text-2xl font-bold text-gray-900 dark:text-gray-100">Latest Posts</h2>
+          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+            {otherPosts.map((frontMatter) => {
+              const { slug, date, title, summary, tags, images } = frontMatter
+              return (
+                <article
+                  key={slug}
+                  className="group flex flex-col overflow-hidden rounded-xl bg-gradient-to-br from-gray-50 to-white shadow-lg transition duration-300 hover:shadow-xl dark:border-gray-800 dark:from-gray-900 dark:to-gray-800"
+                >
+                  <Link href={`/blog/${slug}`} className="relative h-48 overflow-hidden">
+                    <Image
+                      src={images[0]}
+                      alt={title}
+                      className="h-full w-full transform object-cover transition duration-500 group-hover:scale-105"
+                      width={400}
+                      height={200}
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 transition duration-300 group-hover:opacity-100" />
+                  </Link>
+                  <div className="flex flex-grow flex-col p-6">
+                    <div className="mb-3 flex flex-wrap gap-2">
+                      {tags.map((tag) => (
+                        <Tag key={tag} text={tag} />
+                      ))}
+                    </div>
+                    <h3 className="mb-3 text-xl font-bold leading-tight">
+                      <Link
+                        href={`/blog/${slug}`}
+                        className="text-gray-900 hover:text-primary-500 dark:text-gray-100 dark:hover:text-teal-400"
+                      >
+                        {title}
+                      </Link>
+                    </h3>
+                    <div className="mb-3 flex items-center text-sm text-gray-500 dark:text-gray-400">
                       <Calendar size={16} className="mr-2" />
                       <time dateTime={date}>
                         {new Date(date).toLocaleDateString(siteMetadata.locale, postDateTemplate)}
                       </time>
                     </div>
-                    <h3 className="mb-2 text-xl font-bold leading-8 tracking-tight">
-                      <Link href={`/blog/${slug}`} className="text-gray-900 dark:text-gray-100">
-                        {title}
-                      </Link>
-                    </h3>
-                    <div className="mb-2 flex flex-wrap space-x-0.5">
-                      {tags.map((tag) => (
-                        <Tag key={tag} text={tag} />
-                      ))}
-                    </div>
-                    <p className="prose max-w-none text-gray-700 dark:text-white">{summary}</p>
-                  </div>
-                  <div>
+                    <p className="prose mb-4 line-clamp-2 flex-grow text-gray-600 dark:text-gray-300">
+                      {summary}
+                    </p>
                     <Link
                       href={`/blog/${slug}`}
-                      className="ml-3 rounded-full bg-gray-300 px-4 py-2 text-xs font-semibold transition-colors duration-300 hover:bg-gray-300/80 dark:bg-gray-700 dark:text-gray-100 dark:hover:bg-gray-700/80"
+                      className="group inline-flex items-center space-x-2 font-medium text-primary-500 hover:text-primary-600 dark:text-teal-500 dark:hover:text-teal-400"
                     >
-                      Read more
+                      <span>Read more</span>
+                      <span className="transform transition-transform group-hover:translate-x-1">
+                        →
+                      </span>
                     </Link>
                   </div>
                 </article>
-              </li>
-            )
-          })}
-        </ul>
+              )
+            })}
+          </div>
+        </div>
+
         {pagination && pagination.totalPages > 1 && (
           <Pagination currentPage={pagination.currentPage} totalPages={pagination.totalPages} />
         )}

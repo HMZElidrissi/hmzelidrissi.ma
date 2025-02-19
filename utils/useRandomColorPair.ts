@@ -5,7 +5,7 @@ export function useRandomColorPair(): Tuple<string> {
   const colors: Tuple<string>[] = [
     ['#F5E1FF', '#CAF0F8'],
     ['#EAF4F4', '#FFEDD8'],
-    ['#F9E5D8', '#EDE9F6'],
+    ['#EDF8FF', '#EDE9F6'],
     ['#EEEBFF', '#FFFAD4'],
   ]
 

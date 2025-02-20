@@ -21,10 +21,24 @@ module.exports = {
           '20%': { opacity: 1 },
           '100%': { opacity: 0.2 },
         },
+        'move-grid': {
+          '0%': { backgroundPosition: '0 0' },
+          '100%': { backgroundPosition: '-200px 0px' },
+        },
+      },
+      backgroundImage: {
+        'grid-pattern': `linear-gradient(to right, #636161 1px, transparent 1px),
+          linear-gradient(to bottom, #636161 1px, transparent 1px)`,
+      },
+      // Add custom background sizes
+      backgroundSize: {
+        'grid-sm': '100px 100px',
+        'grid-lg': '200px 200px',
       },
       animation: {
         'spin-slow': 'spin-slow 20s linear infinite',
         'loading-dot': 'loadingDots 1.4s infinite',
+        'move-grid': 'move-grid 8s linear infinite 2s',
       },
       lineHeight: {
         11: '2.75rem',
@@ -37,12 +51,14 @@ module.exports = {
       },
       colors: {
         primary: {
-          100: '#5198FB',
-          200: '#066CF9',
-          300: '#2980FA',
-          400: '#12386E',
-          500: '#114997',
+          100: '#EBF8FF',
+          200: '#BEE3F8',
+          300: '#63B3ED',
+          400: '#4299E1',
+          500: '#3182CE',
           600: '#0C57C1',
+          700: '#0A4361',
+          800: '#2C5282',
         },
         gray: {
           100: '#EDF2F7',
@@ -52,16 +68,6 @@ module.exports = {
           500: '#9CA3AF',
           600: '#6B7280',
         },
-        /*        primary: {
-          400: '#B84B44',
-          500: '#A0222A',
-          600: '#8A1D23',
-        },
-        gray: {
-          400: '#A48170',
-          500: '#937056',
-          600: '#815F4C',
-        },*/
       },
       typography: ({ theme }) => ({
         DEFAULT: {

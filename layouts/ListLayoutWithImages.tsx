@@ -155,7 +155,7 @@ export default function ListLayoutWithImages({
                 type="highlight"
                 animationDelay={250}
                 animationDuration={2000}
-                color="#F9E5D8"
+                color="#BEE3F8"
               >
                 sometimes
               </RoughNotation>

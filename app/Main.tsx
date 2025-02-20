@@ -8,7 +8,10 @@ export default function Home() {
   const [aboutColor, contactColor] = useRandomColorPair()
 
   return (
-    <div className="fade-in banner mt-10 flex flex-col justify-between px-6 py-10 dark:text-white lg:flex-row lg:items-center lg:px-10 lg:py-20">
+    <div className="fade-in banner relative mt-10 flex flex-col justify-between px-6 py-10 dark:text-white lg:flex-row lg:items-center lg:px-10 lg:py-20">
+      <div className="absolute inset-0 z-0 lg:block">
+        <div className="absolute inset-0 bg-grid-pattern opacity-10"></div>
+      </div>
       <div className="lg:max-w-2xl">
         <h1 className="text-3xl font-bold dark:text-white lg:text-5xl">Hi, I am Hamza</h1>
         <p className="my-2 text-lg lg:my-4 lg:text-2xl">Software Developer</p>

@@ -50,3 +50,11 @@ input:-webkit-autofill:focus {
 .animate-spin-slow {
   animation: spin-slow 20s linear infinite;
 }
+
+@layer utilities {
+  @media screen and (prefers-reduced-motion: no-preference) {
+    .bg-grid-pattern {
+      @apply bg-grid-sm md:bg-grid-lg animate-move-grid;
+    }
+  }
+}

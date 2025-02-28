@@ -38,16 +38,7 @@ const projectsData: Project[] = [
     link: 'https://tabarro3.ma',
     github: 'https://github.com/HMZElidrissi/tabarro3',
     imgSrc: '/static/images/projects/tabaro3.svg',
-    technologies: [
-      'React',
-      'Laravel',
-      'Next.js',
-      'GitHub Actions',
-      'Tailwind CSS',
-      'Supabase',
-      'next-auth',
-      'Vercel',
-    ],
+    technologies: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Supabase'],
   },
   {
     title: 'Mobdie - School Management System',

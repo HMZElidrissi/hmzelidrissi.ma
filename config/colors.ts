@@ -25,6 +25,7 @@ export const Colors = {
   babel: '#F5DB53',
   redux: '#764ABC',
   githubactions: '#2088FF',
+  jenkins: '#D24939',
 
   // Mobile
   reactnative: '#2D2D2D',

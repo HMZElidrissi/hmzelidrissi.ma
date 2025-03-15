@@ -23,7 +23,6 @@ export default function Projects() {
                 key={d.title}
                 title={d.title}
                 description={d.description}
-                tasks={d.tasks}
                 imgSrc={d.imgSrc}
                 link={d.link}
                 github={d.github}

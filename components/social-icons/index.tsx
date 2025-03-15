@@ -58,3 +58,4 @@ const SocialIcon = ({ kind, href, size = 8 }: SocialIconProps) => {
 }
 
 export default SocialIcon
+export { components }

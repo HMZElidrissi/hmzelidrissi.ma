@@ -15,7 +15,8 @@ export enum Stack {
 
   // Backend
   laravel,
-  spring,
+  spring_boot,
+  spring_cloud,
 
   // Cloud
   // aws,
@@ -23,7 +24,7 @@ export enum Stack {
 
   // Messaging
   // nats,
-  // kafka,
+  kafka,
 
   // Databases
   mysql,
@@ -33,6 +34,7 @@ export enum Stack {
   // Tools
   docker,
   githubactions,
+  jenkins,
 }
 
 export const WorkStack = [
@@ -41,7 +43,8 @@ export const WorkStack = [
   Stack.php,
   Stack.javascript,
   Stack.typescript,
-  Stack.spring,
+  Stack.spring_boot,
+  Stack.spring_cloud,
   Stack.laravel,
   Stack.react,
   Stack.nextjs,
@@ -64,14 +67,10 @@ export const StackInfo: Record<Stack, StackInfoMap> = {
     value: 'Java',
     color: Colors.java,
   },
-  [Stack.go]: {
-    value: 'Go',
-    color: Colors.go,
-  },
-  [Stack.php]: {
-    value: 'PHP',
-    color: Colors.php,
-  },
+  // [Stack.go]: {
+  //   value: 'Go',
+  //   color: Colors.go,
+  // },
   [Stack.javascript]: {
     value: 'JavaScript',
     color: Colors.javascript,
@@ -80,13 +79,17 @@ export const StackInfo: Record<Stack, StackInfoMap> = {
     value: 'TypeScript',
     color: Colors.typescript,
   },
-  [Stack.spring]: {
-    value: 'Spring Ecosystem',
+  [Stack.spring_boot]: {
+    value: 'Spring Boot',
     color: Colors.spring,
   },
-  [Stack.laravel]: {
-    value: 'Laravel',
-    color: Colors.laravel,
+  [Stack.spring_cloud]: {
+    value: 'Spring Cloud',
+    color: Colors.spring,
+  },
+  [Stack.kafka]: {
+    value: 'Kafka',
+    color: Colors.kafka,
   },
   [Stack.react]: {
     value: 'React',
@@ -96,17 +99,13 @@ export const StackInfo: Record<Stack, StackInfoMap> = {
     value: 'Next.js',
     color: Colors.nextjs,
   },
-  [Stack.mysql]: {
-    value: 'MySQL',
-    color: Colors.mysql,
-  },
   [Stack.postgres]: {
     value: 'PostgreSQL',
     color: Colors.postgres,
   },
-  [Stack.mongodb]: {
-    value: 'MongoDB',
-    color: Colors.mongodb,
+  [Stack.mysql]: {
+    value: 'MySQL',
+    color: Colors.mysql,
   },
   [Stack.docker]: {
     value: 'Docker',
@@ -116,8 +115,12 @@ export const StackInfo: Record<Stack, StackInfoMap> = {
     value: 'GitHub Actions',
     color: Colors.githubactions,
   },
-  [Stack.cpp]: {
-    value: 'C/C++',
-    color: Colors.cpp,
+  [Stack.jenkins]: {
+    value: 'Jenkins',
+    color: Colors.jenkins,
   },
+  // [Stack.cpp]: {
+  //   value: 'C/C++',
+  //   color: Colors.cpp,
+  // },
 }

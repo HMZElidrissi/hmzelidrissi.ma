@@ -20,6 +20,7 @@ const projectsData: Project[] = [
       'Spring Boot',
       'Spring Cloud',
       'Spring Security',
+      'Kafka',
       'Microservices',
       'React',
       'Redux',

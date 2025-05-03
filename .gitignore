@@ -54,3 +54,6 @@ yarn-error.log*
 
 # Husky
 .husky
+
+# article template
+/data/blog/article-template.mdx

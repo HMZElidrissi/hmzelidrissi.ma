@@ -93,7 +93,7 @@ export default function ListLayoutWithTags({
               ) : (
                 <Link
                   href={`/blog`}
-                  className="font-bold uppercase text-gray-700 hover:text-primary-500 dark:text-gray-300 dark:hover:text-primary-500"
+                  className="font-bold uppercase text-gray-700 hover:text-primary-500 dark:text-gray-300 dark:hover:text-teal-400"
                 >
                   All Posts
                 </Link>
@@ -103,13 +103,13 @@ export default function ListLayoutWithTags({
                   return (
                     <li key={t} className="my-3">
                       {pathname.split('/tags/')[1] === slug(t) ? (
-                        <h3 className="inline px-3 py-2 text-sm font-bold uppercase text-primary-500">
+                        <h3 className="inline px-3 py-2 text-sm font-bold uppercase text-primary-500 dark:text-teal-400">
                           {`${t} (${tagCounts[t]})`}
                         </h3>
                       ) : (
                         <Link
                           href={`/tags/${slug(t)}`}
-                          className="px-3 py-2 text-sm font-medium uppercase text-gray-500 hover:text-primary-500 dark:text-gray-300 dark:hover:text-primary-500"
+                          className="px-3 py-2 text-sm font-medium uppercase text-gray-500 hover:text-primary-500 dark:text-gray-300 dark:hover:text-teal-400"
                           aria-label={`View posts tagged ${t}`}
                         >
                           {`${t} (${tagCounts[t]})`}
@@ -150,7 +150,7 @@ export default function ListLayoutWithTags({
                         <h2 className="mb-3 mt-2 text-2xl font-bold leading-8 tracking-tight">
                           <Link
                             href={`/${path}`}
-                            className="text-gray-900 hover:text-primary-500 dark:text-gray-100 dark:hover:text-primary-400"
+                            className="text-gray-900 hover:text-primary-500 dark:text-gray-100 dark:hover:text-teal-500"
                           >
                             {title}
                           </Link>
@@ -163,7 +163,7 @@ export default function ListLayoutWithTags({
                         </p>
                         <Link
                           href={`/${path}`}
-                          className="ml-3 rounded-full bg-gray-300 px-4 py-2 text-xs font-semibold transition-colors duration-300 hover:bg-gray-300/80 dark:bg-gray-700 dark:text-gray-100 dark:hover:bg-gray-700/80"
+                          className="rounded-full bg-gray-300 px-4 py-2 text-xs font-semibold transition-colors duration-300 hover:bg-gray-300/80 dark:bg-gray-700 dark:text-gray-100 dark:hover:bg-gray-700/80"
                           aria-label={`Read "${title}"`}
                         >
                           Read more

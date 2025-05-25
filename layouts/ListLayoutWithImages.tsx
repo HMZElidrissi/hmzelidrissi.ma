@@ -220,7 +220,7 @@ export default function ListLayoutWithImages({
                         {new Date(date).toLocaleDateString(siteMetadata.locale, postDateTemplate)}
                       </time>
                     </div>
-                    <p className="prose mb-4 line-clamp-4 text-sm flex-grow text-gray-600 dark:text-gray-300">
+                    <p className="prose mb-4 line-clamp-4 flex-grow text-sm text-gray-600 dark:text-gray-300">
                       {summary}
                     </p>
                     <Link

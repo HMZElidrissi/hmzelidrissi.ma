@@ -79,7 +79,7 @@ function FeaturedArticle({ post }: { post: CoreContent<Blog> }) {
   return (
     <div className="mb-12 overflow-hidden rounded-xl bg-gradient-to-br from-gray-50 to-white shadow-xl transition duration-300 ease-in-out hover:shadow-2xl dark:border-gray-800 dark:from-gray-900 dark:to-gray-800">
       <article className="grid grid-cols-1 gap-0 md:grid-cols-2">
-        <Link href={`/blog/${slug}`} className="group relative h-72 overflow-hidden md:h-96">
+        <Link href={`/blog/${slug}`} className="group relative h-full overflow-hidden">
           <Image
             src={images[0]}
             alt={title}
@@ -110,14 +110,26 @@ function FeaturedArticle({ post }: { post: CoreContent<Blog> }) {
                 {new Date(date).toLocaleDateString(siteMetadata.locale, postDateTemplate)}
               </time>
             </div>
-            <p className="prose mb-6 line-clamp-3 text-gray-600 dark:text-gray-300">{summary}</p>
+            <p className="prose mb-6 line-clamp-4 text-gray-600 dark:text-gray-300">{summary}</p>
           </div>
           <Link
             href={`/blog/${slug}`}
-            className="group inline-flex items-center space-x-2 font-medium text-primary-500 hover:text-primary-600 dark:text-teal-500 dark:hover:text-teal-400"
+            className="mt-auto inline-flex items-center justify-center rounded-lg bg-gray-100 px-4 py-2 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-gray-700"
           >
-            <span>Read Featured Article</span>
-            <span className="transform transition-transform group-hover:translate-x-1">→</span>
+            Read Featured Article
+            <svg
+              className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M14 5l7 7m0 0l-7 7m7-7H3"
+              />
+            </svg>
           </Link>
         </div>
       </article>
@@ -208,17 +220,27 @@ export default function ListLayoutWithImages({
                         {new Date(date).toLocaleDateString(siteMetadata.locale, postDateTemplate)}
                       </time>
                     </div>
-                    <p className="prose mb-4 line-clamp-2 flex-grow text-gray-600 dark:text-gray-300">
+                    <p className="prose mb-4 line-clamp-4 text-sm flex-grow text-gray-600 dark:text-gray-300">
                       {summary}
                     </p>
                     <Link
                       href={`/blog/${slug}`}
-                      className="group inline-flex items-center space-x-2 font-medium text-primary-500 hover:text-primary-600 dark:text-teal-500 dark:hover:text-teal-400"
+                      className="mt-auto inline-flex items-center justify-center rounded-lg bg-gray-100 px-4 py-2 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-gray-700"
                     >
-                      <span>Read more</span>
-                      <span className="transform transition-transform group-hover:translate-x-1">
-                        →
-                      </span>
+                      Read more
+                      <svg
+                        className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M14 5l7 7m0 0l-7 7m7-7H3"
+                        />
+                      </svg>
                     </Link>
                   </div>
                 </article>

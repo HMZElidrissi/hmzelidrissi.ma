@@ -9,7 +9,7 @@ const PageViews = ({ slug }: { slug: string }) => {
   useEffect(() => {
     const url = `${window.location.origin}/blog/${slug}`
     const encodedUrl = encodeURIComponent(url)
-    const counterUrl = `https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=${encodedUrl}&count_bg=%234E763000&title_bg=%237A464600&icon=&icon_color=%23E7E7E7&title=Reads+%28Today+%2F+All+Time%29+%3A&edge_flat=true`
+    const counterUrl = `https://hitscounter.dev/api/count/incr/badge.svg?url=${encodedUrl}&count_bg=%234E763000&title_bg=%237A464600&icon=&icon_color=%23E7E7E7&title=Reads+%28Today+%2F+All+Time%29+%3A&edge_flat=true`
 
     const fetchWithProxy = async (targetUrl: string) => {
       const proxyUrl = 'https://corsproxy.io/?' + encodeURIComponent(targetUrl)

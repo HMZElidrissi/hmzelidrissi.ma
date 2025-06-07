@@ -17,7 +17,7 @@ const Header = () => {
     // Show notation after a small delay for better UX
     const timer = setTimeout(() => {
       setShowNotation(true)
-    }, 500)
+    }, 600)
     return () => clearTimeout(timer)
   }, [])
 
@@ -32,7 +32,7 @@ const Header = () => {
             <RoughNotation
               type="underline"
               show={showNotation}
-              color="#6B7280"
+              color="#0369a1"
               strokeWidth={2}
               animationDuration={1000}
               padding={4}

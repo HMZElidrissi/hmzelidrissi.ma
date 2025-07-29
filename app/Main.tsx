@@ -10,14 +10,14 @@ export default function Home() {
   const [aboutColor, contactColor] = useRandomColorPair()
 
   return (
-    <div className="fade-in banner relative mt-10 flex flex-col justify-between px-4 py-10 dark:text-white lg:flex-row lg:items-center lg:py-20">
+    <div className="fade-in banner relative flex flex-col justify-between px-4 py-6 dark:text-white lg:flex-row lg:items-center lg:py-10">
       <div className="absolute inset-0 z-0 lg:block">
         <div className="absolute inset-0 bg-grid-pattern opacity-10"></div>
       </div>
 
       <div className="lg:max-w-2xl">
         <h1 className="text-3xl font-bold dark:text-white lg:text-5xl">Hi, I am Hamza</h1>
-        <p className="my-2 text-lg lg:my-4 lg:text-2xl">Software Developer</p>
+        <p className="my-2 text-lg lg:my-4 lg:text-2xl">DevOps/Cloud Engineer</p>
         <p className="font-light lg:text-xl">
           <span className="text-nowrap">Read more</span>
           <span className="text-nowrap">

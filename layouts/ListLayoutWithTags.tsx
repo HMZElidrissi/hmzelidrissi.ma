@@ -156,7 +156,9 @@ export default function ListLayoutWithTags({
                           </Link>
                         </h2>
                         <div className="mb-4 flex flex-wrap">
-                          {tags?.map((tag) => <Tag key={tag} text={tag} />)}
+                          {tags?.map((tag) => (
+                            <Tag key={tag} text={tag} />
+                          ))}
                         </div>
                         <p className="prose mb-4 max-w-none text-gray-500 dark:text-gray-400">
                           {summary}

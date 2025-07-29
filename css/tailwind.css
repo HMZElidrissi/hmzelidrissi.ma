@@ -54,7 +54,7 @@ input:-webkit-autofill:focus {
 @layer utilities {
   @media screen and (prefers-reduced-motion: no-preference) {
     .bg-grid-pattern {
-      @apply bg-grid-sm md:bg-grid-lg animate-move-grid;
+      @apply animate-move-grid bg-grid-sm md:bg-grid-lg;
     }
   }
 }

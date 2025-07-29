@@ -1,7 +1,7 @@
 import Image from './Image'
 import Link from './Link'
 import { ExternalLink, BookOpen } from 'lucide-react'
-import { Github } from '@/components/social-icons/icons'
+import { Github } from '@/components/icons/icons'
 
 interface CardProps {
   title: string

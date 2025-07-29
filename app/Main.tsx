@@ -3,15 +3,18 @@ import Link from '@/components/Link'
 import { RoughNotation } from 'react-rough-notation'
 import { useRandomColorPair } from 'utils/useRandomColorPair'
 import siteMetadata from '@/data/siteMetadata'
+import { OrbitingCircles } from '@/components/OrbitingCircles'
+import { components } from '@/components/icons'
 
 export default function Home() {
   const [aboutColor, contactColor] = useRandomColorPair()
 
   return (
-    <div className="fade-in banner relative mt-10 flex flex-col justify-between px-6 py-10 dark:text-white lg:flex-row lg:items-center lg:px-10 lg:py-20">
+    <div className="fade-in banner relative mt-10 flex flex-col justify-between px-4 py-10 dark:text-white lg:flex-row lg:items-center lg:py-20">
       <div className="absolute inset-0 z-0 lg:block">
         <div className="absolute inset-0 bg-grid-pattern opacity-10"></div>
       </div>
+
       <div className="lg:max-w-2xl">
         <h1 className="text-3xl font-bold dark:text-white lg:text-5xl">Hi, I am Hamza</h1>
         <p className="my-2 text-lg lg:my-4 lg:text-2xl">Software Developer</p>
@@ -46,32 +49,36 @@ export default function Home() {
           </span>
         </p>
       </div>
-      {/*<div className="mt-10 flex justify-center lg:mt-0 lg:justify-end">*/}
-      {/*  <Image*/}
-      {/*    src="/static/images/hero.svg"*/}
-      {/*    alt="Hamza's portrait"*/}
-      {/*    width={400}*/}
-      {/*    height={400}*/}
-      {/*    className="max-w-full lg:max-w-md"*/}
-      {/*  />*/}
-      {/*</div>*/}
+
+      {/* Orbiting circles with tech stack */}
       <div className="relative mt-10 flex justify-center lg:mt-0 lg:justify-end">
-        <div className="relative h-64 w-64 sm:h-80 sm:w-80 lg:h-96 lg:w-96">
-          <Image
-            src="/static/images/orbit.png"
-            alt="Orbiting technologies"
-            fill
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            style={{ objectFit: 'contain' }}
-            className="animate-spin-slow"
-            priority
-          />
-          <div className="absolute left-1/2 top-1/2 h-3/5 w-3/5 -translate-x-1/2 -translate-y-1/2 transform">
+        <div className="relative flex h-[400px] w-[400px] flex-col items-center justify-center overflow-hidden sm:h-[500px] sm:w-[500px]">
+          {/* Outer orbit - Backend & Infrastructure */}
+          <OrbitingCircles iconSize={45} radius={180} duration={25}>
+            <components.java className="h-16 w-16" />
+            <components.golang className="h-12 w-12" />
+            <components.docker className="h-16 w-16" />
+            <components.kubernetes className="h-12 w-12" />
+            <components.argocd className="h-16 w-16" />
+            <components.helm className="h-12 w-12" />
+          </OrbitingCircles>
+
+          {/* Inner orbit - Frontend & DevOps */}
+          <OrbitingCircles iconSize={45} radius={120} reverse speed={1.5} duration={20}>
+            <components.spring className="h-12 w-12" />
+            <components.react className="h-12 w-12" />
+            <components.nextjs className="h-16 w-16" />
+            <components.jenkins className="h-12 w-12" />
+            <components.gitlabci className="h-10 w-10" />
+          </OrbitingCircles>
+
+          {/* Center - Your avatar/mascot */}
+          <div className="absolute left-1/2 top-1/2 h-32 w-32 -translate-x-1/2 -translate-y-1/2 transform sm:h-40 sm:w-40">
             <Image
               src="/static/images/stylish-owl.png"
-              alt="Owl mascot"
+              alt="Hamza's avatar"
               fill
-              sizes="(max-width: 768px) 60vw, (max-width: 1200px) 40vw, 20vw"
+              sizes="(max-width: 768px) 128px, 160px"
               style={{ objectFit: 'contain' }}
               loading="lazy"
             />

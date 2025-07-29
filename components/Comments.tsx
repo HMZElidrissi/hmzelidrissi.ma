@@ -4,7 +4,7 @@ import { Comments as CommentsComponent } from 'pliny/comments'
 import { useState } from 'react'
 import siteMetadata from '@/data/siteMetadata'
 import Image from 'next/image'
-import SocialIcon from '@/components/social-icons'
+import SocialIcon from 'components/icons'
 
 export default function Comments({
   slug,

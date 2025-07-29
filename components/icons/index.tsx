@@ -12,6 +12,17 @@ import {
   Pinterest,
   Reddit,
   Spotify,
+  ArgoCD,
+  Docker,
+  Golang,
+  Helm,
+  Kubernetes,
+  Java,
+  Jenkins,
+  NextJS,
+  GitlabCI,
+  React,
+  Spring,
 } from './icons'
 
 const components = {
@@ -28,6 +39,17 @@ const components = {
   reddit: Reddit,
   pinterest: Pinterest,
   spotify: Spotify,
+  argocd: ArgoCD,
+  docker: Docker,
+  golang: Golang,
+  helm: Helm,
+  kubernetes: Kubernetes,
+  java: Java,
+  jenkins: Jenkins,
+  nextjs: NextJS,
+  gitlabci: GitlabCI,
+  react: React,
+  spring: Spring,
 }
 
 type SocialIconProps = {

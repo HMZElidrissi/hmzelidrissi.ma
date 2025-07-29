@@ -25,6 +25,16 @@ module.exports = {
           '0%': { backgroundPosition: '0 0' },
           '100%': { backgroundPosition: '-200px 0px' },
         },
+        orbit: {
+          '0%': {
+            transform:
+              'rotate(calc(var(--angle) * 1deg)) translateY(calc(var(--radius) * 1px)) rotate(calc(var(--angle) * -1deg))',
+          },
+          '100%': {
+            transform:
+              'rotate(calc(var(--angle) * 1deg + 360deg)) translateY(calc(var(--radius) * 1px)) rotate(calc((var(--angle) * -1deg) - 360deg))',
+          },
+        },
       },
       backgroundImage: {
         'grid-pattern': `linear-gradient(to right, #636161 1px, transparent 1px),
@@ -39,6 +49,7 @@ module.exports = {
         'spin-slow': 'spin-slow 20s linear infinite',
         'loading-dot': 'loadingDots 1.4s infinite',
         'move-grid': 'move-grid 8s linear infinite 2s',
+        orbit: 'orbit calc(var(--duration) * 1s) linear infinite',
       },
       lineHeight: {
         11: '2.75rem',

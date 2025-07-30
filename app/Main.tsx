@@ -64,7 +64,7 @@ export default function Home() {
           </OrbitingCircles>
 
           {/* Inner orbit - Frontend & DevOps */}
-          <OrbitingCircles iconSize={45} radius={120} reverse speed={1.5} duration={20}>
+          <OrbitingCircles iconSize={45} radius={110} reverse speed={1.5} duration={20}>
             <components.spring className="h-12 w-12" />
             <components.react className="h-12 w-12" />
             <components.nextjs className="h-16 w-16" />

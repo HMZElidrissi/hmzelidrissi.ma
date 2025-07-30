@@ -31,29 +31,32 @@ export enum Stack {
   postgres,
   mongodb,
 
-  // Tools
+  // DevOps
   docker,
   githubactions,
   jenkins,
+  gitlabci,
+  argocd,
+  kubernetes,
+  helm,
+  rancher,
 }
 
 export const WorkStack = [
-  Stack.java,
+  Stack.kubernetes,
+  Stack.helm,
   Stack.go,
-  Stack.php,
-  Stack.javascript,
+  Stack.argocd,
+  Stack.jenkins,
+  Stack.gitlabci,
+  Stack.rancher,
+  Stack.docker,
+  Stack.java,
   Stack.typescript,
   Stack.spring_boot,
   Stack.spring_cloud,
-  Stack.laravel,
   Stack.react,
   Stack.nextjs,
-  Stack.mysql,
-  Stack.postgres,
-  Stack.mongodb,
-  Stack.docker,
-  Stack.githubactions,
-  Stack.cpp,
 ]
 
 type StackInfoMap = {
@@ -67,10 +70,10 @@ export const StackInfo: Record<Stack, StackInfoMap> = {
     value: 'Java',
     color: Colors.java,
   },
-  // [Stack.go]: {
-  //   value: 'Go',
-  //   color: Colors.go,
-  // },
+  [Stack.go]: {
+    value: 'Go',
+    color: Colors.go,
+  },
   [Stack.javascript]: {
     value: 'JavaScript',
     color: Colors.javascript,
@@ -119,8 +122,24 @@ export const StackInfo: Record<Stack, StackInfoMap> = {
     value: 'Jenkins',
     color: Colors.jenkins,
   },
-  // [Stack.cpp]: {
-  //   value: 'C/C++',
-  //   color: Colors.cpp,
-  // },
+  [Stack.gitlabci]: {
+    value: 'GitLab CI',
+    color: Colors.gitlabci,
+  },
+  [Stack.argocd]: {
+    value: 'ArgoCD',
+    color: Colors.argocd,
+  },
+  [Stack.kubernetes]: {
+    value: 'Kubernetes',
+    color: Colors.kubernetes,
+  },
+  [Stack.helm]: {
+    value: 'Helm',
+    color: Colors.helm,
+  },
+  [Stack.rancher]: {
+    value: 'Rancher',
+    color: Colors.rancher,
+  },
 }

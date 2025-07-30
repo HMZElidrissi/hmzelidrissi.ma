@@ -24,8 +24,6 @@ export const Colors = {
   webpack: '#8DD6F9',
   babel: '#F5DB53',
   redux: '#764ABC',
-  githubactions: '#2088FF',
-  jenkins: '#D24939',
 
   // Mobile
   reactnative: '#2D2D2D',
@@ -42,8 +40,6 @@ export const Colors = {
   // Cloud
   aws: '#FF9900',
   gcp: '#4285F4',
-  docker: '#0DB7Ed',
-  kubernetes: '#326CE5',
   terraform: '#7B42BC',
 
   // Messaging
@@ -72,4 +68,14 @@ export const Colors = {
   resume: '#EEEBFF',
   opensource: '#26BE00',
   tutorial: '#4dd0e1',
+
+  // DevOps
+  docker: '#0DB7Ed',
+  kubernetes: '#326CE5',
+  helm: '#0F1689',
+  rancher: '#22A7F0',
+  gitlabci: '#FC6D26',
+  argocd: '#E60067',
+  jenkins: '#D24939',
+  githubactions: '#2088FF',
 }

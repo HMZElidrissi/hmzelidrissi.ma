@@ -1,0 +1,256 @@
+/* ==========================================================================
+   Tailwind CSS Imports
+   ========================================================================== */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ==========================================================================
+   CSS Custom Properties (CSS Variables)
+   ========================================================================== */
+@layer base {
+  :root {
+    /* Light Theme Colors */
+    --background: 0 0% 100%;
+    --foreground: 0 0% 9%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 3.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 3.9%;
+
+    --primary: 334 84% 45%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 0 0% 96.1%;
+    --secondary-foreground: 0 0% 9%;
+
+    --muted: 0 0% 96.1%;
+    --muted-foreground: 0 0% 45.1%;
+
+    --accent: 0 0% 96.1%;
+    --accent-foreground: 0 0% 9%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+
+    --warning: 38 93% 54%;
+    --warning-foreground: 0 0% 0%;
+
+    --border: 0 0% 89.8%;
+    --input: 0 0% 89.8%;
+    --ring: 0 0% 3.9%;
+
+    --radius: 0.5rem;
+
+    /* Font family variables */
+    --font-sans: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+    --font-heading: "Tomorrow", ui-sans-serif, system-ui, sans-serif;
+    --font-mono: "Space Grotesk", ui-monospace, SFMono-Regular, monospace;
+  }
+
+  .dark {
+    /* Dark Theme Colors */
+    --background: 0 0% 9%;
+    --foreground: 0 0% 100%;
+
+    --card: 0 0% 9%;
+    --card-foreground: 0 0% 100%;
+
+    --popover: 0 0% 9%;
+    --popover-foreground: 0 0% 100%;
+
+    --primary: 334 84% 45%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 0 0% 18%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 0 0% 18%;
+    --muted-foreground: 0 0% 45.1%;
+
+    --accent: 0 0% 18%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+
+    --warning: 38 93% 54%;
+    --warning-foreground: 0 0% 0%;
+
+    --border: 0 0% 18%;
+    --input: 0 0% 18%;
+    --ring: 0 0% 100%;
+
+    --radius: 0.5rem;
+  }
+
+  /* Theme-specific animations */
+  .theme {
+    --animate-orbit: orbit calc(var(--duration) * 1s) linear infinite;
+  }
+}
+
+/* ==========================================================================
+   Base Styles
+   ========================================================================== */
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-sans);
+  }
+
+  /* Shadcn UI Dialog is changing the way body scrollbar is behaving.
+   * Using this hack, we avoid some layout shift.
+   */
+  html body[data-scroll-locked] {
+    overflow-y: scroll !important;
+    margin-right: 0 !important;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* ==========================================================================
+   Component Styles
+   ========================================================================== */
+@layer components {
+  /* Task list styling */
+  .task-list-item::before {
+    @apply hidden;
+  }
+
+  .task-list-item {
+    @apply list-none;
+  }
+
+  /* Footnotes styling */
+  .footnotes {
+    @apply mt-12 border-t border-gray-200 pt-8 dark:border-gray-700;
+  }
+
+  .data-footnote-backref {
+    @apply no-underline;
+  }
+
+  /* Citation styling */
+  .csl-entry {
+    @apply my-5;
+  }
+
+  /* KaTeX display overflow */
+  .katex-display {
+    overflow: auto hidden;
+  }
+}
+
+/* ==========================================================================
+   Utility Classes
+   ========================================================================== */
+@layer utilities {
+  /* Background blur utility */
+  .bg-background-blur {
+    @apply bg-background/60 backdrop-blur-md;
+  }
+
+  /* Hide scrollbar utility */
+  .hide-scrollbar {
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    /* Hide scrollbar for IE, Edge and Firefox */
+    & {
+      -ms-overflow-style: none; /* IE and Edge */
+      scrollbar-width: none; /* Firefox */
+    }
+  }
+
+  /* Font utility classes */
+  .font-space-grotesk {
+    font-family: var(--font-sans);
+  }
+
+  .font-tomorrow {
+    font-family: var(--font-heading);
+  }
+
+  .font-mono-space {
+    font-family: var(--font-mono);
+  }
+
+  /* Grid pattern animation */
+  .bg-grid-pattern {
+    background-image:
+      linear-gradient(to right, #636161 1px, transparent 1px),
+      linear-gradient(to bottom, #636161 1px, transparent 1px);
+    background-size: 100px 100px; /* Smaller squares for mobile screens */
+    animation: move-grid 8s linear infinite 2s;
+  }
+
+  @media (min-width: 768px) {
+    .bg-grid-pattern {
+      background-size: 200px 200px; /* Larger squares for larger screens */
+    }
+  }
+
+  @keyframes move-grid {
+    0% {
+      background-position: 0 0;
+    }
+    100% {
+      background-position: -200px 0px;
+    }
+  }
+}
+
+/* ==========================================================================
+   Form Elements
+   ========================================================================== */
+/* https://stackoverflow.com/questions/61083813/how-to-avoid-internal-autofill-selected-style-to-be-applied */
+input:-webkit-autofill,
+input:-webkit-autofill:focus {
+  transition:
+    background-color 600000s 0s,
+    color 600000s 0s;
+}
+
+/* ==========================================================================
+   Animations
+   ========================================================================== */
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 20s linear infinite;
+}
+
+/* ==========================================================================
+   Theme Inline Animations
+   ========================================================================== */
+@theme inline {
+  @keyframes orbit {
+    0% {
+      transform: rotate(calc(var(--angle) * 1deg))
+        translateY(calc(var(--radius) * 1px)) rotate(calc(var(--angle) * -1deg));
+    }
+    100% {
+      transform: rotate(calc(var(--angle) * 1deg + 360deg))
+        translateY(calc(var(--radius) * 1px))
+        rotate(calc((var(--angle) * -1deg) - 360deg));
+    }
+  }
+}

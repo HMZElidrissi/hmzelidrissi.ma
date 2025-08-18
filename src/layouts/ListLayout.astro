@@ -1,0 +1,182 @@
+---
+import Link from "@/components/ui/link.astro";
+import Tag from "@/components/ui/tag.astro";
+
+interface Post {
+  path: string;
+  date: string;
+  title: string;
+  summary: string;
+  tags?: string[];
+}
+
+interface PaginationProps {
+  totalPages: number;
+  currentPage: number;
+}
+
+interface Props {
+  posts: Post[];
+  title: string;
+  pagination?: PaginationProps;
+}
+
+const { posts, title, pagination } = Astro.props;
+
+// Format date function
+function formatDate(date: string, locale: string = "en-US") {
+  return new Date(date).toLocaleDateString(locale, {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+}
+---
+
+<div class="divide-y divide-gray-200 dark:divide-gray-700">
+  <div class="space-y-2 pb-8 pt-6 md:space-y-5">
+    <h1
+      class="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14"
+    >
+      {title}
+    </h1>
+    <div class="relative max-w-lg">
+      <label>
+        <span class="sr-only">Search articles</span>
+        <input
+          aria-label="Search articles"
+          type="text"
+          placeholder="Search articles"
+          class="block w-full rounded-md border border-gray-300 bg-white px-4 py-2 text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-900 dark:bg-gray-800 dark:text-gray-100"
+          id="search-input"
+        />
+      </label>
+      <svg
+        class="absolute right-3 top-3 h-5 w-5 text-gray-400 dark:text-gray-300"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+      </svg>
+    </div>
+  </div>
+  <ul>
+    {posts.length === 0 && "No posts found."}
+    {
+      posts.map((post) => {
+        const { path, date, title, summary, tags } = post;
+        return (
+          <li class="py-4">
+            <article class="space-y-2 xl:grid xl:grid-cols-4 xl:items-baseline xl:space-y-0">
+              <dl>
+                <dt class="sr-only">Published on</dt>
+                <dd class="text-base font-medium leading-6 text-gray-500 dark:text-gray-400">
+                  <time datetime={date}>{formatDate(date)}</time>
+                </dd>
+              </dl>
+              <div class="space-y-3 xl:col-span-3">
+                <div>
+                  <h3 class="text-2xl font-bold leading-8 tracking-tight">
+                    <Link
+                      href={`/${path}`}
+                      className="text-gray-900 dark:text-gray-100"
+                    >
+                      {title}
+                    </Link>
+                  </h3>
+                  {tags && (
+                    <div class="flex flex-wrap">
+                      {tags.map((tag) => (
+                        <Tag text={tag} />
+                      ))}
+                    </div>
+                  )}
+                </div>
+                <div class="prose max-w-none text-gray-700 dark:text-gray-400">
+                  {summary}
+                </div>
+              </div>
+            </article>
+          </li>
+        );
+      })
+    }
+  </ul>
+</div>
+
+{
+  pagination && pagination.totalPages > 1 && (
+    <div class="space-y-2 pb-8 pt-6 md:space-y-5">
+      <nav class="flex justify-between">
+        {pagination.currentPage > 1 ? (
+          <a
+            href={
+              pagination.currentPage - 1 === 1
+                ? "/blog/"
+                : `/blog/page/${pagination.currentPage - 1}`
+            }
+            rel="prev"
+            class="dark:text-teal-400 dark:hover:text-teal-500 text-primary-500 hover:text-primary-600"
+          >
+            Previous
+          </a>
+        ) : (
+          <button class="cursor-auto disabled:opacity-50" disabled>
+            Previous
+          </button>
+        )}
+        <span>
+          {pagination.currentPage} of {pagination.totalPages}
+        </span>
+        {pagination.currentPage < pagination.totalPages ? (
+          <a
+            href={`/blog/page/${pagination.currentPage + 1}`}
+            rel="next"
+            class="dark:text-teal-400 dark:hover:text-teal-500 text-primary-500 hover:text-primary-600"
+          >
+            Next
+          </a>
+        ) : (
+          <button class="cursor-auto disabled:opacity-50" disabled>
+            Next
+          </button>
+        )}
+      </nav>
+    </div>
+  )
+}
+
+<script>
+  // Client-side search functionality
+  const searchInput = document.getElementById(
+    "search-input"
+  ) as HTMLInputElement;
+  const postItems = document.querySelectorAll("li");
+
+  if (searchInput) {
+    searchInput.addEventListener("input", (e: Event) => {
+      const searchValue = (e.target as HTMLInputElement).value.toLowerCase();
+
+      postItems.forEach((item: Element) => {
+        const title =
+          item.querySelector("h3")?.textContent?.toLowerCase() || "";
+        const summary =
+          item.querySelector(".prose")?.textContent?.toLowerCase() || "";
+        const tags = Array.from(item.querySelectorAll(".inline-flex"))
+          .map((tag: Element) => tag.textContent?.toLowerCase() || "")
+          .join(" ");
+
+        const searchContent = title + summary + tags;
+        const isVisible = searchContent.includes(searchValue);
+
+        (item as HTMLElement).style.display = isVisible ? "block" : "none";
+      });
+    });
+  }
+</script>

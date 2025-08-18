@@ -1,0 +1,26 @@
+---
+import RootLayout from "@/layouts/RootLayout.astro";
+import ListLayoutWithImages from "@/layouts/ListLayoutWithImages.astro";
+import { getCollection } from "astro:content";
+
+// Get all blog posts
+const posts = await getCollection("blog");
+const sortedPosts = posts.sort(
+  (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
+);
+
+// Transform posts to match the expected interface
+const transformedPosts = sortedPosts.map((post) => ({
+  slug: post.data.slug || post.slug,
+  date: post.data.date,
+  title: post.data.title,
+  summary: post.data.summary,
+  tags: post.data.tags || [],
+  images: post.data.images || ["/static/images/blog-default.jpg"],
+  draft: post.data.draft || false,
+}));
+---
+
+<RootLayout title="Blog - Hamza El Idrissi">
+  <ListLayoutWithImages posts={transformedPosts} title="Blog" />
+</RootLayout>

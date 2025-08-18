@@ -1,0 +1,99 @@
+---
+import "@fontsource/space-grotesk/400.css";
+import "@fontsource/space-grotesk/500.css";
+import "@fontsource/space-grotesk/600.css";
+import "@fontsource/space-grotesk/700.css";
+import "@fontsource-variable/inter";
+import "@fontsource/tomorrow";
+import Header from "@/components/home/header.astro";
+import Footer from "@/components/home/footer.astro";
+import SectionContainer from "@/components/ui/section-container.astro";
+import "@/styles/globals.css";
+import { ThemeScript } from "astro-theme-toggle";
+import { ClientRouter } from "astro:transitions";
+---
+
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, interactive-widget=resizes-content"
+    />
+    <link rel="icon" type="image/x-icon" href="/favicons/favicon.ico" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/favicons/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/favicons/favicon-16x16.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="192x192"
+      href="/favicons/android-chrome-192x192.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="512x512"
+      href="/favicons/android-chrome-512x512.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="152x152"
+      href="/favicons/apple-touch-icon.png"
+    />
+    <link rel="manifest" href="/favicons/site.webmanifest" />
+    <meta name="msapplication-TileColor" content="#000000" />
+    <meta
+      name="theme-color"
+      media="(prefers-color-scheme: light)"
+      content="#fff"
+    />
+    <meta
+      name="theme-color"
+      media="(prefers-color-scheme: dark)"
+      content="#000"
+    />
+    <link rel="alternate" type="application/rss+xml" href="/feed.xml" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="theme-color" content="#171717" />
+    <ClientRouter />
+    <link rel="canonical" href="./" />
+    <link rel="alternate" type="application/rss+xml" href="/feed.xml" />
+    <meta
+      name="robots"
+      content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"
+    />
+    <meta
+      name="googlebot"
+      content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"
+    />
+    <meta name="google" content="notranslate" />
+    <slot name="seo" />
+    <slot name="ld+json" />
+  </head>
+  <body
+    class="min-h-screen bg-background font-sans text-foreground antialiased"
+  >
+    <ThemeScript />
+    <SectionContainer>
+      <div class="flex h-screen flex-col justify-between font-sans">
+        <Header />
+        <main class="mb-auto">
+          <slot />
+        </main>
+        <Footer />
+      </div>
+    </SectionContainer>
+  </body>
+</html>

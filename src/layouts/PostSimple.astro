@@ -1,0 +1,102 @@
+---
+import Link from "@/components/ui/link.astro";
+import Tag from "@/components/ui/tag.astro";
+
+interface Post {
+  path: string;
+  date: string;
+  title: string;
+  tags?: string[];
+}
+
+interface Props {
+  content: Post;
+  children: any;
+}
+
+const { content } = Astro.props;
+const { date, title, tags } = content;
+
+// Format date function
+function formatDate(date: string, locale: string = "en-US") {
+  return new Date(date).toLocaleDateString(locale, {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+}
+---
+
+<article>
+  <div class="xl:divide-y xl:divide-gray-200 xl:dark:divide-gray-700">
+    <header class="pt-6 xl:pb-6">
+      <div class="space-y-1 text-center">
+        <dl class="space-y-10">
+          <div>
+            <dt class="sr-only">Published on</dt>
+            <dd
+              class="text-base font-medium leading-6 text-gray-500 dark:text-gray-400"
+            >
+              <time datetime={date}>{formatDate(date)}</time>
+            </dd>
+          </div>
+        </dl>
+        <div>
+          <h1
+            class="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-5xl md:leading-14"
+          >
+            {title}
+          </h1>
+        </div>
+      </div>
+    </header>
+    <div
+      class="divide-y divide-gray-200 pb-8 dark:divide-gray-700 xl:grid xl:grid-cols-4 xl:gap-x-6 xl:divide-y-0"
+    >
+      <dl
+        class="pb-8 pt-6 xl:col-span-1 xl:border-b xl:border-gray-200 xl:pt-11 xl:dark:border-gray-700"
+      >
+        <dt class="sr-only">Authors</dt>
+        <dd>
+          <ul
+            class="flex flex-wrap justify-center gap-4 xl:flex-col xl:justify-start xl:space-y-8"
+          >
+            <li class="flex items-center space-x-2 pt-8">
+              <span class="text-gray-500 dark:text-gray-400">•</span>
+              <Link href="/" className="text-gray-900 dark:text-gray-100">
+                Back to the blog
+              </Link>
+            </li>
+          </ul>
+        </dd>
+      </dl>
+      <div
+        class="divide-y divide-gray-200 dark:divide-gray-700 xl:col-span-3 xl:row-span-2 xl:pb-0"
+      >
+        <div class="prose max-w-none pb-8 pt-10 dark:prose-invert">
+          <slot />
+        </div>
+        <footer>
+          <div
+            class="text-sm font-medium leading-5 xl:col-start-1 xl:row-start-2 xl:divide-y xl:divide-gray-200 dark:xl:divide-gray-700"
+          >
+            {
+              tags && (
+                <div class="py-4 xl:py-8">
+                  <h2 class="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">
+                    Tags
+                  </h2>
+                  <div class="flex flex-wrap">
+                    {tags.map((tag) => (
+                      <Tag text={tag} className="mr-3 mt-3" />
+                    ))}
+                  </div>
+                </div>
+              )
+            }
+          </div>
+        </footer>
+      </div>
+    </div>
+  </div>
+</article>

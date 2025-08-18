@@ -1,0 +1,262 @@
+---
+import Image from "@/components/ui/image.astro";
+import Link from "@/components/ui/link.astro";
+import Tag from "@/components/ui/tag.astro";
+
+interface Post {
+  slug: string;
+  date: string;
+  title: string;
+  summary: string;
+  tags: string[];
+  images: string[];
+  draft?: boolean;
+}
+
+interface PaginationProps {
+  totalPages: number;
+  currentPage: number;
+}
+
+interface Props {
+  posts: Post[];
+  title: string;
+  pagination?: PaginationProps;
+}
+
+const { posts, pagination } = Astro.props;
+
+// Format date function
+function formatDate(date: string, locale: string = "en-US") {
+  return new Date(date).toLocaleDateString(locale, {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+}
+
+const nonDraftPosts = posts.filter((post) => !post.draft);
+const [featuredPost, ...otherPosts] = nonDraftPosts;
+---
+
+<div class="flex dark:text-white sm:space-x-24">
+  <div class="w-full">
+    <div class="space-y-4 pb-10 pt-6 text-center">
+      <p
+        class="mx-2 text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14"
+      >
+        new post every&nbsp;
+        <span class="text-black">
+          <span class="bg-blue-200 rounded px-2 py-1"> sometimes </span>
+        </span>
+      </p>
+      <p class="text-lg leading-7 text-gray-500 dark:text-gray-400">
+        learnings, thoughts, and other musings.
+      </p>
+    </div>
+
+    {
+      featuredPost && (
+        <div class="mb-12 overflow-hidden rounded-xl bg-gradient-to-br from-gray-50 to-white shadow-xl transition duration-300 ease-in-out hover:shadow-2xl dark:border-gray-800 dark:from-gray-900 dark:to-gray-800">
+          <article class="grid grid-cols-1 gap-0 md:grid-cols-2">
+            <Link
+              href={`/blog/${featuredPost.slug}`}
+              className="group relative h-full overflow-hidden"
+            >
+              <Image
+                src={featuredPost.images[0] ?? ""}
+                alt={featuredPost.title}
+                className="absolute h-full w-full transform object-cover transition duration-500 group-hover:scale-105"
+                width={800}
+                height={600}
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 transition duration-300 group-hover:opacity-100" />
+            </Link>
+            <div class="flex flex-col justify-between p-8 md:p-10">
+              <div>
+                <div class="mb-4 flex flex-wrap gap-2">
+                  {featuredPost.tags.map((tag) => (
+                    <Tag text={tag} />
+                  ))}
+                </div>
+                <h2 class="mb-4 text-3xl font-bold leading-tight tracking-tight">
+                  <Link
+                    href={`/blog/${featuredPost.slug}`}
+                    className="text-gray-900 hover:text-primary-500 dark:text-gray-100 dark:hover:text-teal-400"
+                  >
+                    {featuredPost.title}
+                  </Link>
+                </h2>
+                <div class="mb-4 flex items-center text-sm text-gray-500 dark:text-gray-400">
+                  <svg
+                    class="mr-2 h-4 w-4"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                    />
+                  </svg>
+                  <time datetime={featuredPost.date}>
+                    {formatDate(featuredPost.date)}
+                  </time>
+                </div>
+                <p class="prose mb-6 line-clamp-4 text-gray-600 dark:text-gray-300">
+                  {featuredPost.summary}
+                </p>
+              </div>
+              <Link
+                href={`/blog/${featuredPost.slug}`}
+                className="mt-auto inline-flex items-center justify-center rounded-lg bg-gray-100 px-4 py-2 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-gray-700"
+              >
+                Read Featured Article
+                <svg
+                  class="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M14 5l7 7m0 0l-7 7m7-7H3"
+                  />
+                </svg>
+              </Link>
+            </div>
+          </article>
+        </div>
+      )
+    }
+
+    <div class="mt-12">
+      <h2 class="mb-8 text-2xl font-bold text-gray-900 dark:text-gray-100">
+        Latest Posts
+      </h2>
+      <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+        {
+          otherPosts.map((post) => {
+            const { slug, date, title, summary, tags, images } = post;
+            return (
+              <article class="group flex flex-col overflow-hidden rounded-xl bg-gradient-to-br from-gray-50 to-white shadow-lg transition duration-300 hover:shadow-xl dark:border-gray-800 dark:from-gray-900 dark:to-gray-800">
+                <Link
+                  href={`/blog/${slug}`}
+                  className="relative h-48 overflow-hidden"
+                >
+                  <Image
+                    src={images[0] ?? ""}
+                    alt={title}
+                    className="h-full w-full transform object-cover transition duration-500 group-hover:scale-105"
+                    width={400}
+                    height={200}
+                  />
+                  <div class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 transition duration-300 group-hover:opacity-100" />
+                </Link>
+                <div class="flex flex-grow flex-col p-6">
+                  <div class="mb-3 flex flex-wrap gap-2">
+                    {tags.map((tag) => (
+                      <Tag text={tag} />
+                    ))}
+                  </div>
+                  <h3 class="mb-3 text-xl font-bold leading-tight">
+                    <Link
+                      href={`/blog/${slug}`}
+                      className="text-gray-900 hover:text-primary-500 dark:text-gray-100 dark:hover:text-teal-400"
+                    >
+                      {title}
+                    </Link>
+                  </h3>
+                  <div class="mb-3 flex items-center text-sm text-gray-500 dark:text-gray-400">
+                    <svg
+                      class="mr-2 h-4 w-4"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                      />
+                    </svg>
+                    <time datetime={date}>{formatDate(date)}</time>
+                  </div>
+                  <p class="prose mb-4 line-clamp-4 flex-grow text-sm text-gray-600 dark:text-gray-300">
+                    {summary}
+                  </p>
+                  <Link
+                    href={`/blog/${slug}`}
+                    className="mt-auto inline-flex items-center justify-center rounded-lg bg-gray-100 px-4 py-2 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-gray-700"
+                  >
+                    Read more
+                    <svg
+                      class="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M14 5l7 7m0 0l-7 7m7-7H3"
+                      />
+                    </svg>
+                  </Link>
+                </div>
+              </article>
+            );
+          })
+        }
+      </div>
+    </div>
+
+    {
+      pagination && pagination.totalPages > 1 && (
+        <div class="space-y-2 pb-8 pt-6 md:space-y-5">
+          <nav class="flex justify-between">
+            {pagination.currentPage > 1 ? (
+              <a
+                href={
+                  pagination.currentPage - 1 === 1
+                    ? "/blog/"
+                    : `/blog/page/${pagination.currentPage - 1}`
+                }
+                rel="prev"
+                class="dark:text-teal-500 dark:hover:text-teal-400 text-primary-500 hover:text-primary-600"
+              >
+                Previous
+              </a>
+            ) : (
+              <button class="cursor-auto disabled:opacity-50" disabled>
+                Previous
+              </button>
+            )}
+            <span>
+              {pagination.currentPage} of {pagination.totalPages}
+            </span>
+            {pagination.currentPage < pagination.totalPages ? (
+              <a
+                href={`/blog/page/${pagination.currentPage + 1}`}
+                rel="next"
+                class="dark:text-teal-500 dark:hover:text-teal-400 text-primary-500 hover:text-primary-600"
+              >
+                Next
+              </a>
+            ) : (
+              <button class="cursor-auto disabled:opacity-50" disabled>
+                Next
+              </button>
+            )}
+          </nav>
+        </div>
+      )
+    }
+  </div>
+</div>

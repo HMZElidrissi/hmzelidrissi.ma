@@ -1,0 +1,101 @@
+---
+import Link from "@/components/ui/link.astro";
+import Tag from "@/components/ui/tag.astro";
+
+interface Post {
+  path: string;
+  date: string;
+  title: string;
+  summary: string;
+  tags?: string[];
+}
+
+interface Props {
+  posts: Post[];
+  title: string;
+  children: any;
+}
+
+const { posts, title } = Astro.props;
+
+// Format date function
+function formatDate(date: string, locale: string = "en-US") {
+  return new Date(date).toLocaleDateString(locale, {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+}
+
+// Get all unique tags
+const allTags = [...new Set(posts.flatMap((post) => post.tags || []))];
+---
+
+<div class="divide-y divide-gray-200 dark:divide-gray-700">
+  <div class="space-y-2 pb-8 pt-6 md:space-y-5">
+    <h1
+      class="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14"
+    >
+      {title}
+    </h1>
+    <div class="prose max-w-none text-gray-700 dark:text-gray-400">
+      <slot />
+    </div>
+  </div>
+  <div class="pb-8 pt-6">
+    <div class="flex flex-wrap gap-2">
+      {
+        allTags.map((tag) => (
+          <a
+            href={`/tags/${tag}`}
+            class="inline-flex items-center rounded-full bg-gray-100 px-3 py-0.5 text-sm font-medium text-gray-800 hover:bg-gray-200 dark:bg-gray-700 dark:text-gray-100 dark:hover:bg-gray-600"
+          >
+            {tag}
+          </a>
+        ))
+      }
+    </div>
+  </div>
+  <ul>
+    {posts.length === 0 && "No posts found."}
+    {
+      posts.map((post) => {
+        const { path, date, title, summary, tags } = post;
+        return (
+          <li class="py-4">
+            <article class="space-y-2 xl:grid xl:grid-cols-4 xl:items-baseline xl:space-y-0">
+              <dl>
+                <dt class="sr-only">Published on</dt>
+                <dd class="text-base font-medium leading-6 text-gray-500 dark:text-gray-400">
+                  <time datetime={date}>{formatDate(date)}</time>
+                </dd>
+              </dl>
+              <div class="space-y-3 xl:col-span-3">
+                <div>
+                  <h3 class="text-2xl font-bold leading-8 tracking-tight">
+                    <Link
+                      href={`/${path}`}
+                      className="text-gray-900 dark:text-gray-100"
+                    >
+                      {title}
+                    </Link>
+                  </h3>
+                  {tags && (
+                    <div class="flex flex-wrap">
+                      {tags.map((tag) => (
+                        <Tag text={tag} />
+                      ))}
+                    </div>
+                  )}
+                </div>
+                <div class="prose max-w-none text-gray-700 dark:text-gray-400">
+                  {summary}
+                </div>
+              </div>
+            </article>
+          </li>
+        );
+      })
+    }
+  </ul>
+</div>

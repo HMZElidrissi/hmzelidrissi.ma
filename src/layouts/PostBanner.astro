@@ -1,0 +1,95 @@
+---
+import Image from "@/components/ui/image.astro";
+
+interface Post {
+  title: string;
+  date: string;
+  tags?: string[];
+  images?: string[];
+}
+
+interface Props {
+  content: Post;
+  children: any;
+}
+
+const { content } = Astro.props;
+const { title, date, tags, images } = content;
+
+// Format date function
+function formatDate(date: string, locale: string = "en-US") {
+  return new Date(date).toLocaleDateString(locale, {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+}
+---
+
+<div class="divide-y divide-gray-200 dark:divide-gray-700">
+  <div class="space-y-2 pb-8 pt-6 md:space-y-5">
+    <h1
+      class="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14"
+    >
+      {title}
+    </h1>
+    <div class="flex flex-wrap">
+      {
+        tags?.map((tag) => (
+          <span class="mr-3 text-sm font-medium uppercase text-primary-500 hover:text-primary-600 dark:hover:text-primary-400">
+            {tag}
+          </span>
+        ))
+      }
+    </div>
+    <dl>
+      <dt class="sr-only">Published on</dt>
+      <dd
+        class="text-base font-medium leading-6 text-gray-500 dark:text-gray-400"
+      >
+        <time datetime={date}>{formatDate(date)}</time>
+      </dd>
+    </dl>
+  </div>
+  <div
+    class="divide-y divide-gray-200 pb-8 dark:divide-gray-700 xl:grid xl:grid-cols-4 xl:gap-x-6 xl:divide-y-0"
+  >
+    <dl
+      class="pb-8 pt-6 xl:col-span-1 xl:border-b xl:border-gray-200 xl:pt-11 xl:dark:border-gray-700"
+    >
+      <dt class="sr-only">Authors</dt>
+      <dd>
+        <ul
+          class="flex flex-wrap justify-center gap-4 xl:flex-col xl:justify-start xl:space-y-8"
+        >
+          <li class="flex items-center space-x-2 pt-8">
+            <span class="text-gray-500 dark:text-gray-400">•</span>
+            <a href="/" class="text-gray-900 dark:text-gray-100">
+              Back to the blog
+            </a>
+          </li>
+        </ul>
+      </dd>
+    </dl>
+    <div
+      class="divide-y divide-gray-200 dark:divide-gray-700 xl:col-span-3 xl:row-span-2 xl:pb-0"
+    >
+      {
+        images && images.length > 0 && (
+          <div class="pb-8 pt-10">
+            <Image
+              src={images[0] ?? ""}
+              alt={title}
+              width={800}
+              height={400}
+              className="rounded-lg"
+            />
+          </div>
+        )
+      }
+      <div class="prose max-w-none pb-8 pt-10 dark:prose-invert">
+        <slot />
+      </div>
+    </div>
+  </div>
+</div>

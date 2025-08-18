@@ -1,0 +1,48 @@
+---
+import RootLayout from "@/layouts/RootLayout.astro";
+import PostLayout from "@/layouts/PostLayout.astro";
+import { getCollection } from "astro:content";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("blog");
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+
+// Get author details (you can customize this based on your needs)
+const authorDetails = [
+  {
+    name: "Hamza El Idrissi",
+    avatar: "/static/images/avatar.jpg",
+    authorBioLink: "whoami",
+  },
+];
+
+// Transform post data to match the expected interface
+const transformedPost = {
+  filePath: post.id,
+  path: `blog/${post.slug}`,
+  slug: post.slug,
+  date: post.data.date,
+  title: post.data.title,
+  tags: post.data.tags || [],
+  ig: false,
+  bsky: false,
+  threads: false,
+  x: true,
+  fb: false,
+  reddit: false,
+  pinterest: false,
+};
+---
+
+<RootLayout title={`${post.data.title} - Blog`}>
+  <PostLayout content={transformedPost} authorDetails={authorDetails}>
+    <Content />
+  </PostLayout>
+</RootLayout>

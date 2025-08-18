@@ -1,0 +1,67 @@
+---
+import { siteMetadata } from "@/config/siteMetadata";
+import Link from "@/components/ui/link.astro";
+import { Mail, Twitter, Linkedin, Github, Spotify } from "@/components/icons";
+---
+
+<footer>
+  <div class="mt-16 flex flex-col items-center">
+    <div class="mb-3 mt-8 flex space-x-4">
+      <a href={`mailto:${siteMetadata.email}`}>
+        <Mail
+          className="h-6 w-6 text-gray-700 hover:text-primary-500 dark:text-gray-200 dark:hover:text-primary-400"
+        />
+      </a>
+      <a href={siteMetadata.twitter}>
+        <Twitter
+          className="h-6 w-6 text-gray-700 hover:text-primary-500 dark:text-gray-200 dark:hover:text-primary-400"
+        />
+      </a>
+      <a href={siteMetadata.linkedin}>
+        <Linkedin
+          className="h-6 w-6 text-gray-700 hover:text-primary-500 dark:text-gray-200 dark:hover:text-primary-400"
+        />
+      </a>
+      <a href={siteMetadata.github}>
+        <Github
+          className="h-6 w-6 text-gray-700 hover:text-primary-500 dark:text-gray-200 dark:hover:text-primary-400"
+        />
+      </a>
+      <a href={siteMetadata.spotify}>
+        <Spotify
+          className="h-6 w-6 text-gray-700 hover:text-primary-500 dark:text-gray-200 dark:hover:text-primary-400"
+        />
+      </a>
+    </div>
+    <div class="mb-8 flex space-x-2 text-sm text-gray-500 dark:text-gray-400">
+      <div>{siteMetadata.author}</div>
+      <div>{` • `}</div>
+      <div>{`© ${new Date().getFullYear()}`}</div>
+      <div>{` • `}</div>
+      <Link href="/">{siteMetadata.title}</Link>
+    </div>
+  </div>
+</footer>
+
+<!-- <style>
+  footer .social-link {
+    color: rgb(55 65 81) !important;
+    transition: color 0.2s ease-in-out !important;
+  }
+
+  footer .social-link:hover {
+    color: rgb(59 130 246) !important;
+  }
+
+  .dark footer .social-link {
+    color: rgb(229 231 235) !important;
+  }
+
+  .dark footer .social-link:hover {
+    color: rgb(96 165 250) !important;
+  }
+
+  footer .social-link svg {
+    fill: currentColor !important;
+  }
+</style> -->

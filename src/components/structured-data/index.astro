@@ -1,0 +1,131 @@
+---
+import { Schema } from "astro-seo-schema";
+import { siteMetadata } from "@/config/siteMetadata";
+
+interface Props {
+  type:
+    | "WebSite"
+    | "WebPage"
+    | "Person"
+    | "Organization"
+    | "BlogPosting"
+    | "Article";
+  title?: string;
+  description?: string;
+  url?: string;
+  image?: string;
+  datePublished?: string;
+  dateModified?: string;
+  keywords?: string[];
+  data?: Record<string, any>;
+}
+
+const {
+  type,
+  title,
+  description,
+  url,
+  image,
+  datePublished,
+  dateModified,
+  keywords,
+  data = {},
+} = Astro.props;
+
+const currentUrl = url || Astro.url.href;
+const pageTitle = title || siteMetadata.headerTitle;
+const pageDescription = description || siteMetadata.description;
+
+const defaultData = {
+  WebSite: {
+    name: pageTitle,
+    description: pageDescription,
+    url: siteMetadata.siteUrl,
+    author: {
+      "@type": "Person",
+      name: siteMetadata.author,
+      email: siteMetadata.email,
+      url: siteMetadata.siteUrl,
+      sameAs: [
+        siteMetadata.github,
+        siteMetadata.twitter,
+        siteMetadata.linkedin,
+      ],
+    },
+    ...(image && { image }),
+  },
+  WebPage: {
+    name: pageTitle,
+    description: pageDescription,
+    url: currentUrl,
+    ...(image && { image }),
+  },
+  Person: {
+    name: siteMetadata.author,
+    email: siteMetadata.email,
+    url: siteMetadata.siteUrl,
+    sameAs: [siteMetadata.github, siteMetadata.twitter, siteMetadata.linkedin],
+    ...(image && { image }),
+  },
+  Organization: {
+    name: siteMetadata.headerTitle,
+    description: siteMetadata.description,
+    url: siteMetadata.siteUrl,
+    logo: siteMetadata.siteLogo,
+  },
+  BlogPosting: {
+    headline: pageTitle,
+    description: pageDescription,
+    url: currentUrl,
+    author: {
+      "@type": "Person",
+      name: siteMetadata.author,
+      email: siteMetadata.email,
+      url: siteMetadata.siteUrl,
+    },
+    publisher: {
+      "@type": "Person",
+      name: siteMetadata.author,
+      url: siteMetadata.siteUrl,
+    },
+    ...(image && { image }),
+    ...(datePublished && { datePublished }),
+    ...(dateModified && { dateModified }),
+    ...(keywords && { keywords }),
+  },
+  Article: {
+    headline: pageTitle,
+    description: pageDescription,
+    url: currentUrl,
+    author: {
+      "@type": "Person",
+      name: siteMetadata.author,
+      email: siteMetadata.email,
+      url: siteMetadata.siteUrl,
+    },
+    publisher: {
+      "@type": "Person",
+      name: siteMetadata.author,
+      url: siteMetadata.siteUrl,
+    },
+    ...(image && { image }),
+    ...(datePublished && { datePublished }),
+    ...(dateModified && { dateModified }),
+    ...(keywords && { keywords }),
+  },
+};
+
+const schemaData = {
+  ...defaultData[type],
+  ...data,
+};
+---
+
+<Schema
+  slot="ld+json"
+  item={{
+    "@type": type as any,
+    "@context": "https://schema.org",
+    ...schemaData,
+  }}
+/>

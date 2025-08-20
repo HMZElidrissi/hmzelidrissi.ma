@@ -1,0 +1,20 @@
+---
+import { WorkStack, StackInfo } from "@/config/stack";
+---
+
+<div class="mb-2 flex flex-wrap">
+  {
+    WorkStack.map((item) => {
+      const info = StackInfo[item];
+      if (!info) return null;
+      return (
+        <span
+          class="mb-2 mr-2 rounded-sm px-2 py-1 text-xs font-medium text-white"
+          style={{ background: info.color }}
+        >
+          {info.value}
+        </span>
+      );
+    })
+  }
+</div>

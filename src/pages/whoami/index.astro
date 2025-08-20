@@ -1,107 +1,36 @@
 ---
 import RootLayout from "@/layouts/RootLayout.astro";
-import Card from "@/components/ui/card.astro";
-import CardContent from "@/components/ui/card-content.astro";
-import CardDescription from "@/components/ui/card-description.astro";
-import CardHeader from "@/components/ui/card-header.astro";
-import CardTitle from "@/components/ui/card-title.astro";
-import StructuredData from "../../components/structured-data/index.astro";
+import AuthorLayout from "@/layouts/AuthorLayout.astro";
+import { getCollection } from "astro:content";
+
+// Load author from content collection (matches Next.js behavior of using default author)
+const authors = await getCollection("authors");
+if (authors.length === 0) {
+  throw new Error("No authors found in the 'authors' content collection.");
+}
+// Prefer the default schema name; fallback to first author
+const author = (authors.find((a) => a.data.name === "Hamza El Idrissi") ??
+  authors[0])!;
+const { Content } = await author.render();
+
+// Map to AuthorLayout props and normalize avatar
+const data: any = author.data;
+const avatarValue = data.avatar;
+const avatar =
+  avatarValue && typeof avatarValue === "object" && "src" in avatarValue
+    ? avatarValue.src
+    : avatarValue;
+
+const authorForLayout = {
+  name: data.name,
+  avatar,
+  occupation: data.occupation,
+  updatedAt: data.updatedAt,
+};
 ---
 
-<RootLayout
-  title="About"
-  description="Learn more about Hamza El Idrissi, a software engineer and researcher specializing in distributed systems, virtualization, and system design."
->
-  <StructuredData
-    slot="ld+json"
-    type="WebPage"
-    data={{
-      name: "About - Hamza El Idrissi",
-      description:
-        "Learn more about Hamza El Idrissi, a software engineer and researcher specializing in distributed systems, virtualization, and system design.",
-      url: "https://hmzelidrissi.ma/about",
-    }}
-  />
-  <div class="container mx-auto px-4 py-8">
-    <div class="mb-8 text-center">
-      <h1 class="mb-4 text-4xl font-bold tracking-tight text-foreground">
-        About Us
-      </h1>
-      <p class="text-lg text-muted-foreground">
-        Discover our story, mission, and the values that drive us forward
-      </p>
-    </div>
-
-    <div class="mx-auto max-w-4xl space-y-8">
-      <Card>
-        <CardHeader>
-          <CardTitle>Our Mission</CardTitle>
-          <CardDescription>
-            Empowering innovation through technology and collaboration
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <p class="text-muted-foreground">
-            We are dedicated to creating cutting-edge solutions that make a
-            difference in people's lives. Our team combines creativity,
-            technical expertise, and a passion for excellence to deliver
-            outstanding results.
-          </p>
-        </CardContent>
-      </Card>
-
-      <Card>
-        <CardHeader>
-          <CardTitle>Our Vision</CardTitle>
-          <CardDescription>
-            Building the future, one project at a time
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <p class="text-muted-foreground">
-            We envision a world where technology seamlessly integrates with
-            everyday life, making complex tasks simple and creating
-            opportunities for growth and innovation across all sectors.
-          </p>
-        </CardContent>
-      </Card>
-
-      <Card>
-        <CardHeader>
-          <CardTitle>Our Values</CardTitle>
-          <CardDescription>
-            The principles that guide everything we do
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
-            <div>
-              <h4 class="font-semibold text-foreground">Innovation</h4>
-              <p class="text-sm text-muted-foreground">
-                Constantly pushing boundaries and exploring new possibilities
-              </p>
-            </div>
-            <div>
-              <h4 class="font-semibold text-foreground">Quality</h4>
-              <p class="text-sm text-muted-foreground">
-                Delivering excellence in every project and interaction
-              </p>
-            </div>
-            <div>
-              <h4 class="font-semibold text-foreground">Collaboration</h4>
-              <p class="text-sm text-muted-foreground">
-                Working together to achieve greater results
-              </p>
-            </div>
-            <div>
-              <h4 class="font-semibold text-foreground">Integrity</h4>
-              <p class="text-sm text-muted-foreground">
-                Maintaining the highest ethical standards in all we do
-              </p>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
-    </div>
-  </div>
+<RootLayout title={`Who is ${authorForLayout.name}?`}>
+  <AuthorLayout content={authorForLayout}>
+    <Content />
+  </AuthorLayout>
 </RootLayout>

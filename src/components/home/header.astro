@@ -10,9 +10,9 @@ import LogoHeader from "@/components/home/logo-header";
 
 <header class="flex items-center justify-between py-10">
   <div>
-    <Link href="/" aria-label={siteMetadata.headerTitle}>
+    <a href="/" aria-label={siteMetadata.headerTitle} data-astro-reload>
       <LogoHeader client:load />
-    </Link>
+    </a>
   </div>
   <div class="flex items-center space-x-4 leading-5 sm:space-x-6">
     {

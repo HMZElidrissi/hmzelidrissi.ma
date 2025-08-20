@@ -2,10 +2,16 @@
 import RootLayout from "@/layouts/RootLayout.astro";
 import ListLayoutWithTags from "@/layouts/ListLayoutWithTags.astro";
 import { getCollection } from "astro:content";
+import {
+  getPostSlug,
+  isPostPublished,
+  filterPostsByTag,
+  getAllTags,
+} from "@/lib/utils";
 
 export async function getStaticPaths() {
-  const posts = await getCollection("blog");
-  const tags = [...new Set(posts.flatMap((post) => post.data.tags || []))];
+  const posts = await getCollection("blog", isPostPublished);
+  const tags = getAllTags(posts);
 
   return tags.map((tag) => ({
     params: { tag },
@@ -16,13 +22,11 @@ export async function getStaticPaths() {
 const { tag, posts } = Astro.props;
 
 // Filter posts by tag
-const filteredPosts = posts.filter(
-  (post) => post.data.tags && post.data.tags.includes(tag)
-);
+const filteredPosts = filterPostsByTag(posts, tag);
 
 // Transform posts to match the expected interface
 const transformedPosts = filteredPosts.map((post) => ({
-  path: `blog/${post.slug}`,
+  path: `blog/${getPostSlug(post)}`,
   date: post.data.date,
   title: post.data.title,
   summary: post.data.summary,

@@ -9,8 +9,8 @@ export const siteMetadata = {
   theme: "system", // system, dark or light
   siteUrl: "https://hmzelidrissi.ma",
   siteRepo: "https://github.com/HMZElidrissi/hmzelidrissi.ma",
-  siteLogo: "/static/images/logo.svg",
-  socialBanner: "/static/images/twitter-card.png",
+  siteLogo: "./logo.svg",
+  socialBanner: "./twitter-card.png",
   email: "hamza.ezzharelidrissi1@gmail.com",
   github: "https://github.com/HMZElidrissi",
   twitter: "https://x.com/HMZElidrissi",

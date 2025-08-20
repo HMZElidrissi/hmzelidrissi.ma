@@ -12,6 +12,7 @@ export default {
       black: colors.black,
       white: colors.white,
       gray: colors.neutral,
+      teal: colors.teal,
       border: "hsl(var(--border))",
       input: "hsl(var(--input))",
       ring: "hsl(var(--ring))",

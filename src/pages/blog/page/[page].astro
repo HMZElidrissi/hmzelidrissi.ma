@@ -9,11 +9,25 @@ import {
   resolvePostImages,
 } from "@/lib/utils";
 
-// Get all non-draft blog posts
+export async function getStaticPaths() {
+  const posts = await getCollection("blog", isPostPublished);
+  const sortedPosts = sortPostsByDate(posts);
+  const PAGE_SIZE = 6;
+  const totalPages = Math.ceil(sortedPosts.length / PAGE_SIZE) || 1;
+  return Array.from({ length: totalPages }, (_, i) => ({
+    params: { page: String(i + 1) },
+    props: { currentPage: i + 1, totalPages },
+  }));
+}
+
+const { currentPage, totalPages } = Astro.props as {
+  currentPage: number;
+  totalPages: number;
+};
+
 const posts = await getCollection("blog", isPostPublished);
 const sortedPosts = sortPostsByDate(posts);
 
-// Transform posts to match the expected interface
 const transformedPosts: {
   slug: string;
   date: string;
@@ -32,15 +46,15 @@ const transformedPosts: {
   draft: post.data.draft || false,
 }));
 
-// Pagination: first page
 const PAGE_SIZE = 6;
-const totalPages = Math.ceil(transformedPosts.length / PAGE_SIZE) || 1;
-const pageOnePosts = transformedPosts.slice(0, PAGE_SIZE);
+const start = (currentPage - 1) * PAGE_SIZE;
+const end = start + PAGE_SIZE;
+const pagePosts = transformedPosts.slice(start, end);
 ---
 
 <RootLayout>
   <ListLayoutWithImages
-    posts={pageOnePosts}
-    pagination={{ totalPages: totalPages, currentPage: 1 }}
+    posts={pagePosts}
+    pagination={{ totalPages: totalPages, currentPage: currentPage }}
   />
 </RootLayout>

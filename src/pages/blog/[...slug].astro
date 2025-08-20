@@ -2,11 +2,13 @@
 import RootLayout from "@/layouts/RootLayout.astro";
 import PostLayout from "@/layouts/PostLayout.astro";
 import { getCollection } from "astro:content";
+import { getPostSlug, isPostPublished } from "@/lib/utils";
 
 export async function getStaticPaths() {
-  const posts = await getCollection("blog");
+  const posts = await getCollection("blog", isPostPublished);
+
   return posts.map((post) => ({
-    params: { slug: post.slug },
+    params: { slug: getPostSlug(post) },
     props: { post },
   }));
 }
@@ -18,7 +20,7 @@ const { Content } = await post.render();
 const authorDetails = [
   {
     name: "Hamza El Idrissi",
-    avatar: "/static/images/avatar.jpg",
+    avatar: "/stylish-owl.png", // Use a default avatar image
     authorBioLink: "whoami",
   },
 ];
@@ -26,8 +28,8 @@ const authorDetails = [
 // Transform post data to match the expected interface
 const transformedPost = {
   filePath: post.id,
-  path: `blog/${post.slug}`,
-  slug: post.slug,
+  path: `blog/${getPostSlug(post)}`,
+  slug: getPostSlug(post),
   date: post.data.date,
   title: post.data.title,
   tags: post.data.tags || [],

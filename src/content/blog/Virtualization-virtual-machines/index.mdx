@@ -1,0 +1,61 @@
+---
+title: "Virtualization & Virtual Machines"
+date: "2024-07-29"
+lastmod: "2024-07-29"
+tags: ["Virtualization", "Virtual Machines", "Linux"]
+draft: false
+summary: "In this blog post, we will discuss virtualization, virtual machines, and how they are used in modern computing environments."
+images: ["./12.webp"]
+---
+
+![cover](./12.webp)
+
+# WHAT IS A VIRTUAL MACHINE?
+
+Imagine having a Windows computer and wanting to run a Linux program. You could either have a separate Linux computer or install a Linux operating system on your computer, but that would require partitioning your hard drive, installing a new operating system, and potentially losing data. Instead, with virtualization, you can install Linux on top of your Windows operating system without affecting your existing setup and vice versa. This is where virtual machines come into play. This achieved by using a software called a hypervisor, which creates a virtual environment that emulates a physical computer.
+
+## HOW DOES A VIRTUAL MACHINE WORK?
+
+A virtual machine (VM) is a software-based emulation of a physical computer. And since it emulates a physical computer it works how a real machine works. and how a real machine works? According to the Von Neumann architecture, which
+describes a way to build a fully-functioning computer, a computer has the following components:
+
+- **Central Processing Unit (CPU):** The CPU is the brain of the computer. It executes instructions and performs calculations.
+- **Memory (RAM):** Memory stores data and instructions that the CPU needs to access quickly.
+- **Mass Storage (Hard Drive):** Storage stores data and programs for long-term use.
+- **Input/Output (I/O):** I/O devices allow the computer to interact with the outside world, such as keyboards, mice, and monitors.
+
+![Von Neumann Architecture](./von-neumann-architecture.png)
+
+A virtual machine emulates these components using software. The hypervisor creates a virtual CPU, virtual memory, virtual storage, and virtual I/O devices for each VM. The VM runs its own operating system and applications, just like a physical computer.
+
+> **NOTE**: Virtual machines are isolated from each other and the host system. This isolation provides security and stability, as one VM cannot affect another VM or the host system.
+
+## TYPES OF HYPERVISORS
+
+There are two main types of hypervisors:
+
+![Hypervisor Types](./hypervisor-types.png)
+
+1. **Type 1 (Bare Metal):** Type 1 hypervisors run directly on the host hardware without an underlying operating system. This type is typically used in enterprise environments and data centers for high performance and security. Examples include VMware ESXi, Microsoft Hyper-V, and Xen.
+2. **Type 2 (Hosted):** Type 2 hypervisors run on top of an existing operating system. This type is commonly used for development, testing, and personal use. Examples include VMware Workstation, Oracle VirtualBox, and Parallels Desktop.
+
+# VIRTUALIZATION USE CASES: WHAT ARE THE BENEFITS FOR COMPANIES USING VIRTUALIZATION?
+
+Main benefit: Instead of OS being tightly coupled to the hardware, Virtualization gives an abstraction layer between the hardware and the OS with the following benefits:
+
+- **Cost Savings:** Companies can reduce hardware costs by consolidating multiple virtual machines on a single physical server.
+- **Resource Optimization:** Virtualization allows companies to allocate resources dynamically based on demand, improving efficiency and performance.
+- **Isolation and Security:** Virtual machines are isolated from each other, providing security and stability. If one VM is compromised, it does not affect other VMs or the host system.
+- **Disaster Recovery:** Virtual machines can be easily backed up and restored, making disaster recovery faster and more reliable.
+- **Portability:** OS as a portable file (VMI - Virtual Machine Image) can be moved to another host with the same hypervisor.
+  - **VMI (Virtual Machine Image):** A VMI is a file that contains the entire state of a virtual machine, including the operating system, applications, and data. VMIs can be easily copied, moved, and restored, making them ideal for disaster recovery and portability.
+
+---
+
+![Virtual-Machines](./virtual-machines.gif)
+
+---
+
+### **Resources:**
+
+- [hypervisor - appviewbox](https://appviewx.com/education-center/hypervisor/)

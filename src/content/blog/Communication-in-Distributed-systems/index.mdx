@@ -1,0 +1,124 @@
+---
+title: "Communication in Distributed Systems"
+date: "2024-05-10"
+lastmod: "2024-05-10"
+tags: ["Distributed Systems", "System Design"]
+draft: true
+summary: "In this blog, we will discuss the different communication models in distributed systems (Peer-to-Peer, Publish-Subscribe, Remote Procedure Call, ...) and some examples from real-world applications."
+images: ["./10.jpg"]
+---
+
+![Distributed Systems](./10.jpg)
+
+# PEER-TO-PEER MODEL
+
+In a peer-to-peer (P2P) communication model, all nodes in the network can communicate with each other directly. There is no central server or broker involved in the communication. Each node can act as both a client and a server, sending and receiving messages from other nodes.
+
+P2P networks are decentralized and can be used for file sharing, messaging, and other applications where direct communication between nodes is required. Examples of P2P networks include BitTorrent, Skype, and Bitcoin.
+
+## Node Structure
+
+- Each node (peer) is a self-contained entity that can function independently.
+- Each node typically consists of:
+  - **Node ID**: A unique identifier for the node, used for communication and routing.
+  - **Node State**: The node's current state, including its availability, resources, and connections to other nodes.
+  - **Node Interface**: The interface through which the node communicates with other nodes, typically using a standardized protocol (e.g., TCP/IP).
+  - **Node Logic**: The node's internal logic, responsible for processing requests, managing resources, and making decisions.
+
+## Node Interactions
+
+- Nodes interact with each other through a combination of:
+  - **Direct Communication**: Nodes communicate directly with each other, using the node interface, to exchange data, requests, and responses.
+  - **Indirect Communication**: Nodes may communicate indirectly through intermediate nodes, using a routing mechanism to forward messages.
+  - **Node Discovery**: Nodes discover each other through various mechanisms, such as:
+    - **Bootstrapping**: Nodes learn about each other through a centralized directory or a well-known node.
+    - **Neighbor Discovery**: Nodes discover each other through a process of broadcasting and responding to messages.
+    - **Distributed Hash Tables (DHTs)**: Nodes use a DHT to map keys to node IDs, enabling efficient lookup and routing.
+
+![Peer-to-Peer Model](./peer-to-peer.png)
+
+# PUBLISH-SUBSCRIBE (PUB/SUB) MODEL
+
+In a publish-subscribe (pub/sub) communication model, publishers produce messages (events) that are delivered to subscribers based on their interests. Publishers and subscribers are decoupled (i.e., they do not need to know each other), and the pub/sub system acts as an intermediary that routes messages from publishers to subscribers.
+
+![Publish-Subscribe Model](./publish-subscribe.webp)
+
+The subscribers to the message topic often perform different functions, and can each do something different with the message in parallel. The publisher doesn't need to know who is using the information that it is broadcasting, and the subscribers don't need to know where the message comes from. This style of messaging is a bit different from message queues, where the component that sends the message often knows the destination it is sending to.
+
+## Key Components
+
+- **Publishers**: Nodes that produce and publish messages to the system.
+- **Subscribers**: Nodes that subscribe to receive messages from the system.
+- **Message Broker**: A centralized or decentralized entity that manages the flow of messages between publishers and subscribers.
+
+## Publish-Subscribe Operations
+
+The Pub-Sub system operates as follows: -**Message Publication**: A publisher sends a message to the message broker, specifying the topic or channel to which the message belongs. -**Message Routing**: The message broker routes the message to all subscribers that have subscribed to the topic or channel. -**Message Delivery**: The message broker delivers the message to the subscribers, who can then process the message as needed.
+
+# REMOTE PROCEDURE CALL (RPC) MODEL
+
+In a remote procedure call (RPC) communication model, a client invokes a procedure (function) on a remote server as if it were a local procedure call. The client sends a request to the server, which processes the request and returns a response to the client.
+
+- A mechanism for a program to call procedures or methods on another program or module, without having to know the details of how those procedures are implemented.
+- Allows for distributed computing, where multiple programs or modules can communicate with each other.
+
+> Remote Procedure Call (RPC) is a protocol that allows a program to call procedures or methods on another program or computer over a network. It's a way for different systems or applications to communicate with each other and exchange data.
+
+> RPC is similar to client-server architecture in that it involves a client program that makes requests to a server program. However, RPC is a more specific type of client-server architecture that focuses on procedure calls.
+> Here's a breakdown of the RPC process:
+
+    - Client: The client program initiates a procedure call by sending a request to the server.
+    - Server: The server program receives the request and executes the procedure.
+    - Response: The server sends the response back to the client.
+
+- RPC is often used in distributed systems, where different components or services need to communicate with each other. It's commonly used in:
+  - Distributed databases
+  - Web services
+  - Microservices architecture
+  - Cloud computing
+- Some popular RPC frameworks include:
+  - gRPC
+  - Apache Thrift
+  - Apache Avro
+  - JSON-RPC
+  - XML-RPC
+
+# DISCOVERY AND ROUTING
+
+In distributed systems, nodes need to discover each other and route messages efficiently.
+
+## RENDENZVOUS PROTOCOL
+
+The Rendezvous Protocol is a decentralized protocol for peer discovery and routing in P2P networks.
+
+- It provides facilities for real-time peer discovery within application-specific namespaces.
+- Peers connect to the rendezvous point and register their presence in one or more namespaces.
+- It is not allowed to register arbitrary peers in a namespace; only the peer initiating the registration can register itself.
+- The register message contains a serialized signed peer record created by the peer, which others can validate.
+- It's important to note that the degree of decentralization can vary depending on the specific implementation and deployment of the protocol. While the RENDEZVOUS protocol itself may not be inherently decentralized, it can be implemented in a decentralized manner depending on how the rendezvous points are distributed and managed.
+
+## Multicast DNS (mDNS)
+
+mDNS, or multicast Domain Name System, is a way for nodes to use IP multicast to publish and receive DNS records within a local network.
+
+- It allows devices on a local network to discover each other and communicate without the need for a centralized DNS server.
+- mDNS is used in various applications, such as:
+  - Zeroconf networking
+  - Apple's Bonjour service discovery
+  - Chromecast device discovery
+
+## Distributed Hash Tables (DHTs)
+
+Distributed Hash Tables (DHTs) are a decentralized mechanism for storing and retrieving key-value pairs in a distributed network.
+
+- A hash table is a set of records in which every record holds a key -> value mapping.
+- In a distributed hash table, the records are spread across the network, which means that every node holds a subset of records.
+- When searching for a specific record, we do not have a centralized registry; therefore, we must ask peers in the network until the record is found.
+- This search is not random however, but guided by the DHT distance metric.
+- The distance metric represents the distance between two IDs; therefore, it is a **logical distance**, not a physical distance.
+  - Example: `distance(nodeID1, nodeID2, C) = hash(nodeID1) XOR hash(nodeID2 + C)` where C is a random salt.
+    - Why distance?
+      - Preventing Eclipse attacks
+    - Why salt?
+      - Make pre-computation based attacks unhelpful.
+  - In distributed systems (most of blockchains) use public randomness beacons like drand.love.

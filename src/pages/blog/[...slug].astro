@@ -16,14 +16,29 @@ export async function getStaticPaths() {
 const { post } = Astro.props;
 const { Content } = await post.render();
 
-// Get author details (you can customize this based on your needs)
-const authorDetails = [
-  {
-    name: "Hamza El Idrissi",
-    avatar: "/stylish-owl.png", // Use a default avatar image
-    authorBioLink: "whoami",
-  },
-];
+const allAuthors = await getCollection("authors");
+
+let selectedAuthors = allAuthors.filter(
+  (entry) => entry.data.name === post.data.author
+);
+if (selectedAuthors.length === 0 && allAuthors.length > 0) {
+  selectedAuthors = allAuthors.slice(0, 1);
+}
+
+const authorDetails = selectedAuthors.map((entry) => {
+  const data: any = entry.data;
+  const avatarValue = data.avatar;
+  const avatar =
+    avatarValue && typeof avatarValue === "object" && "src" in avatarValue
+      ? avatarValue.src
+      : avatarValue;
+
+  return {
+    name: data.name,
+    avatar: avatar,
+    authorBioLink: data.authorBioLink ?? "whoami",
+  };
+});
 
 // Transform post data to match the expected interface
 const transformedPost = {
@@ -33,17 +48,10 @@ const transformedPost = {
   date: post.data.date,
   title: post.data.title,
   tags: post.data.tags || [],
-  ig: false,
-  bsky: false,
-  threads: false,
-  x: true,
-  fb: false,
-  reddit: false,
-  pinterest: false,
 };
 ---
 
-<RootLayout title={`${post.data.title} - Blog`}>
+<RootLayout>
   <PostLayout content={transformedPost} authorDetails={authorDetails}>
     <Content />
   </PostLayout>

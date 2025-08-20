@@ -12,7 +12,7 @@ const zBlog = ({ image }: SchemaContext) =>
     images: z.array(z.string()).optional(), // Relative paths like "./image.jpg"
     featuredImage: image().optional(), // For high-quality featured images
     draft: z.boolean().default(false),
-    author: z.string().optional(),
+    author: z.string().default("Hamza El Idrissi"),
     slug: z.string().optional(),
     state: z.enum(["draft", "published"]).default("published"),
   });

@@ -18,13 +18,6 @@ interface Post {
   date: string;
   title: string;
   tags?: string[];
-  ig?: boolean;
-  bsky?: boolean;
-  threads?: boolean;
-  x?: boolean;
-  fb?: boolean;
-  reddit?: boolean;
-  pinterest?: boolean;
 }
 
 interface Props {
@@ -156,7 +149,7 @@ const editUrl = (path: string) =>
                       <h2 class="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">
                         Previous Article
                       </h2>
-                      <div class="dark:text-teal-400 dark:hover:text-teal-500 text-primary-500 hover:text-primary-600">
+                      <div class="text-primary-500 hover:text-primary-600 dark:text-teal-400 dark:hover:text-teal-500">
                         <Link href={`/${prev.path}`}>{prev.title}</Link>
                       </div>
                     </div>
@@ -166,7 +159,7 @@ const editUrl = (path: string) =>
                       <h2 class="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">
                         Next Article
                       </h2>
-                      <div class="dark:text-teal-400 dark:hover:text-teal-500 text-primary-500 hover:text-primary-600">
+                      <div class="text-primary-500 hover:text-primary-600 dark:text-teal-400 dark:hover:text-teal-500">
                         <Link href={`/${next.path}`}>{next.title}</Link>
                       </div>
                     </div>
@@ -178,7 +171,7 @@ const editUrl = (path: string) =>
           <div class="pt-4 xl:pt-8">
             <Link
               href={`/${basePath}`}
-              className="dark:text-teal-400 dark:hover:text-teal-500 text-primary-500 hover:text-primary-600 hover:underline"
+              className="text-primary-500 hover:text-primary-600 hover:underline dark:text-teal-400 dark:hover:text-teal-500"
               aria-label="Back to the blog"
             >
               &larr; Back to the blog

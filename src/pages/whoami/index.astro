@@ -2,6 +2,8 @@
 import RootLayout from "@/layouts/RootLayout.astro";
 import AuthorLayout from "@/layouts/AuthorLayout.astro";
 import { getCollection } from "astro:content";
+import SEO from "@/components/seo/index.astro";
+import Schema from "@/components/structured-data/index.astro";
 
 // Load author from content collection (matches Next.js behavior of using default author)
 const authors = await getCollection("authors");
@@ -30,6 +32,12 @@ const authorForLayout = {
 ---
 
 <RootLayout>
+  <SEO
+    slot="seo"
+    title="Who am I?"
+    description="a developer who aims to evolve, innovate, and inspire through technology."
+  />
+  <Schema slot="ld+json" type="Person" />
   <AuthorLayout content={authorForLayout}>
     <Content />
   </AuthorLayout>

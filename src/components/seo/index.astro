@@ -30,15 +30,15 @@ const titleDefault =
 ---
 
 <SEO
-  title={title ?? ""}
+  title={`${title} | ${titleDefault}`}
   titleTemplate="%s | hmzelidrissi.ma"
   titleDefault={titleDefault}
-  description={description ?? ""}
+  description={description || titleDefault}
   noindex={noindex ?? false}
   nofollow={nofollow ?? false}
   openGraph={{
     basic: {
-      title: title ?? titleDefault,
+      title: title || titleDefault,
       type: "website",
       image: image,
       url: url ?? "",

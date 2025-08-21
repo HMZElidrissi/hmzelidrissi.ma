@@ -8,6 +8,8 @@ import {
   sortPostsByDate,
   resolvePostImages,
 } from "@/lib/utils-blog";
+import SEO from "@/components/seo/index.astro";
+import Schema from "@/components/structured-data/index.astro";
 
 export async function getStaticPaths() {
   const posts = await getCollection("blog", isPostPublished);
@@ -53,6 +55,8 @@ const pagePosts = transformedPosts.slice(start, end);
 ---
 
 <RootLayout>
+  <SEO slot="seo" title="Blog" />
+  <Schema slot="ld+json" type="WebSite" />
   <ListLayoutWithImages
     posts={pagePosts}
     pagination={{ totalPages: totalPages, currentPage: currentPage }}

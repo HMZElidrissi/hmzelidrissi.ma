@@ -3,12 +3,20 @@ import RootLayout from "@/layouts/RootLayout.astro";
 import Card from "@/components/ui/card.astro";
 import { getCollection } from "astro:content";
 import { resolveProjectImage } from "@/lib/utils-blog";
+import SEO from "@/components/seo/index.astro";
+import Schema from "@/components/structured-data/index.astro";
 
 const projects = await getCollection("projects");
 const sortedProjects = projects.sort((a, b) => a.data.index - b.data.index);
 ---
 
 <RootLayout>
+  <SEO
+    slot="seo"
+    title="Projects"
+    description="(a non-comprehensive list of) some of the things I help(ed) bring to life."
+  />
+  <Schema slot="ld+json" type="WebSite" />
   <div class="divide-y divide-gray-200 dark:divide-gray-700">
     <div class="space-y-2 pb-8 pt-6 md:space-y-5">
       <h1

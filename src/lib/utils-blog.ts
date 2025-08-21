@@ -71,25 +71,36 @@ export function getOriginalTagCase(
 
 /**
  * Resolve image paths for blog posts
- * Images are stored in the content directory, so we need to reference them correctly
+ * This function now works with Astro's image imports from content collections
  */
 export function resolvePostImages(post: CollectionEntry<"blog">): string[] {
-  // If the post has a featured image, use that as the primary image
-  if (post.data.featuredImage && post.data.featuredImage.src) {
-    return [post.data.featuredImage.src as string];
+  // If the post has a featured image object with src property
+  if (post.data.featuredImage) {
+    // Check if it's an ImageMetadata object or a string
+    if (
+      typeof post.data.featuredImage === "object" &&
+      "src" in post.data.featuredImage
+    ) {
+      return [post.data.featuredImage.src];
+    } else if (typeof post.data.featuredImage === "string") {
+      return [post.data.featuredImage];
+    }
   }
 
-  // If the post has images array, resolve the relative paths
+  // If the post has images array with ImageMetadata objects
   if (post.data.images && post.data.images.length > 0) {
-    return post.data.images.map((imagePath) => {
-      // Remove the ./ prefix if present
-      const cleanImagePath = imagePath.replace(/^\.\//, "");
-      // Construct the path to the image in the content directory
-      return `/src/content/blog/${post.id.split("/").slice(0, -1).join("/")}/${cleanImagePath}`;
+    return post.data.images.map((image) => {
+      // Check if it's an ImageMetadata object or a string
+      if (typeof image === "object" && "src" in image) {
+        return image.src;
+      } else if (typeof image === "string") {
+        return image;
+      }
+      return image;
     });
   }
 
-  // Default fallback image
+  // Default fallback image from public directory
   return ["/stylish-owl.png"];
 }
 
@@ -99,12 +110,17 @@ export function resolvePostImages(post: CollectionEntry<"blog">): string[] {
 export function resolveProjectImage(
   project: CollectionEntry<"projects">
 ): string {
-  // If the project has an imgSrc, resolve the relative path
+  // If the project has an imgSrc as ImageMetadata object
   if (project.data.imgSrc) {
-    // Remove the ./ prefix if present
-    const cleanImagePath = project.data.imgSrc.replace(/^\.\//, "");
-    // Construct the path to the image in the content directory
-    return `/src/content/projects/${project.id.split("/").slice(0, -1).join("/")}/${cleanImagePath}`;
+    // Check if it's an ImageMetadata object or a string
+    if (
+      typeof project.data.imgSrc === "object" &&
+      "src" in project.data.imgSrc
+    ) {
+      return project.data.imgSrc.src;
+    } else if (typeof project.data.imgSrc === "string") {
+      return project.data.imgSrc;
+    }
   }
 
   // Default fallback image

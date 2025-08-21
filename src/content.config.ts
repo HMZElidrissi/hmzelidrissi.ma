@@ -1,61 +1,48 @@
-import { defineCollection, z, type SchemaContext } from "astro:content";
+import { defineCollection, z } from "astro:content";
 
-// Define the blog post schema with proper image handling
-const zBlog = ({ image }: SchemaContext) =>
-  z.object({
-    title: z.string(),
-    date: z.string(), // Keep as string for compatibility
-    lastmod: z.string().optional(),
-    summary: z.string(),
-    excerpt: z.string().optional(),
-    tags: z.array(z.string()).optional(),
-    images: z.array(z.string()).optional(), // Relative paths like "./image.jpg"
-    featuredImage: image().optional(), // For high-quality featured images
-    draft: z.boolean().default(false),
-    author: z.string().default("Hamza El Idrissi"),
-    slug: z.string().optional(),
-    state: z.enum(["draft", "published"]).default("published"),
-  });
-
-// Define the author schema with proper image handling
-const zAuthor = ({ image }: SchemaContext) =>
-  z.object({
-    name: z.string(),
-    avatar: image().optional(), // Use Astro's image type for avatars
-    occupation: z.string().optional(),
-    authorBioLink: z.string().optional(),
-    updatedAt: z.string().optional(),
-    bio: z.string().optional(),
-    socials: z
-      .object({
-        twitter: z.string().optional(),
-        github: z.string().optional(),
-        linkedin: z.string().optional(),
-        website: z.string().optional(),
-      })
-      .optional(),
-  });
-
-// Define the project schema
-const zProject = z.object({
-  title: z.string(),
-  description: z.string(),
-  index: z.number(),
-  blog: z.string().optional(),
-  github: z.string().optional(),
-  link: z.string().optional(),
-  imgSrc: z.string().optional(),
-  technologies: z.array(z.string()).optional(),
+const blog = defineCollection({
+  type: "content",
+  schema: ({ image }) =>
+    z.object({
+      title: z.string(),
+      description: z.string().optional(),
+      summary: z.string(),
+      date: z.string(),
+      lastmod: z.string().optional(),
+      draft: z.boolean().optional().default(false),
+      tags: z.array(z.string()).default([]),
+      canonicalURL: z.string().optional(),
+      featuredImage: image().optional(),
+      images: z.array(image()).optional(),
+    }),
 });
 
-export const collections = {
-  blog: defineCollection({
-    schema: zBlog,
-  }),
-  authors: defineCollection({
-    schema: zAuthor,
-  }),
-  projects: defineCollection({
-    schema: zProject,
-  }),
-};
+const projects = defineCollection({
+  type: "content",
+  schema: ({ image }) =>
+    z.object({
+      title: z.string(),
+      description: z.string(),
+      demoURL: z.string().optional(),
+      repoURL: z.string().optional(),
+      imgSrc: image().optional(),
+    }),
+});
+
+const authors = defineCollection({
+  type: "content",
+  schema: ({ image }) =>
+    z.object({
+      name: z.string(),
+      avatar: image().optional(),
+      occupation: z.string().optional(),
+      company: z.string().optional(),
+      email: z.string().email().optional(),
+      twitter: z.string().optional(),
+      linkedin: z.string().optional(),
+      github: z.string().optional(),
+      layout: z.string().optional(),
+    }),
+});
+
+export const collections = { blog, projects, authors };

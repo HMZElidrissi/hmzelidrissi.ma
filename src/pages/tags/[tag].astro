@@ -7,22 +7,33 @@ import {
   isPostPublished,
   filterPostsByTag,
   getAllTags,
-} from "@/lib/utils";
+  getOriginalTagCase,
+  resolvePostImages,
+} from "@/lib/utils-blog";
 
 export async function getStaticPaths() {
   const posts = await getCollection("blog", isPostPublished);
   const tags = getAllTags(posts);
 
-  return tags.map((tag) => ({
-    params: { tag },
-    props: { tag, posts },
-  }));
+  return tags.map((normalizedTag) => {
+    // Convert normalized tag to hyphenated format for URL
+    const hyphenatedTag = normalizedTag.replace(/\s+/g, "-");
+
+    return {
+      params: { tag: hyphenatedTag },
+      props: { tag: hyphenatedTag, posts },
+    };
+  });
 }
 
 const { tag, posts } = Astro.props;
 
-// Filter posts by tag
-const filteredPosts = filterPostsByTag(posts, tag);
+// Get the original tag case for display
+const originalTag = getOriginalTagCase(posts, tag.replace(/-/g, " "));
+
+// Filter posts by tag (convert hyphenated tag back to normalized for filtering)
+const normalizedTag = tag.replace(/-/g, " ");
+const filteredPosts = filterPostsByTag(posts, normalizedTag);
 
 // Transform posts to match the expected interface
 const transformedPosts = filteredPosts.map((post) => ({
@@ -31,14 +42,10 @@ const transformedPosts = filteredPosts.map((post) => ({
   title: post.data.title,
   summary: post.data.summary,
   tags: post.data.tags || [],
+  images: resolvePostImages(post),
 }));
 ---
 
-<RootLayout title={`Posts tagged with "${tag}" - Blog`}>
-  <ListLayoutWithTags
-    posts={transformedPosts}
-    title={`Posts tagged with "${tag}"`}
-  >
-    <p>Here are all the blog posts tagged with <strong>{tag}</strong>.</p>
-  </ListLayoutWithTags>
+<RootLayout>
+  <ListLayoutWithTags title={originalTag} posts={transformedPosts} />
 </RootLayout>

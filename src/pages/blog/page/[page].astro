@@ -7,7 +7,7 @@ import {
   isPostPublished,
   sortPostsByDate,
   resolvePostImages,
-} from "@/lib/utils";
+} from "@/lib/utils-blog";
 
 export async function getStaticPaths() {
   const posts = await getCollection("blog", isPostPublished);

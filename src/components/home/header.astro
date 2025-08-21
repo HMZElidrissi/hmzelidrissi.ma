@@ -11,7 +11,7 @@ import LogoHeader from "@/components/home/logo-header";
 <header class="flex items-center justify-between py-10">
   <div>
     <a href="/" aria-label={siteMetadata.headerTitle} data-astro-reload>
-      <LogoHeader client:load />
+      <LogoHeader client:only="react" />
     </a>
   </div>
   <div class="flex items-center space-x-4 leading-5 sm:space-x-6">
@@ -27,9 +27,9 @@ import LogoHeader from "@/components/home/logo-header";
           </Link>
         ))
     }
-    <SearchButton client:load />
+    <SearchButton client:only="react" />
     <ThemeSwitch />
-    <MobileNav client:load />
+    <MobileNav client:only="react" />
   </div>
 </header>
 

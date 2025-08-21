@@ -36,11 +36,26 @@ const zAuthor = ({ image }: SchemaContext) =>
       .optional(),
   });
 
+// Define the project schema
+const zProject = z.object({
+  title: z.string(),
+  description: z.string(),
+  index: z.number(),
+  blog: z.string().optional(),
+  github: z.string().optional(),
+  link: z.string().optional(),
+  imgSrc: z.string().optional(),
+  technologies: z.array(z.string()).optional(),
+});
+
 export const collections = {
   blog: defineCollection({
     schema: zBlog,
   }),
   authors: defineCollection({
     schema: zAuthor,
+  }),
+  projects: defineCollection({
+    schema: zProject,
   }),
 };

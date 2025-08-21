@@ -1,0 +1,55 @@
+---
+import RootLayout from "@/layouts/RootLayout.astro";
+import BigTag from "@/components/ui/big-tag.astro";
+import { getCollection } from "astro:content";
+import {
+  isPostPublished,
+  getAllTags,
+  getOriginalTagCase,
+} from "@/lib/utils-blog";
+
+// Get all published posts and extract tags
+const posts = await getCollection("blog", isPostPublished);
+const allTags = getAllTags(posts).filter(Boolean);
+
+// Count posts per tag (case insensitive)
+const tagCounts: Record<string, number> = {};
+allTags.forEach((normalizedTag) => {
+  if (normalizedTag) {
+    tagCounts[normalizedTag] = posts.filter(
+      (post) =>
+        post.data.tags &&
+        post.data.tags.some((tag) => tag.toLowerCase() === normalizedTag)
+    ).length;
+  }
+});
+
+// Sort tags by count (descending)
+const sortedTags = Object.keys(tagCounts).sort(
+  (a, b) => (tagCounts[b] ?? 0) - (tagCounts[a] ?? 0)
+);
+---
+
+<RootLayout>
+  <div
+    class="flex flex-col items-start justify-start divide-y divide-gray-200 dark:divide-gray-700 md:mt-24 md:flex-row md:items-center md:justify-center md:space-x-6 md:divide-y-0"
+  >
+    <div class="space-x-2 pb-8 pt-6 md:space-y-5">
+      <h1
+        class="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:border-r-2 md:px-6 md:text-6xl md:leading-14"
+      >
+        topics
+      </h1>
+    </div>
+    <div class="flex max-w-lg flex-wrap gap-3">
+      {sortedTags.length === 0 && "No tags found."}
+      {
+        sortedTags.map((normalizedTag) => {
+          const count = tagCounts[normalizedTag] || 0;
+          const originalTag = getOriginalTagCase(posts, normalizedTag);
+          return <BigTag text={originalTag} count={count} />;
+        })
+      }
+    </div>
+  </div>
+</RootLayout>

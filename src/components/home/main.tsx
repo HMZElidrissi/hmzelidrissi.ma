@@ -1,4 +1,3 @@
-import { useRandomColorPair } from "@/lib/useRandomColorPair";
 import { siteMetadata } from "@/config/siteMetadata";
 import { OrbitingCircles } from "@/components/ui/orbiting-circles";
 import { RoughNotation } from "react-rough-notation";
@@ -17,13 +16,16 @@ import {
   GitlabCI,
 } from "@/components/icons";
 
-export default function Home() {
-  const [aboutColor, contactColor] = useRandomColorPair();
+interface MainProps {
+  aboutColor: string;
+  contactColor: string;
+}
 
+export default function Main({ aboutColor, contactColor }: MainProps) {
   return (
     <div className="banner relative flex flex-col justify-between px-4 py-6 fade-in dark:text-white lg:flex-row lg:items-center lg:py-10">
       <div className="absolute inset-0 z-0 lg:block">
-        <div className="absolute inset-0 bg-grid-pattern opacity-10"></div>
+        <div className="bg-grid-pattern absolute inset-0 opacity-10"></div>
       </div>
 
       <div className="lg:max-w-2xl">

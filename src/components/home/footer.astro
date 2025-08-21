@@ -1,6 +1,5 @@
 ---
 import { siteMetadata } from "@/config/siteMetadata";
-import Link from "@/components/ui/link.astro";
 import { Mail, Twitter, Linkedin, Github, Spotify } from "@/components/icons";
 ---
 
@@ -38,30 +37,7 @@ import { Mail, Twitter, Linkedin, Github, Spotify } from "@/components/icons";
       <div>{` • `}</div>
       <div>{`© ${new Date().getFullYear()}`}</div>
       <div>{` • `}</div>
-      <Link href="/">{siteMetadata.title}</Link>
+      <a href="/">{siteMetadata.title}</a>
     </div>
   </div>
 </footer>
-
-<!-- <style>
-  footer .social-link {
-    color: rgb(55 65 81) !important;
-    transition: color 0.2s ease-in-out !important;
-  }
-
-  footer .social-link:hover {
-    color: rgb(59 130 246) !important;
-  }
-
-  .dark footer .social-link {
-    color: rgb(229 231 235) !important;
-  }
-
-  .dark footer .social-link:hover {
-    color: rgb(96 165 250) !important;
-  }
-
-  footer .social-link svg {
-    fill: currentColor !important;
-  }
-</style> -->

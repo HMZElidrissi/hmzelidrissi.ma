@@ -1,7 +1,6 @@
 ---
 import { siteMetadata } from "@/config/siteMetadata";
 import { navigation } from "@/config/navigation";
-import Link from "@/components/ui/link.astro";
 import MobileNav from "@/components/home/mobile-nav";
 import ThemeSwitch from "@/components/home/theme-switch.astro";
 import SearchButton from "@/components/home/search-button";
@@ -19,12 +18,12 @@ import LogoHeader from "@/components/home/logo-header";
       navigation
         .filter((link) => link.href !== "/")
         .map((link) => (
-          <Link
+          <a
             href={link.href}
-            className="hidden font-medium text-gray-900 dark:text-gray-100 sm:block"
+            class="hidden font-medium text-gray-900 dark:text-gray-100 sm:block"
           >
             {link.title}
-          </Link>
+          </a>
         ))
     }
     <SearchButton client:only="react" />

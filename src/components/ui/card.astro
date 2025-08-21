@@ -1,6 +1,5 @@
 ---
-import Link from "./link.astro";
-import Image from "./image.astro";
+import Image from "@/components/ui/image.astro";
 
 interface Props {
   title: string;
@@ -12,134 +11,130 @@ interface Props {
   technologies?: string[];
 }
 
-const { title, description, imgSrc, github, link, blog, technologies } = Astro.props;
+const { title, description, imgSrc, github, link, blog, technologies } =
+  Astro.props;
 const primaryLink = link || github || blog;
 ---
 
-<div class="group flex h-full flex-col overflow-hidden rounded-xl border border-gray-200 bg-white shadow-lg transition-all duration-300 hover:shadow-xl dark:border-gray-700 dark:bg-gray-800/95">
-  {imgSrc ? (
-    <div class="relative h-48 overflow-hidden">
-              <Image
-          alt={title}
-          src={imgSrc}
-          className="h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-110"
-          width={544}
-          height={306}
-        />
-      <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
+<div
+  class="group flex h-full flex-col overflow-hidden rounded-xl border border-gray-200 bg-white shadow-lg transition-all duration-300 hover:shadow-xl dark:border-gray-700 dark:bg-gray-800/95"
+>
+  <div class="relative h-48 overflow-hidden">
+    <Image
+      alt={title}
+      src={imgSrc ?? ""}
+      className="h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-110"
+      width={544}
+      height={306}
+    />
+    <div
+      class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+    >
     </div>
-  ) : (
-    <div class="flex h-48 items-center justify-center bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-900">
-      <div class="flex flex-col items-center justify-center">
-        <div class="relative">
-          <svg
-            viewBox="0 0 100 60"
-            width="120"
-            height="60"
-            class="fill-primary-500 dark:fill-teal-400"
-          >
-            <!-- Circle background -->
-            <circle cx="50" cy="30" r="25" class="fill-primary-100 dark:fill-gray-700" />
-
-            <!-- Stylized "A" -->
-            <path d="M50 10 L65 50 H58 L53 40 H47 L42 50 H35 L50 10Z" />
-
-            <!-- Horizontal line in "A" -->
-            <path
-              d="M44 35 H56"
-              stroke="currentColor"
-              stroke-width="4"
-              class="stroke-primary-500 dark:stroke-teal-400"
-              fill="none"
-            />
-          </svg>
-
-          <!-- Shadow effect -->
-          <div class="absolute -bottom-1 left-0 right-0 h-4 bg-gradient-to-t from-gray-200/50 to-transparent dark:from-gray-700/30"></div>
-        </div>
-
-        <!-- ACME text with slight shadow -->
-        <div class="relative mt-3">
-          <span class="text-xl font-bold tracking-wider text-primary-700 dark:text-teal-300">
-            ACME
-          </span>
-          <span class="absolute left-0.5 top-0.5 -z-10 text-xl font-bold tracking-wider text-gray-400 opacity-40 blur-sm dark:text-gray-600">
-            ACME
-          </span>
-        </div>
-      </div>
-    </div>
-  )}
+  </div>
   <div class="flex flex-1 flex-col p-6">
     <div class="mb-6">
       <h2 class="mb-3 text-xl font-bold leading-8 tracking-tight">
-        {primaryLink ? (
-          <Link
-            href={primaryLink}
-            aria-label={`Link to ${title}`}
-            className="text-gray-900 transition-colors duration-300 hover:text-primary-500 dark:text-gray-100 dark:hover:text-teal-400"
-          >
-            {title}
-          </Link>
-        ) : (
-          title
-        )}
+        {
+          primaryLink ? (
+            <a
+              href={primaryLink}
+              aria-label={`Link to ${title}`}
+              class="text-gray-900 transition-colors duration-300 hover:text-primary-500 dark:text-gray-100 dark:hover:text-teal-400"
+            >
+              {title}
+            </a>
+          ) : (
+            title
+          )
+        }
       </h2>
-      <div class="mb-4 h-1 w-20 rounded-full bg-primary-500 transition-all duration-300 group-hover:w-32 dark:bg-teal-500"></div>
-      <p class="prose prose-sm text-gray-600 dark:text-gray-300">{description}</p>
+      <div
+        class="mb-4 h-1 w-20 rounded-full bg-primary-500 transition-all duration-300 group-hover:w-32 dark:bg-teal-500"
+      >
+      </div>
+      <p class="prose prose-sm text-gray-600 dark:text-gray-300">
+        {description}
+      </p>
     </div>
 
     <div class="flex-1 space-y-6">
-      {technologies && technologies.length > 0 && (
-        <div class="flex flex-wrap gap-2">
-          {technologies.map((techno) => (
-            <span
-              class="mb-1 mr-1 inline-flex items-center rounded-full bg-primary-400 px-3 py-1 text-xs font-medium text-white dark:bg-teal-900/30 dark:text-teal-300"
-            >
-              {techno}
-            </span>
-          ))}
-        </div>
-      )}
+      {
+        technologies && technologies.length > 0 && (
+          <div class="flex flex-wrap gap-2">
+            {technologies.map((techno) => (
+              <span class="mb-1 mr-1 inline-flex items-center rounded-full bg-primary-400 px-3 py-1 text-xs font-medium text-white dark:bg-teal-900/30 dark:text-teal-300">
+                {techno}
+              </span>
+            ))}
+          </div>
+        )
+      }
     </div>
 
     <div class="mt-6 flex flex-wrap gap-2">
-      {github && (
-        <Link
-          href={github}
-          className="inline-flex items-center rounded-lg bg-gray-100 px-4 py-2 text-sm font-medium text-gray-800 transition-colors duration-300 hover:bg-gray-200 dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600"
-          aria-label={`GitHub repository for ${title}`}
-        >
-          <svg class="mr-2 h-4 w-4 fill-current" viewBox="0 0 24 24">
-            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-          </svg>
-          GitHub
-        </Link>
-      )}
-      {link && (
-        <Link
-          href={link}
-          className="inline-flex items-center rounded-lg bg-primary-500 px-4 py-2 text-sm font-medium text-white transition-colors duration-300 hover:bg-primary-600 dark:bg-teal-600 dark:hover:bg-teal-500"
-          aria-label={`Live demo for ${title}`}
-        >
-          <svg class="mr-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
-          </svg>
-          Visit Project
-        </Link>
-      )}
-      {blog && (
-        <Link
-          href={blog}
-          className="inline-flex items-center rounded-lg bg-gray-100 px-4 py-2 text-sm font-medium text-gray-800 transition-colors duration-300 hover:bg-gray-200 dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600"
-          aria-label={`Blog post about ${title}`}
-        >
-          <svg class="mr-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
-          </svg>
-          Blog
-        </Link>
-      )}
+      {
+        github && (
+          <a
+            href={github}
+            class="inline-flex items-center rounded-lg bg-gray-100 px-4 py-2 text-sm font-medium text-gray-800 transition-colors duration-300 hover:bg-gray-200 dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600"
+            aria-label={`GitHub repository for ${title}`}
+          >
+            <svg class="mr-2 h-4 w-4 fill-current" viewBox="0 0 24 24">
+              <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+            </svg>
+            GitHub
+          </a>
+        )
+      }
+      {
+        link && (
+          <a
+            href={link}
+            class="inline-flex items-center rounded-lg bg-primary-500 px-4 py-2 text-sm font-medium text-white transition-colors duration-300 hover:bg-primary-600 dark:bg-teal-600 dark:hover:bg-teal-500"
+            aria-label={`Live demo for ${title}`}
+          >
+            <svg
+              class="mr-2 h-4 w-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+              />
+            </svg>
+            Visit Project
+          </a>
+        )
+      }
+      {
+        blog && (
+          <a
+            href={blog}
+            class="inline-flex items-center rounded-lg bg-gray-100 px-4 py-2 text-sm font-medium text-gray-800 transition-colors duration-300 hover:bg-gray-200 dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600"
+            aria-label={`Blog post about ${title}`}
+          >
+            <svg
+              class="mr-2 h-4 w-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
+              />
+            </svg>
+            Blog
+          </a>
+        )
+      }
     </div>
   </div>
 </div>

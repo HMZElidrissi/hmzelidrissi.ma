@@ -1,6 +1,4 @@
 ---
-import Link from "./link.astro";
-
 interface Props {
   text: string;
   count?: number;
@@ -10,18 +8,18 @@ const { text, count } = Astro.props;
 const normalizedTag = text.toLowerCase();
 ---
 
-<Link
+<a
   href={`/tags/${normalizedTag.replace(/\s+/g, "-")}`}
-  className="group relative inline-flex items-center overflow-hidden"
+  class="group relative inline-flex items-center overflow-hidden"
 >
   <span
     class="hover:bg-primary-50 relative z-10 inline-flex items-center overflow-hidden rounded-l-full border border-primary-200 px-4 py-1.5 text-sm font-medium uppercase tracking-wide text-primary-600 transition-all duration-300 hover:border-primary-300 hover:text-primary-700 dark:border-teal-800 dark:text-teal-300 dark:hover:border-teal-700 dark:hover:bg-teal-900/20 dark:hover:text-teal-200"
   >
     <span>{text.split(" ").join("-")}</span>
-    <div
+    <span
       class="absolute inset-0 h-full w-full translate-x-[-100%] bg-gradient-to-r from-transparent via-primary-100/40 to-transparent transition-transform duration-300 group-hover:translate-x-[100%] dark:via-teal-500/5"
     >
-    </div>
+    </span>
   </span>
   {
     count !== undefined && (
@@ -30,4 +28,4 @@ const normalizedTag = text.toLowerCase();
       </span>
     )
   }
-</Link>
+</a>

@@ -18,5 +18,9 @@ const [aboutColor, contactColor] = colors[random] ?? colors[0]!;
 <RootLayout>
   <SEO slot="seo" />
   <Schema slot="ld+json" type="WebSite" />
-  <Main client:only="react" aboutColor={aboutColor} contactColor={contactColor} />
+  <Main
+    client:only="react"
+    aboutColor={aboutColor}
+    contactColor={contactColor}
+  />
 </RootLayout>

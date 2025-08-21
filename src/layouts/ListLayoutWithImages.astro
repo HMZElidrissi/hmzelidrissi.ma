@@ -1,6 +1,5 @@
 ---
 import Image from "@/components/ui/image.astro";
-import Link from "@/components/ui/link.astro";
 import Tag from "@/components/ui/tag.astro";
 import BlogHeader from "@/components/home/blog-header";
 
@@ -50,9 +49,9 @@ const listPosts = showFeatured ? restPosts : nonDraftPosts;
       featuredPost && (
         <div class="mb-12 overflow-hidden rounded-xl bg-gradient-to-br from-gray-50 to-white shadow-xl transition duration-300 ease-in-out hover:shadow-2xl dark:border-gray-800 dark:from-gray-900 dark:to-gray-800">
           <article class="grid grid-cols-1 gap-0 md:grid-cols-2">
-            <Link
+            <a
               href={`/blog/${featuredPost.slug}`}
-              className="group relative h-full overflow-hidden"
+              class="group relative h-full overflow-hidden"
             >
               <Image
                 src={featuredPost.images[0] ?? ""}
@@ -62,7 +61,7 @@ const listPosts = showFeatured ? restPosts : nonDraftPosts;
                 height={600}
               />
               <div class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 transition duration-300 group-hover:opacity-100" />
-            </Link>
+            </a>
             <div class="flex flex-col justify-between p-8 md:p-10">
               <div>
                 <div class="mb-4 flex flex-wrap gap-2">
@@ -71,12 +70,12 @@ const listPosts = showFeatured ? restPosts : nonDraftPosts;
                   ))}
                 </div>
                 <h2 class="mb-4 text-3xl font-bold leading-tight tracking-tight">
-                  <Link
+                  <a
                     href={`/blog/${featuredPost.slug}`}
-                    className="text-gray-900 hover:text-primary-500 dark:text-gray-100 dark:hover:text-teal-400"
+                    class="text-gray-900 hover:text-primary-500 dark:text-gray-100 dark:hover:text-teal-400"
                   >
                     {featuredPost.title}
-                  </Link>
+                  </a>
                 </h2>
                 <div class="mb-4 flex items-center text-sm text-gray-500 dark:text-gray-400">
                   <svg
@@ -100,9 +99,9 @@ const listPosts = showFeatured ? restPosts : nonDraftPosts;
                   {featuredPost.summary}
                 </p>
               </div>
-              <Link
+              <a
                 href={`/blog/${featuredPost.slug}`}
-                className="mt-auto inline-flex items-center justify-center rounded-lg bg-gray-100 px-4 py-2 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-gray-700"
+                class="mt-auto inline-flex items-center justify-center rounded-lg bg-gray-100 px-4 py-2 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-gray-700"
               >
                 Read Featured Article
                 <svg
@@ -118,7 +117,7 @@ const listPosts = showFeatured ? restPosts : nonDraftPosts;
                     d="M14 5l7 7m0 0l-7 7m7-7H3"
                   />
                 </svg>
-              </Link>
+              </a>
             </div>
           </article>
         </div>
@@ -135,9 +134,9 @@ const listPosts = showFeatured ? restPosts : nonDraftPosts;
             const { slug, date, title, summary, tags, images } = post;
             return (
               <article class="group flex flex-col overflow-hidden rounded-xl bg-gradient-to-br from-gray-50 to-white shadow-lg transition duration-300 hover:shadow-xl dark:border-gray-800 dark:from-gray-900 dark:to-gray-800">
-                <Link
+                <a
                   href={`/blog/${slug}`}
-                  className="relative h-48 overflow-hidden"
+                  class="relative h-48 overflow-hidden"
                 >
                   <Image
                     src={images[0] ?? ""}
@@ -147,7 +146,7 @@ const listPosts = showFeatured ? restPosts : nonDraftPosts;
                     height={200}
                   />
                   <div class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 transition duration-300 group-hover:opacity-100" />
-                </Link>
+                </a>
                 <div class="flex flex-grow flex-col p-6">
                   <div class="mb-3 flex flex-wrap gap-2">
                     {tags.map((tag) => (
@@ -155,12 +154,12 @@ const listPosts = showFeatured ? restPosts : nonDraftPosts;
                     ))}
                   </div>
                   <h3 class="mb-3 text-xl font-bold leading-tight">
-                    <Link
+                    <a
                       href={`/blog/${slug}`}
-                      className="text-gray-900 hover:text-primary-500 dark:text-gray-100 dark:hover:text-teal-400"
+                      class="text-gray-900 hover:text-primary-500 dark:text-gray-100 dark:hover:text-teal-400"
                     >
                       {title}
-                    </Link>
+                    </a>
                   </h3>
                   <div class="mb-3 flex items-center text-sm text-gray-500 dark:text-gray-400">
                     <svg
@@ -181,9 +180,9 @@ const listPosts = showFeatured ? restPosts : nonDraftPosts;
                   <p class="prose mb-4 line-clamp-4 flex-grow text-sm text-gray-600 dark:text-gray-300">
                     {summary}
                   </p>
-                  <Link
+                  <a
                     href={`/blog/${slug}`}
-                    className="mt-auto inline-flex items-center justify-center rounded-lg bg-gray-100 px-4 py-2 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-gray-700"
+                    class="mt-auto inline-flex items-center justify-center rounded-lg bg-gray-100 px-4 py-2 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-gray-700"
                   >
                     Read more
                     <svg
@@ -199,7 +198,7 @@ const listPosts = showFeatured ? restPosts : nonDraftPosts;
                         d="M14 5l7 7m0 0l-7 7m7-7H3"
                       />
                     </svg>
-                  </Link>
+                  </a>
                 </div>
               </article>
             );

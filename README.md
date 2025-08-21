@@ -1,5 +1,5 @@
 <div align="center">
-  <img alt="Logo" src="/public/static/images/logo.svg" width="100px" />
+  <img alt="Logo" src="/public/logo.svg" width="100px" />
 </div>
 <h1 align="center">
   hmzelidrissi.ma

@@ -1,5 +1,4 @@
 ---
-import Link from "@/components/ui/link.astro";
 import Tag from "@/components/ui/tag.astro";
 
 interface Post {
@@ -63,9 +62,9 @@ function formatDate(date: string, locale: string = "en-US") {
           >
             <li class="flex items-center space-x-2 pt-8">
               <span class="text-gray-500 dark:text-gray-400">•</span>
-              <Link href="/" className="text-gray-900 dark:text-gray-100">
+              <a href="/" class="text-gray-900 dark:text-gray-100">
                 Back to the blog
-              </Link>
+              </a>
             </li>
           </ul>
         </dd>

@@ -1,6 +1,5 @@
 ---
 import Image from "@/components/ui/image.astro";
-import Link from "@/components/ui/link.astro";
 import PageTitle from "@/components/ui/page-title.astro";
 import SectionContainer from "@/components/ui/section-container.astro";
 import Tag from "@/components/ui/tag.astro";
@@ -43,7 +42,7 @@ function formatDate(date: string, locale: string = "en-US") {
 }
 
 const editUrl = (path: string) =>
-  `https://github.com/hmzelidrissi/hmzelidrissi.ma/blob/main/data/${path}`;
+  `https://github.com/hmzelidrissi/hmzelidrissi.ma/blob/main/src/content/blog/${path}`;
 ---
 
 <SectionContainer>
@@ -95,12 +94,12 @@ const editUrl = (path: string) =>
                       <dt class="sr-only">Name</dt>
                       <dd class="text-gray-900 dark:text-gray-100">
                         by{" "}
-                        <Link
+                        <a
                           href={`/${author.authorBioLink}`}
-                          className="text-primary-500 hover:text-primary-600 dark:text-teal-400 dark:hover:text-teal-500"
+                          class="text-primary-500 hover:text-primary-600 dark:text-teal-400 dark:hover:text-teal-500"
                         >
                           {author.name}
-                        </Link>
+                        </a>
                       </dd>
                     </dl>
                   </li>
@@ -150,7 +149,7 @@ const editUrl = (path: string) =>
                         Previous Article
                       </h2>
                       <div class="text-primary-500 hover:text-primary-600 dark:text-teal-400 dark:hover:text-teal-500">
-                        <Link href={`/${prev.path}`}>{prev.title}</Link>
+                        <a href={`/${prev.path}`}>{prev.title}</a>
                       </div>
                     </div>
                   )}
@@ -160,7 +159,7 @@ const editUrl = (path: string) =>
                         Next Article
                       </h2>
                       <div class="text-primary-500 hover:text-primary-600 dark:text-teal-400 dark:hover:text-teal-500">
-                        <Link href={`/${next.path}`}>{next.title}</Link>
+                        <a href={`/${next.path}`}>{next.title}</a>
                       </div>
                     </div>
                   )}
@@ -169,13 +168,13 @@ const editUrl = (path: string) =>
             }
           </div>
           <div class="pt-4 xl:pt-8">
-            <Link
+            <a
               href={`/${basePath}`}
-              className="text-primary-500 hover:text-primary-600 hover:underline dark:text-teal-400 dark:hover:text-teal-500"
+              class="text-primary-500 hover:text-primary-600 hover:underline dark:text-teal-400 dark:hover:text-teal-500"
               aria-label="Back to the blog"
             >
               &larr; Back to the blog
-            </Link>
+            </a>
           </div>
         </footer>
       </div>

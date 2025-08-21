@@ -23,8 +23,11 @@ const projects = defineCollection({
     z.object({
       title: z.string(),
       description: z.string(),
-      demoURL: z.string().optional(),
-      repoURL: z.string().optional(),
+      index: z.number(),
+      link: z.string().optional(),
+      github: z.string().optional(),
+      blog: z.string().optional(),
+      technologies: z.array(z.string()).optional(),
       imgSrc: image().optional(),
     }),
 });

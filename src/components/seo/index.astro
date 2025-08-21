@@ -17,7 +17,7 @@ interface Props
 const {
   title,
   description = "hmzelidrissi.ma – A developer who aims to evolve, innovate, and inspire through technology.",
-  image = new URL("/og-image.jpg", Astro.site).toString(),
+  image = new URL("/og-image.png", Astro.site).toString(),
   imageAlt,
   noindex = false,
   nofollow = false,
@@ -30,7 +30,7 @@ const titleDefault =
 ---
 
 <SEO
-  title={`${title} | ${titleDefault}`}
+  title={title ? `${title} | ${titleDefault}` : titleDefault}
   titleTemplate="%s | hmzelidrissi.ma"
   titleDefault={titleDefault}
   description={description || titleDefault}

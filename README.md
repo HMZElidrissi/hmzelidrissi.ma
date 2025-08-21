@@ -5,11 +5,11 @@
   hmzelidrissi.ma
 </h1>
 
-This is the source code for my personal portfolio hosted on Cloudflare Pages at https://hmzelidrissi.ma. The blog is developed with Astro.
+This is the source code for my personal website hosted on Vercel at https://hmzelidrissi.ma. The project is developed with Astro.
 
 ## Description
 
-My personal portfolio is a platform where I share my projects, thoughts, ideas, experiences, and insights on various topics that interest me. It serves as a space for me to express myself, connect with others, and contribute to meaningful discussions within the community.
+My personal website is a platform where I share my projects, thoughts, ideas, experiences, and insights on various topics that interest me. It serves as a space for me to express myself, connect with others, and contribute to meaningful discussions within the community.
 
 ## Deployment
 

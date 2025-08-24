@@ -3,7 +3,7 @@ import { siteMetadata } from "@/config/siteMetadata";
 import { navigation } from "@/config/navigation";
 import MobileNav from "@/components/home/mobile-nav";
 import ThemeSwitch from "@/components/home/theme-switch.astro";
-import SearchButton from "@/components/home/search-button";
+import SearchButton from "../search/search-button";
 import LogoHeader from "@/components/home/logo-header";
 ---
 
@@ -26,9 +26,11 @@ import LogoHeader from "@/components/home/logo-header";
           </a>
         ))
     }
-    <SearchButton client:only="react" />
-    <ThemeSwitch />
-    <MobileNav client:only="react" />
+    <div class="flex items-center space-x-2">
+      <SearchButton client:only="react" />
+      <ThemeSwitch />
+      <MobileNav client:only="react" />
+    </div>
   </div>
 </header>
 

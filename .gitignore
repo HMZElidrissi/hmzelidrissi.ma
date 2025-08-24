@@ -1,5 +1,9 @@
 # build output
 dist/
+.vercel/
+
+# pagefind search index
+_pagefind/
 
 # generated types
 .astro/

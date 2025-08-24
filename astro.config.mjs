@@ -5,8 +5,8 @@ import tailwind from "@astrojs/tailwind";
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
 import robotsTxt from "astro-robots-txt";
-
 import vercel from "@astrojs/vercel";
+import { pagefindCopier } from "./pagefind-copier";
 
 // https://astro.build/config
 export default defineConfig({
@@ -26,6 +26,7 @@ export default defineConfig({
     sitemap(),
     robotsTxt(),
     vercel(),
+    pagefindCopier(),
   ],
   adapter: vercel({
     webAnalytics: {

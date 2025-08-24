@@ -5,13 +5,12 @@ import tailwind from "@astrojs/tailwind";
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
 import robotsTxt from "astro-robots-txt";
-import vercel from "@astrojs/vercel";
+import vercel from "@astrojs/vercel/static";
 
 // https://astro.build/config
 export default defineConfig({
   site: "https://hmzelidrissi.ma",
   trailingSlash: "ignore",
-  output: "server",
 
   experimental: {
     contentIntellisense: true,
@@ -25,7 +24,6 @@ export default defineConfig({
     mdx(),
     sitemap(),
     robotsTxt(),
-    vercel(),
   ],
   adapter: vercel({
     webAnalytics: {

@@ -13,6 +13,8 @@ import {
 import SEO from "@/components/seo/index.astro";
 import Schema from "@/components/structured-data/index.astro";
 
+export const prerender = true;
+
 export async function getStaticPaths() {
   const posts = await getCollection("blog", isPostPublished);
   const tags = getAllTags(posts);

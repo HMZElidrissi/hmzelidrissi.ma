@@ -14,6 +14,7 @@ const blog = defineCollection({
       canonicalURL: z.string().optional(),
       featuredImage: image().optional(),
       images: z.array(image()).optional(),
+      author: z.string().optional().default("Hamza El Idrissi"),
     }),
 });
 

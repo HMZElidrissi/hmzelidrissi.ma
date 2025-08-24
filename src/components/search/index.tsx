@@ -51,7 +51,7 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
         // Load Pagefind script dynamically with ES module import
         try {
           const pagefindModule = await import(
-            /* @vite-ignore */ "/_pagefind/pagefind.js" as any
+            /* @vite-ignore */ "/" + "_pagefind/pagefind.js"
           );
           if (pagefindModule?.init && pagefindModule?.search) {
             await pagefindModule.init();

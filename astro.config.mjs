@@ -25,17 +25,11 @@ export default defineConfig({
     mdx(),
     sitemap(),
     robotsTxt(),
+    vercel(),
   ],
   adapter: vercel({
     webAnalytics: {
       enabled: true,
     },
   }),
-  vite: {
-    build: {
-      rollupOptions: {
-        external: ["/_pagefind/pagefind.js"],
-      },
-    },
-  },
 });

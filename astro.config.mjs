@@ -11,6 +11,7 @@ import vercel from "@astrojs/vercel";
 export default defineConfig({
   site: "https://hmzelidrissi.ma",
   trailingSlash: "ignore",
+  output: "server",
 
   experimental: {
     contentIntellisense: true,

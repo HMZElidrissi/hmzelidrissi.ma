@@ -50,7 +50,9 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
 
         // Load Pagefind script dynamically with ES module import
         try {
-          const pagefindModule = await import("/_pagefind/pagefind.js" as any);
+          const pagefindModule = await import(
+            /* @vite-ignore */ "/" + "pagefind/pagefind.js"
+          );
           if (pagefindModule?.init && pagefindModule?.search) {
             await pagefindModule.init();
             setPagefind(pagefindModule);
@@ -144,7 +146,8 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
                 const full = await r.data();
                 const cleanUrl = full.url
                   .replace(/^\/?dist\//, "/")
-                  .replace(/^\/?\.vercel\/output\/static\//, "/");
+                  .replace(/^\/?\.vercel\/output\/static\//, "/")
+                  .replace(/^\/?pagefind\//, "/");
 
                 return {
                   url: cleanUrl,

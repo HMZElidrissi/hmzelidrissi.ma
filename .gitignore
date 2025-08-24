@@ -3,7 +3,7 @@ dist/
 .vercel/
 
 # pagefind search index
-_pagefind/
+pagefind/
 
 # generated types
 .astro/

@@ -1,0 +1,41 @@
+{
+  "version": 2,
+  "name": "hmzelidrissi.ma",
+  "buildCommand": "node scripts/build-with-search.js",
+  "outputDirectory": "dist",
+  "installCommand": "npm install",
+  "framework": null,
+  "headers": [
+    {
+      "source": "/_pagefind/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/_pagefind/pagefind-entry.json",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=300"
+        },
+        {
+          "key": "Content-Type",
+          "value": "application/json"
+        }
+      ]
+    }
+  ],
+  "routes": [
+    {
+      "src": "/_pagefind/(.*)",
+      "dest": "/_pagefind/$1",
+      "headers": {
+        "cache-control": "public, max-age=31536000, immutable"
+      }
+    }
+  ]
+}

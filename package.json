@@ -6,7 +6,7 @@
     "dev": "astro dev",
     "build": "astro build",
     "postbuild": "npx pagefind --site dist --output-subdir _pagefind",
-    "generate-search": "npx pagefind --site . --output-subdir _pagefind",
+    "generate:search": "npx pagefind --site . --output-subdir _pagefind",
     "preview": "astro preview",
     "astro": "astro",
     "check": "astro check",

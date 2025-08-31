@@ -21,7 +21,7 @@ const { Content } = await post.render();
 const allAuthors = await getCollection("authors");
 
 let selectedAuthors = allAuthors.filter(
-  (entry) => entry.data.name === post.data.author
+  (entry) => entry.data.name === "Hamza El Idrissi"
 );
 if (selectedAuthors.length === 0 && allAuthors.length > 0) {
   selectedAuthors = allAuthors.slice(0, 1);

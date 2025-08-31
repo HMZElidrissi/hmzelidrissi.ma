@@ -45,8 +45,10 @@ export default defineConfig({
     optimizeDeps: {
       exclude: ["pagefind"],
     },
-    ssr: {
-      noExternal: ["pagefind"],
+    build: {
+      rollupOptions: {
+        external: ["/_pagefind/pagefind.js"],
+      },
     },
   },
 });

@@ -24,6 +24,7 @@ declare global {
     pagefind?: {
       init: () => Promise<any>;
       search: (query: string) => Promise<any>;
+      options?: (options: { basePath?: string }) => Promise<any>;
     };
     init?: () => Promise<any>;
   }
@@ -54,7 +55,8 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
             /* @vite-ignore */ "/" + "_pagefind/pagefind.js"
           );
           if (pagefindModule?.init && pagefindModule?.search) {
-            await pagefindModule.init();
+            // Initialize Pagefind with basePath to avoid the warning
+            await pagefindModule.init(undefined, { basePath: "/_pagefind/" });
             setPagefind(pagefindModule);
           } else {
             console.error(

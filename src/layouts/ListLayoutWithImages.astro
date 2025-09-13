@@ -134,10 +134,7 @@ const listPosts = showFeatured ? restPosts : nonDraftPosts;
             const { slug, date, title, summary, tags, images } = post;
             return (
               <article class="group flex flex-col overflow-hidden rounded-xl bg-gradient-to-br from-gray-50 to-white shadow-lg transition duration-300 hover:shadow-xl dark:border-gray-800 dark:from-gray-900 dark:to-gray-800">
-                <a
-                  href={`/blog/${slug}`}
-                  class="relative h-48 overflow-hidden"
-                >
+                <a href={`/blog/${slug}`} class="relative h-48 overflow-hidden">
                   <Image
                     src={images[0] ?? ""}
                     alt={title}

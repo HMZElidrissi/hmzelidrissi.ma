@@ -22,7 +22,7 @@ export default function MobileNav() {
       <button
         aria-label="Toggle Menu"
         onClick={onToggleNav}
-        className="sm:hidden p-2"
+        className="p-2 sm:hidden"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"

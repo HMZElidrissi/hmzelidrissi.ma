@@ -21,6 +21,7 @@ import LogoHeader from "@/components/home/logo-header";
           <a
             href={link.href}
             class="hidden font-medium text-gray-900 dark:text-gray-100 sm:block"
+            {...(link.href === "/blog" ? { "data-astro-reload": true } : {})}
           >
             {link.title}
           </a>

@@ -11,7 +11,7 @@ export const siteMetadata = {
   siteRepo: "https://github.com/HMZElidrissi/hmzelidrissi.ma",
   siteLogo: "./logo.svg",
   socialBanner: "./twitter-card.png",
-  email: "hamza.ezzharelidrissi1@gmail.com",
+  email: "hi@hmzelidrissi.ma",
   github: "https://github.com/HMZElidrissi",
   twitter: "https://x.com/HMZElidrissi",
   linkedin: "https://www.linkedin.com/in/hmzelidrissi",

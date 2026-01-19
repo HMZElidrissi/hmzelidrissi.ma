@@ -1,0 +1,4 @@
+# Redirects/Rewrites configuration for Cloudflare Pages
+# Equivalent to vercel.json rewrites
+
+/pagefind/* /_pagefind/:splat 200

@@ -1,0 +1,9 @@
+# Headers configuration for Cloudflare Pages
+# Equivalent to vercel.json headers
+
+/_pagefind/pagefind-entry.json
+  Cache-Control: public, max-age=300
+  Content-Type: application/json
+
+/_pagefind/*
+  Cache-Control: public, max-age=31536000, immutable

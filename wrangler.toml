@@ -1,0 +1,17 @@
+name = "hmzelidrissi-ma"
+compatibility_date = "2024-01-01"
+pages_build_output_dir = "dist"
+
+# Build configuration (equivalent to vercel.json buildCommand)
+[build]
+command = "pnpm build"
+cwd = "."
+
+# Install command (equivalent to vercel.json installCommand)
+# Note: Cloudflare Pages automatically runs install based on package manager detection
+
+[env.production]
+name = "hmzelidrissi-ma"
+
+[env.preview]
+name = "hmzelidrissi-ma-preview"

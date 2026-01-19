@@ -8,6 +8,8 @@ import robotsTxt from "astro-robots-txt";
 import vercel from "@astrojs/vercel";
 import pagefindIntegration from "./integrations/pagefind";
 
+import cloudflare from "@astrojs/cloudflare";
+
 // https://astro.build/config
 export default defineConfig({
   site: "https://hmzelidrissi.ma",
@@ -30,11 +32,7 @@ export default defineConfig({
       outputSubdir: "_pagefind",
     }),
   ],
-  adapter: vercel({
-    webAnalytics: {
-      enabled: true,
-    },
-  }),
+  adapter: cloudflare(),
   markdown: {
     shikiConfig: {
       theme: "github-dark-dimmed",

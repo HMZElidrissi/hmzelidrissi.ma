@@ -9,7 +9,9 @@
   "files.associations": {
     "*.astro": "astro",
     "*.astro.ts": "typescriptreact",
-    "*.tsx": "typescriptreact"
+    "*.tsx": "typescriptreact",
+    "**/_headers": "plaintext",
+    "**/public/_headers": "plaintext"
   },
 
   // Enable for specific file types
@@ -42,5 +44,23 @@
   },
   "[html]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
-  }
+  },
+
+  // Disable YAML validation for Cloudflare headers file
+  "yaml.validate": true,
+  "yaml.customTags": [],
+  "[yaml]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[plaintext]": {
+    "editor.defaultFormatter": null,
+    "editor.quickSuggestions": {
+      "other": false,
+      "comments": false,
+      "strings": false
+    }
+  },
+
+  // Disable diagnostics for _headers file (Cloudflare Pages format, not YAML)
+  "problems.showCurrentInStatus": true
 }

@@ -1,9 +1,72 @@
 # Headers configuration for Cloudflare Pages
-# Equivalent to vercel.json headers
 
+# Pagefind search assets
 /_pagefind/pagefind-entry.json
   Cache-Control: public, max-age=300
   Content-Type: application/json
 
 /_pagefind/*
   Cache-Control: public, max-age=31536000, immutable
+
+# Static assets with content hashes (immutable)
+/_astro/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Images
+/*.jpg
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.jpeg
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.png
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.webp
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.gif
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.svg
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.avif
+  Cache-Control: public, max-age=31536000, immutable
+
+# Fonts
+/*.woff
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.woff2
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.ttf
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.otf
+  Cache-Control: public, max-age=31536000, immutable
+
+# CSS and JavaScript
+/*.css
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.js
+  Cache-Control: public, max-age=31536000, immutable
+
+# HTML files - shorter cache for dynamic content
+/*.html
+  Cache-Control: public, max-age=3600, must-revalidate
+
+# Other static assets
+/*.ico
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.xml
+  Cache-Control: public, max-age=3600
+
+/*.txt
+  Cache-Control: public, max-age=3600
+
+/*.json
+  Cache-Control: public, max-age=3600

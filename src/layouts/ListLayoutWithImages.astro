@@ -51,7 +51,7 @@ const listPosts = showFeatured ? restPosts : nonDraftPosts;
           <article class="grid grid-cols-1 gap-0 md:grid-cols-2">
             <a
               href={`/blog/${featuredPost.slug}`}
-              class="group relative h-full overflow-hidden"
+              class="group relative h-64 overflow-hidden md:h-full"
             >
               <Image
                 src={featuredPost.images[0] ?? ""}

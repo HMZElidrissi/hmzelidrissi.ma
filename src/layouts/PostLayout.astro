@@ -49,11 +49,11 @@ const editUrl = (path: string) =>
   <article>
     <div class="xl:divide-y xl:divide-border">
       <header>
-        <div class="space-y-1 border-b border-border pb-10 text-center">
+        <div class="space-y-4 border-b border-border pb-10 pt-10 text-center">
           <dl>
-            <div class="flex items-center justify-center space-x-2">
+            <div>
               <dt class="sr-only">Published on</dt>
-              <dd class="text-sm font-medium leading-6 text-muted-foreground">
+              <dd class="text-sm font-mono uppercase tracking-tight text-muted-foreground">
                 <time datetime={date}>{formatDate(date)}</time>
               </dd>
             </div>
@@ -84,13 +84,13 @@ const editUrl = (path: string) =>
                         className="h-10 w-10 rounded-full"
                       />
                     )}
-                    <dl class="whitespace-nowrap text-sm font-medium leading-5">
+                    <dl class="whitespace-nowrap font-mono text-sm leading-5">
                       <dt class="sr-only">Name</dt>
                       <dd class="text-muted-foreground">
                         <span class="mr-1">by</span>
                         <a
                           href={`/${author.authorBioLink}`}
-                          class="font-medium text-foreground transition-colors hover:text-muted-foreground"
+                          class="font-medium text-foreground transition-colors hover:text-muted-foreground underline decoration-border underline-offset-4 hover:decoration-foreground"
                         >
                           {author.name}
                         </a>
@@ -111,7 +111,7 @@ const editUrl = (path: string) =>
               href={editUrl(filePath)}
               target="_blank"
               rel="noopener noreferrer"
-              class="inline-flex items-center gap-1 font-medium text-muted-foreground transition-colors hover:text-foreground"
+              class="inline-flex items-center gap-1 font-mono text-sm text-muted-foreground transition-colors hover:text-foreground"
             >
               View on GitHub
               <svg
@@ -134,21 +134,10 @@ const editUrl = (path: string) =>
           <div class="pt-4 xl:pt-8">
             <a
               href={`/${basePath}`}
-              class="inline-flex items-center gap-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+              class="inline-flex items-center gap-2 font-mono text-sm text-muted-foreground transition-colors hover:text-foreground"
               aria-label="Back to the blog"
             >
-              <svg
-                class="h-4 w-4"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
-              </svg>
+              <span class="font-mono text-muted-foreground">&larr;</span>
               Back to the blog
             </a>
           </div>
@@ -158,10 +147,10 @@ const editUrl = (path: string) =>
             {
               tags && (
                 <div class="py-4 xl:py-8">
-                  <h2 class="mb-2 text-xs uppercase tracking-wide text-muted-foreground">
+                  <h2 class="mb-2 font-mono text-xs uppercase tracking-tight text-muted-foreground">
                     Tags
                   </h2>
-                  <div class="flex flex-wrap gap-2">
+                  <div class="mt-2 flex flex-wrap gap-2">
                     {tags.map((tag) => (
                       <Tag text={tag} />
                     ))}
@@ -174,12 +163,12 @@ const editUrl = (path: string) =>
                 <div class="flex justify-between py-4 xl:block xl:space-y-8 xl:py-8">
                   {prev && prev.path && (
                     <div class="group relative">
-                      <h2 class="mb-1 text-xs uppercase tracking-wide text-muted-foreground">
+                      <h2 class="mb-1 font-mono text-xs uppercase tracking-tight text-muted-foreground">
                         Previous Article
                       </h2>
                       <a
                         href={`/${prev.path}`}
-                        class="block font-medium text-foreground transition-colors group-hover:text-muted-foreground"
+                        class="block font-medium text-foreground transition-colors group-hover:text-muted-foreground underline decoration-border underline-offset-4 hover:decoration-muted-foreground"
                       >
                         &larr; {prev.title}
                       </a>
@@ -187,12 +176,12 @@ const editUrl = (path: string) =>
                   )}
                   {next && next.path && (
                     <div class="group relative">
-                      <h2 class="mb-1 text-xs uppercase tracking-wide text-muted-foreground">
+                      <h2 class="mb-1 font-mono text-xs uppercase tracking-tight text-muted-foreground">
                         Next Article
                       </h2>
                       <a
                         href={`/${next.path}`}
-                        class="block font-medium text-foreground transition-colors group-hover:text-muted-foreground"
+                        class="block font-medium text-foreground transition-colors group-hover:text-muted-foreground underline decoration-border underline-offset-4 hover:decoration-muted-foreground"
                       >
                         {next.title} &rarr;
                       </a>

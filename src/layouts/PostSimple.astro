@@ -28,19 +28,19 @@ function formatDate(date: string, locale: string = "en-US") {
 
 <article>
   <div class="xl:divide-y xl:divide-border">
-    <header class="pt-6 xl:pb-6">
-      <div class="space-y-1 text-center">
-        <dl class="space-y-10">
+    <header class="pt-10 xl:pb-6">
+      <div class="space-y-4 text-center">
+        <dl>
           <div>
             <dt class="sr-only">Published on</dt>
-            <dd class="text-base font-medium leading-6 text-muted-foreground">
+            <dd class="text-sm font-mono uppercase tracking-tight text-muted-foreground">
               <time datetime={date}>{formatDate(date)}</time>
             </dd>
           </div>
         </dl>
         <div>
           <h1
-            class="text-3xl font-extrabold leading-9 tracking-tight text-foreground sm:text-4xl sm:leading-10 md:text-5xl md:leading-14"
+            class="text-3xl font-bold tracking-tight text-foreground sm:text-4xl md:text-5xl lg:text-6xl"
           >
             {title}
           </h1>
@@ -57,10 +57,10 @@ function formatDate(date: string, locale: string = "en-US") {
             class="flex flex-wrap justify-center gap-4 xl:flex-col xl:justify-start xl:space-y-8"
           >
             <li class="flex items-center space-x-2 pt-8">
-              <span class="text-muted-foreground">•</span>
+              <span class="font-mono text-muted-foreground">&larr;</span>
               <a
                 href="/"
-                class="text-foreground transition-colors hover:text-violet-600 dark:hover:text-violet-400"
+                class="font-mono text-sm text-muted-foreground transition-colors hover:text-foreground"
               >
                 Back to the blog
               </a>
@@ -79,12 +79,12 @@ function formatDate(date: string, locale: string = "en-US") {
             {
               tags && (
                 <div class="py-4 xl:py-8">
-                  <h2 class="text-xs uppercase tracking-wide text-muted-foreground">
+                  <h2 class="font-mono text-xs uppercase tracking-tight text-muted-foreground">
                     Tags
                   </h2>
-                  <div class="flex flex-wrap">
+                  <div class="mt-2 flex flex-wrap gap-2">
                     {tags.map((tag) => (
-                      <Tag text={tag} className="mr-3 mt-3" />
+                      <Tag text={tag} />
                     ))}
                   </div>
                 </div>

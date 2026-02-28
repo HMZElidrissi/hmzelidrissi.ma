@@ -1,6 +1,5 @@
 import { siteMetadata } from "@/config/siteMetadata";
 import { useEffect, useState } from "react";
-import { RoughNotation } from "react-rough-notation";
 
 export default function LogoHeader() {
   const [showNotation, setShowNotation] = useState(false);
@@ -82,18 +81,16 @@ export default function LogoHeader() {
           </g>
         </svg>
       </div>
-      <RoughNotation
-        type="underline"
-        show={showNotation}
-        color="hsl(var(--foreground))"
-        strokeWidth={2}
-        animationDuration={1000}
-        padding={4}
-      >
+      <div className="relative inline-block">
         <div className="hidden text-sm font-medium sm:block">
           {siteMetadata.headerTitle}
         </div>
-      </RoughNotation>
+        {showNotation && (
+          <span
+            className="absolute -bottom-1 left-0 h-[2px] w-full origin-left scale-x-0 animate-[highlight_1s_ease-out_forwards] rounded-full bg-foreground"
+          />
+        )}
+      </div>
     </div>
   );
 }

@@ -14,7 +14,6 @@ import {
   Jenkins,
   GitlabCI,
 } from "@/components/icons";
-import { RoughNotation } from "react-rough-notation";
 import { navigate } from "astro:transitions/client";
 
 interface MainProps {
@@ -37,8 +36,9 @@ export default function Main({ aboutColor, contactColor }: MainProps) {
         </h1>
 
         <p className="mt-4 text-lg font-medium text-muted-foreground lg:text-xl">
-          DevOps <span className="font-bold text-violet-500">·</span> Cloud{" "}
-          <span className="font-bold text-violet-500">·</span> Software Engineer
+          DevOps <span className="mx-1 font-bold text-muted-foreground">·</span>{" "}
+          Cloud <span className="mx-1 font-bold text-muted-foreground">·</span>{" "}
+          Software Engineer
         </p>
 
         <p className="mt-3 max-w-md text-base leading-relaxed text-muted-foreground">
@@ -60,15 +60,13 @@ export default function Main({ aboutColor, contactColor }: MainProps) {
                 }
               }}
             >
-              <RoughNotation
-                show
-                type="highlight"
-                animationDelay={250}
-                animationDuration={2000}
-                color={aboutColor}
-              >
-                about me
-              </RoughNotation>
+              <span className="relative inline-block px-1">
+                <span
+                  className="absolute inset-0 -z-10 origin-left -rotate-1 scale-x-0 animate-[highlight_2s_ease-out_250ms_forwards] rounded-[255px_15px_225px_15px/15px_225px_15px_255px]"
+                  style={{ backgroundColor: aboutColor }}
+                />
+                <span className="text-background relative z-10">about me</span>
+              </span>
             </a>
           </span>
           or
@@ -77,15 +75,15 @@ export default function Main({ aboutColor, contactColor }: MainProps) {
               className="ml-2 font-normal text-background"
               href={`mailto:${siteMetadata.email}`}
             >
-              <RoughNotation
-                show
-                type="highlight"
-                animationDelay={250}
-                animationDuration={2000}
-                color={contactColor}
-              >
-                contact me
-              </RoughNotation>
+              <span className="relative inline-block px-1">
+                <span
+                  className="absolute inset-0 -z-10 origin-left -rotate-1 scale-x-0 animate-[highlight_2s_ease-out_250ms_forwards] rounded-[255px_15px_225px_15px/15px_225px_15px_255px]"
+                  style={{ backgroundColor: contactColor }}
+                />
+                <span className="text-background relative z-10">
+                  contact me
+                </span>
+              </span>
             </a>
           </span>
         </div>

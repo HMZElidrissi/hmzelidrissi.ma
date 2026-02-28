@@ -42,7 +42,7 @@ const primaryLink = link || github || gitlab || blog;
               <a
                 href={primaryLink}
                 aria-label={`Link to ${title}`}
-                class="text-foreground transition-colors duration-300 hover:text-violet-600 dark:hover:text-violet-400"
+                class="text-foreground transition-colors duration-300 hover:text-muted-foreground"
               >
                 {title}
               </a>
@@ -52,7 +52,7 @@ const primaryLink = link || github || gitlab || blog;
           }
         </h2>
         <div
-          class="mb-4 h-1 w-20 rounded-full bg-violet-600 transition-all duration-300 group-hover:w-32 dark:bg-violet-500"
+          class="mb-4 h-1 w-20 rounded-full bg-foreground transition-all duration-300 group-hover:w-32"
         >
         </div>
         <p class="prose prose-sm text-muted-foreground">

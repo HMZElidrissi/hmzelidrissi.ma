@@ -116,6 +116,10 @@ export default {
           "0%": { opacity: "0", transform: "translateY(8px)" },
           "100%": { opacity: "1", transform: "translateY(0)" },
         },
+        highlight: {
+          "0%": { transform: "scaleX(0) rotate(-1deg)" },
+          "100%": { transform: "scaleX(1) rotate(-1deg)" },
+        },
       },
       backgroundSize: {
         "grid-sm": "100px 100px",

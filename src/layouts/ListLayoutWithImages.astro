@@ -47,7 +47,7 @@ const listPosts = showFeatured ? restPosts : nonDraftPosts;
 
     {
       featuredPost && (
-        <div class="mb-12 overflow-hidden rounded-xl bg-card border border-border shadow-md transition-all duration-300 ease-in-out hover:shadow-lg">
+        <div class="mb-12 overflow-hidden rounded-xl border border-border bg-card shadow-md transition-all duration-300 ease-in-out hover:shadow-lg">
           <article class="grid grid-cols-1 gap-0 md:grid-cols-2">
             <a
               href={`/blog/${featuredPost.slug}`}
@@ -101,7 +101,7 @@ const listPosts = showFeatured ? restPosts : nonDraftPosts;
               </div>
               <a
                 href={`/blog/${featuredPost.slug}`}
-                class="mt-auto inline-flex items-center justify-center rounded-lg bg-muted border border-border px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-accent"
+                class="mt-auto inline-flex items-center justify-center rounded-lg border border-border bg-muted px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-accent"
               >
                 Read Featured Article
                 <svg
@@ -125,9 +125,7 @@ const listPosts = showFeatured ? restPosts : nonDraftPosts;
     }
 
     <div class="mt-12">
-      <h2 class="mb-8 text-2xl font-bold text-foreground">
-        Latest Posts
-      </h2>
+      <h2 class="mb-8 text-2xl font-bold text-foreground">Latest Posts</h2>
       <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
         {
           listPosts.map((post) => {
@@ -179,7 +177,7 @@ const listPosts = showFeatured ? restPosts : nonDraftPosts;
                   </p>
                   <a
                     href={`/blog/${slug}`}
-                    class="mt-auto inline-flex items-center justify-center rounded-lg bg-muted border border-border px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-accent"
+                    class="mt-auto inline-flex items-center justify-center rounded-lg border border-border bg-muted px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-accent"
                   >
                     Read more
                     <svg
@@ -216,7 +214,7 @@ const listPosts = showFeatured ? restPosts : nonDraftPosts;
                     : `/blog/page/${pagination.currentPage - 1}`
                 }
                 rel="prev"
-                class="text-violet-600 hover:text-violet-700 dark:text-violet-400 dark:hover:text-violet-300 transition-colors"
+                class="text-violet-600 transition-colors hover:text-violet-700 dark:text-violet-400 dark:hover:text-violet-300"
               >
                 Previous
               </a>
@@ -232,7 +230,7 @@ const listPosts = showFeatured ? restPosts : nonDraftPosts;
               <a
                 href={`/blog/page/${pagination.currentPage + 1}`}
                 rel="next"
-                class="text-violet-600 hover:text-violet-700 dark:text-violet-400 dark:hover:text-violet-300 transition-colors"
+                class="text-violet-600 transition-colors hover:text-violet-700 dark:text-violet-400 dark:hover:text-violet-300"
               >
                 Next
               </a>

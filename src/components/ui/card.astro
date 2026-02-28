@@ -35,47 +35,50 @@ const primaryLink = link || github || blog;
   <div class="flex flex-1 flex-col">
     <div class="flex flex-1 flex-col p-6 pb-8">
       <div class="mb-6">
-      <h2 class="mb-3 text-xl font-bold leading-8 tracking-tight">
+        <h2 class="mb-3 text-xl font-bold leading-8 tracking-tight">
+          {
+            primaryLink ? (
+              <a
+                href={primaryLink}
+                aria-label={`Link to ${title}`}
+                class="text-foreground transition-colors duration-300 hover:text-violet-600 dark:hover:text-violet-400"
+              >
+                {title}
+              </a>
+            ) : (
+              title
+            )
+          }
+        </h2>
+        <div
+          class="mb-4 h-1 w-20 rounded-full bg-violet-600 transition-all duration-300 group-hover:w-32 dark:bg-violet-500"
+        >
+        </div>
+        <p class="prose prose-sm text-muted-foreground">
+          {description}
+        </p>
+      </div>
+
+      <div class="flex-1 space-y-6">
         {
-          primaryLink ? (
-            <a
-              href={primaryLink}
-              aria-label={`Link to ${title}`}
-              class="text-foreground transition-colors duration-300 hover:text-violet-600 dark:hover:text-violet-400"
-            >
-              {title}
-            </a>
-          ) : (
-            title
+          technologies && technologies.length > 0 && (
+            <div class="flex flex-wrap gap-2">
+              {technologies.map((techno) => (
+                <span class="inline-flex items-center gap-1 rounded-md border border-border bg-muted px-2 py-0.5 text-xs font-medium text-muted-foreground">
+                  <span class="font-mono text-[10px] text-foreground/30">
+                    #
+                  </span>
+                  <span>{techno.split(" ").join("-")}</span>
+                </span>
+              ))}
+            </div>
           )
         }
-      </h2>
-      <div
-        class="mb-4 h-1 w-20 rounded-full bg-violet-600 transition-all duration-300 group-hover:w-32 dark:bg-violet-500"
-      >
       </div>
-      <p class="prose prose-sm text-muted-foreground">
-        {description}
-      </p>
     </div>
-
-    <div class="flex-1 space-y-6">
-      {
-        technologies && technologies.length > 0 && (
-          <div class="flex flex-wrap gap-2">
-            {technologies.map((techno) => (
-              <span class="inline-flex items-center gap-1 rounded-md border border-violet-200 bg-violet-50 px-2 py-0.5 text-xs font-medium text-violet-700 dark:border-violet-800/60 dark:bg-violet-900/30 dark:text-violet-300">
-                <span class="font-mono text-[10px] text-violet-500/60 dark:text-violet-400/60">#</span>
-                <span>{techno.split(" ").join("-")}</span>
-              </span>
-            ))}
-          </div>
-        )
-      }
-    </div>
-
-    </div>
-    <div class="flex flex-wrap gap-2 border-t border-border bg-muted/40 px-6 py-4 mt-auto">
+    <div
+      class="mt-auto flex flex-wrap gap-2 border-t border-border bg-muted/40 px-6 py-4"
+    >
       {
         github && (
           <a

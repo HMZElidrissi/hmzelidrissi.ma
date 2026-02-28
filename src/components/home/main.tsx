@@ -24,9 +24,10 @@ interface MainProps {
 
 export default function Main({ aboutColor, contactColor }: MainProps) {
   return (
-    <div className="banner relative flex flex-col justify-between px-4 py-8 lg:flex-row lg:items-center lg:py-16">      {/* Hero copy */}
+    <div className="banner relative flex flex-col justify-between px-4 py-8 lg:flex-row lg:items-center lg:py-16">
+      {" "}
+      {/* Hero copy */}
       <div className="relative z-10 lg:max-w-xl">
-
         <h1 className="text-4xl font-bold tracking-tight text-foreground lg:text-6xl">
           Hi, I&apos;m{" "}
           <span className="inline-block">
@@ -50,7 +51,7 @@ export default function Main({ aboutColor, contactColor }: MainProps) {
           <span className="text-nowrap">Read more</span>
           <span className="text-nowrap">
             <a
-              className="ml-2 mr-2 font-normal text-white"
+              className="ml-2 mr-2 font-normal text-background"
               href="/whoami"
               onClick={(e) => {
                 e.preventDefault();
@@ -73,7 +74,7 @@ export default function Main({ aboutColor, contactColor }: MainProps) {
           or
           <span className="text-nowrap text-muted-foreground">
             <a
-              className="ml-2 font-normal text-white"
+              className="ml-2 font-normal text-background"
               href={`mailto:${siteMetadata.email}`}
             >
               <RoughNotation
@@ -89,7 +90,6 @@ export default function Main({ aboutColor, contactColor }: MainProps) {
           </span>
         </div>
       </div>
-
       {/* Orbiting tech stack — unchanged, works with any theme */}
       <div className="relative z-10 mt-12 flex justify-center lg:mt-0 lg:justify-end">
         {/* Mobile variant */}

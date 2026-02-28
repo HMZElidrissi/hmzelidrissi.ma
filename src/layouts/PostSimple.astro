@@ -33,9 +33,7 @@ function formatDate(date: string, locale: string = "en-US") {
         <dl class="space-y-10">
           <div>
             <dt class="sr-only">Published on</dt>
-            <dd
-              class="text-base font-medium leading-6 text-muted-foreground"
-            >
+            <dd class="text-base font-medium leading-6 text-muted-foreground">
               <time datetime={date}>{formatDate(date)}</time>
             </dd>
           </div>
@@ -52,9 +50,7 @@ function formatDate(date: string, locale: string = "en-US") {
     <div
       class="divide-y divide-border pb-8 xl:grid xl:grid-cols-4 xl:gap-x-6 xl:divide-y-0"
     >
-      <dl
-        class="pb-8 pt-6 xl:col-span-1 xl:border-b xl:border-border xl:pt-11"
-      >
+      <dl class="pb-8 pt-6 xl:col-span-1 xl:border-b xl:border-border xl:pt-11">
         <dt class="sr-only">Authors</dt>
         <dd>
           <ul
@@ -62,16 +58,17 @@ function formatDate(date: string, locale: string = "en-US") {
           >
             <li class="flex items-center space-x-2 pt-8">
               <span class="text-muted-foreground">•</span>
-              <a href="/" class="text-foreground transition-colors hover:text-violet-600 dark:hover:text-violet-400">
+              <a
+                href="/"
+                class="text-foreground transition-colors hover:text-violet-600 dark:hover:text-violet-400"
+              >
                 Back to the blog
               </a>
             </li>
           </ul>
         </dd>
       </dl>
-      <div
-        class="divide-y divide-border xl:col-span-3 xl:row-span-2 xl:pb-0"
-      >
+      <div class="divide-y divide-border xl:col-span-3 xl:row-span-2 xl:pb-0">
         <div class="prose max-w-none pb-8 pt-10 dark:prose-invert">
           <slot />
         </div>

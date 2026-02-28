@@ -13,7 +13,7 @@ const normalizedTag = text.toLowerCase();
   class="group inline-flex items-center gap-1.5 rounded-md border border-border bg-muted px-3 py-1 text-sm font-medium text-muted-foreground transition-colors duration-150 hover:border-foreground/30 hover:bg-accent hover:text-foreground"
 >
   <span class="font-mono text-xs text-foreground/30">#</span>
-  <span class="tracking-wide uppercase">{text.split(" ").join("-")}</span>
+  <span class="uppercase tracking-wide">{text.split(" ").join("-")}</span>
   {
     count !== undefined && (
       <span class="ml-1 rounded-sm bg-foreground/10 px-1.5 py-0.5 text-xs font-medium text-foreground transition-colors duration-150 group-hover:bg-foreground group-hover:text-background">

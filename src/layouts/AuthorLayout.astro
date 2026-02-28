@@ -43,11 +43,7 @@ const { name, avatar, occupation, updatedAt } = content;
       <h3 class="pb-2 pt-4 text-2xl font-bold leading-8 tracking-tight">
         {name}
       </h3>
-      {
-        occupation && (
-          <div class="text-muted-foreground">{occupation}</div>
-        )
-      }
+      {occupation && <div class="text-muted-foreground">{occupation}</div>}
     </div>
     <div class="prose max-w-none pb-8 pt-8 dark:prose-invert xl:col-span-2">
       <slot />

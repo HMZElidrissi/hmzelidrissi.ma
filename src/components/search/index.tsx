@@ -210,7 +210,7 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
     <div className="fixed inset-0 z-50 flex items-start justify-center bg-black bg-opacity-50 pt-20">
       <div
         ref={modalRef}
-        className="relative mx-4 max-h-[80vh] w-full max-w-2xl overflow-hidden rounded-lg bg-card shadow-2xl border border-border"
+        className="relative mx-4 max-h-[80vh] w-full max-w-2xl overflow-hidden rounded-lg border border-border bg-card shadow-2xl"
       >
         {/* Search Input */}
         <div className="flex items-center border-b border-border p-4">
@@ -237,7 +237,7 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
           />
           <button
             onClick={onClose}
-            className="ml-3 text-muted-foreground hover:text-foreground transition-colors"
+            className="ml-3 text-muted-foreground transition-colors hover:text-foreground"
           >
             <svg
               className="h-5 w-5"
@@ -262,9 +262,7 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
               <div className="text-red-500 dark:text-red-400 mb-2">
                 ⚠️ Search Unavailable
               </div>
-              <div className="mb-4 text-sm text-foreground">
-                {searchError}
-              </div>
+              <div className="mb-4 text-sm text-foreground">{searchError}</div>
               {searchError.includes("Run 'pnpm generate-search'") && (
                 <div className="text-blue-600 dark:text-blue-400 text-sm">
                   <strong>How to fix:</strong>

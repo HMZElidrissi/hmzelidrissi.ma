@@ -93,17 +93,11 @@ function normalizeTagForURL(tag: string): string {
   <div class="flex flex-col gap-8 lg:flex-row lg:gap-12">
     <div class="w-full lg:w-64">
       <div class="sticky top-8">
-        <div
-          class="overflow-hidden rounded-md border border-border bg-card"
-        >
-          <div
-            class="border-b border-border px-4 py-3"
-          >
+        <div class="overflow-hidden rounded-md border border-border bg-card">
+          <div class="border-b border-border px-4 py-3">
             {
               currentPath.startsWith("/blog") ? (
-                <h3 class="text-sm font-semibold text-foreground">
-                  All Posts
-                </h3>
+                <h3 class="text-sm font-semibold text-foreground">All Posts</h3>
               ) : (
                 <a
                   href="/blog"
@@ -185,7 +179,11 @@ function normalizeTagForURL(tag: string): string {
     <!-- Main content area -->
     <div class="flex-1">
       <ul class="divide-y divide-border">
-        {displayPosts.length === 0 && <p class="py-8 text-sm text-muted-foreground">No posts found.</p>}
+        {
+          displayPosts.length === 0 && (
+            <p class="py-8 text-sm text-muted-foreground">No posts found.</p>
+          )
+        }
         {
           displayPosts.map((post) => {
             const { path, date, title, summary, tags, images } = post;
@@ -193,7 +191,10 @@ function normalizeTagForURL(tag: string): string {
               <li class="group py-8 first:pt-0">
                 <article>
                   {images && images[0] && (
-                    <a href={`/${path}`} class="mb-4 block overflow-hidden rounded-md border border-border">
+                    <a
+                      href={`/${path}`}
+                      class="mb-4 block overflow-hidden rounded-md border border-border"
+                    >
                       <img
                         src={images[0]}
                         alt={title}
@@ -268,7 +269,10 @@ function normalizeTagForURL(tag: string): string {
                   ← Previous
                 </a>
               ) : (
-                <button class="inline-flex items-center gap-1 rounded-md border border-border px-3 py-1.5 text-sm font-medium text-muted-foreground opacity-40" disabled>
+                <button
+                  class="inline-flex items-center gap-1 rounded-md border border-border px-3 py-1.5 text-sm font-medium text-muted-foreground opacity-40"
+                  disabled
+                >
                   ← Previous
                 </button>
               )}
@@ -284,7 +288,10 @@ function normalizeTagForURL(tag: string): string {
                   Next →
                 </a>
               ) : (
-                <button class="inline-flex items-center gap-1 rounded-md border border-border px-3 py-1.5 text-sm font-medium text-muted-foreground opacity-40" disabled>
+                <button
+                  class="inline-flex items-center gap-1 rounded-md border border-border px-3 py-1.5 text-sm font-medium text-muted-foreground opacity-40"
+                  disabled
+                >
                   Next →
                 </button>
               )}

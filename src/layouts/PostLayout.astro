@@ -49,15 +49,11 @@ const editUrl = (path: string) =>
   <article>
     <div class="xl:divide-y xl:divide-border">
       <header>
-        <div
-          class="space-y-1 border-b border-border pb-10 text-center"
-        >
+        <div class="space-y-1 border-b border-border pb-10 text-center">
           <dl>
             <div class="flex items-center justify-center space-x-2">
               <dt class="sr-only">Published on</dt>
-              <dd
-                class="text-base font-medium leading-6 text-muted-foreground"
-              >
+              <dd class="text-sm font-medium leading-6 text-muted-foreground">
                 <time datetime={date}>{formatDate(date)}</time>
               </dd>
             </div>
@@ -70,9 +66,7 @@ const editUrl = (path: string) =>
       <div
         class="grid-rows-[auto_1fr] divide-y divide-border pb-8 xl:grid xl:grid-cols-4 xl:gap-x-6 xl:divide-y-0"
       >
-        <dl
-          class="pb-10 pt-6 xl:border-b xl:border-border xl:pt-11"
-        >
+        <dl class="pb-10 pt-6 xl:border-b xl:border-border xl:pt-11">
           <dt class="sr-only">Authors</dt>
           <dd>
             <ul
@@ -92,11 +86,11 @@ const editUrl = (path: string) =>
                     )}
                     <dl class="whitespace-nowrap text-sm font-medium leading-5">
                       <dt class="sr-only">Name</dt>
-                      <dd class="text-foreground">
-                        by{" "}
+                      <dd class="text-muted-foreground">
+                        <span class="mr-1">by</span>
                         <a
                           href={`/${author.authorBioLink}`}
-                          class="text-foreground underline decoration-border underline-offset-2 transition-colors hover:decoration-foreground"
+                          class="font-medium text-foreground transition-colors hover:text-muted-foreground"
                         >
                           {author.name}
                         </a>
@@ -108,35 +102,68 @@ const editUrl = (path: string) =>
             </ul>
           </dd>
         </dl>
-        <div
-          class="divide-y divide-border xl:col-span-3 xl:row-span-2 xl:pb-0"
-        >
+        <div class="divide-y divide-border xl:col-span-3 xl:row-span-2 xl:pb-0">
           <div class="prose max-w-none pb-8 pt-10 dark:prose-invert">
             <slot />
           </div>
-          <div class="pb-6 pt-6 text-sm text-muted-foreground">
+          <div class="pb-6 pt-6 text-sm">
             <a
               href={editUrl(filePath)}
               target="_blank"
               rel="noopener noreferrer"
-              class="text-foreground underline decoration-border underline-offset-2 transition-colors hover:decoration-foreground"
-            >View on GitHub</a
+              class="inline-flex items-center gap-1 font-medium text-muted-foreground transition-colors hover:text-foreground"
             >
+              View on GitHub
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-3 w-3"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+              >
+                <path
+                  d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"
+                ></path>
+                <path
+                  d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"
+                ></path>
+              </svg>
+            </a>
           </div>
         </div>
         <footer>
+          <div class="pt-4 xl:pt-8">
+            <a
+              href={`/${basePath}`}
+              class="inline-flex items-center gap-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+              aria-label="Back to the blog"
+            >
+              <svg
+                class="h-4 w-4"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+              </svg>
+              Back to the blog
+            </a>
+          </div>
           <div
             class="divide-border text-sm font-medium leading-5 xl:col-start-1 xl:row-start-2 xl:divide-y"
           >
             {
               tags && (
                 <div class="py-4 xl:py-8">
-                  <h2 class="text-xs uppercase tracking-wide text-muted-foreground">
+                  <h2 class="mb-2 text-xs uppercase tracking-wide text-muted-foreground">
                     Tags
                   </h2>
-                  <div class="flex flex-wrap">
+                  <div class="flex flex-wrap gap-2">
                     {tags.map((tag) => (
-                      <Tag text={tag} className="mb-0.5" />
+                      <Tag text={tag} />
                     ))}
                   </div>
                 </div>
@@ -146,37 +173,34 @@ const editUrl = (path: string) =>
               (next || prev) && (
                 <div class="flex justify-between py-4 xl:block xl:space-y-8 xl:py-8">
                   {prev && prev.path && (
-                    <div>
-                      <h2 class="text-xs uppercase tracking-wide text-muted-foreground">
+                    <div class="group relative">
+                      <h2 class="mb-1 text-xs uppercase tracking-wide text-muted-foreground">
                         Previous Article
                       </h2>
-                      <div class="text-foreground underline decoration-border underline-offset-2 transition-colors hover:decoration-foreground">
-                        <a href={`/${prev.path}`}>{prev.title}</a>
-                      </div>
+                      <a
+                        href={`/${prev.path}`}
+                        class="block font-medium text-foreground transition-colors group-hover:text-muted-foreground"
+                      >
+                        &larr; {prev.title}
+                      </a>
                     </div>
                   )}
                   {next && next.path && (
-                    <div>
-                      <h2 class="text-xs uppercase tracking-wide text-muted-foreground">
+                    <div class="group relative">
+                      <h2 class="mb-1 text-xs uppercase tracking-wide text-muted-foreground">
                         Next Article
                       </h2>
-                      <div class="text-foreground underline decoration-border underline-offset-2 transition-colors hover:decoration-foreground">
-                        <a href={`/${next.path}`}>{next.title}</a>
-                      </div>
+                      <a
+                        href={`/${next.path}`}
+                        class="block font-medium text-foreground transition-colors group-hover:text-muted-foreground"
+                      >
+                        {next.title} &rarr;
+                      </a>
                     </div>
                   )}
                 </div>
               )
             }
-          </div>
-          <div class="pt-4 xl:pt-8">
-            <a
-              href={`/${basePath}`}
-              class="text-foreground underline decoration-border underline-offset-2 transition-colors hover:decoration-foreground"
-              aria-label="Back to the blog"
-            >
-              &larr; Back to the blog
-            </a>
           </div>
         </footer>
       </div>

@@ -26,6 +26,7 @@ const projects = defineCollection({
       index: z.number(),
       link: z.string().optional(),
       github: z.string().optional(),
+      gitlab: z.string().optional(),
       blog: z.string().optional(),
       technologies: z.array(z.string()).optional(),
       imgSrc: image().optional(),

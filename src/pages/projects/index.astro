@@ -42,6 +42,7 @@ const sortedProjects = projects.sort((a, b) => a.data.index - b.data.index);
               props.imgSrc = resolveProjectImage(project);
             if (project.data.link) props.link = project.data.link;
             if (project.data.github) props.github = project.data.github;
+            if (project.data.gitlab) props.gitlab = project.data.gitlab;
             if (project.data.blog) props.blog = project.data.blog;
             if (project.data.technologies)
               props.technologies = project.data.technologies;

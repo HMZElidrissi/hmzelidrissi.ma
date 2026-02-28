@@ -8,7 +8,7 @@ export default function SearchButton() {
     <>
       <button
         onClick={() => setIsSearchOpen(true)}
-        className="relative rounded-md p-2 transition-colors hover:bg-gray-100 dark:hover:bg-gray-800"
+        className="relative rounded-md p-2 transition-colors hover:bg-muted"
         aria-label="Search"
       >
         <svg
@@ -17,7 +17,7 @@ export default function SearchButton() {
           viewBox="0 0 24 24"
           strokeWidth={1.5}
           stroke="currentColor"
-          className="h-6 w-6 text-gray-900 dark:text-gray-100"
+          className="h-6 w-6 text-foreground"
         >
           <path
             strokeLinecap="round"

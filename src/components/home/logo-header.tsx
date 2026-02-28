@@ -20,8 +20,8 @@ export default function LogoHeader() {
           xmlns="http://www.w3.org/2000/svg"
           x="0px"
           y="0px"
-          width="100"
-          height="83"
+          width="52"
+          height="47"
           viewBox="0 0 256 256"
           style={{ fill: "#000000" }}
         >
@@ -40,44 +40,44 @@ export default function LogoHeader() {
             style={{ mixBlendMode: "normal" }}
           >
             <g transform="scale(4,4)">
-              <path d="M32,16l-2,2l2,6l3,-6z" fill="#1e40af"></path>
+              <path d="M32,16l-2,2l2,6l3,-6z" fill="#5b21b6"></path>
               <path d="M21,14l-2,5l3,3h3l3,-2v-3l-4,-3z" fill="#475569"></path>
               <path d="M36,17l3,-3h3l2,1v4l-3,3l-5,-2z" fill="#475569"></path>
               <path
                 d="M33,13l3,-2l8,-1l5,-3l-2,3l-3,2l-5,1l-4,3l-2,-1z"
-                fill="#1e40af"
+                fill="#5b21b6"
               ></path>
               <path
                 d="M31,13l-3,-2l-8,-1l-5,-3l2,3l3,2l5,1l4,3l2,-1z"
-                fill="#1e40af"
+                fill="#5b21b6"
               ></path>
               <path
                 d="M22,8l7,-1h5l6,1l-1,1l-7,2l-11,-2z"
-                fill="#0284c7"
+                fill="#7c3aed"
               ></path>
-              <path d="M28,21l-4,3l8,6v-5l-3,-4z" fill="#0284c7"></path>
+              <path d="M28,21l-4,3l8,6v-5l-3,-4z" fill="#7c3aed"></path>
               <path
                 d="M35,21l-2,3v6l4,-2.875l4,-3.125v-1z"
-                fill="#0284c7"
+                fill="#7c3aed"
               ></path>
               <path
                 d="M14,23l-3,4v9l5,11l8,7l-1,-18l-5,-10z"
-                fill="#1e40af"
+                fill="#5b21b6"
               ></path>
               <path
                 d="M49,23l-4,4l-3,8l-2,12v8l7,-6l6,-12v-9l-2,-5z"
-                fill="#1e40af"
+                fill="#5b21b6"
               ></path>
               <path d="M16,22l2,-1l5,3l-2,2l-5,-3z" fill="#64748b"></path>
               <path d="M24,25l-3,2l3,7l2,2l3,-4v-2z" fill="#64748b"></path>
               <path d="M47,20l1,1l-1,2l-3,4l-3,-2l3,-3z" fill="#64748b"></path>
               <path d="M40,26l-4,3l1,5l2,2l4,-8l-2,-2z" fill="#64748b"></path>
               <path d="M30,32l-1,3l3,3l4,-4l-1,-3h-3z" fill="#64748b"></path>
-              <path d="M28,36l3,3l1,4v5l-7,-1v-9z" fill="#0369a1"></path>
-              <path d="M36,36l-3,5v7l5,1l1,-3l1,-8z" fill="#0369a1"></path>
-              <path d="M25,49l1,5l4,5l2,1l6,-6v-3l-1,-1z" fill="#0369a1"></path>
-              <path d="M18,13l-2,4v2h2l2,-5z" fill="#0284c7"></path>
-              <path d="M45,14l1,-1l1,5l-1,1l-1,-1z" fill="#0284c7"></path>
+              <path d="M28,36l3,3l1,4v5l-7,-1v-9z" fill="#6d28d9"></path>
+              <path d="M36,36l-3,5v7l5,1l1,-3l1,-8z" fill="#6d28d9"></path>
+              <path d="M25,49l1,5l4,5l2,1l6,-6v-3l-1,-1z" fill="#6d28d9"></path>
+              <path d="M18,13l-2,4v2h2l2,-5z" fill="#7c3aed"></path>
+              <path d="M45,14l1,-1l1,5l-1,1l-1,-1z" fill="#7c3aed"></path>
             </g>
           </g>
         </svg>
@@ -85,12 +85,12 @@ export default function LogoHeader() {
       <RoughNotation
         type="underline"
         show={showNotation}
-        color="#0369a1"
+        color="hsl(var(--foreground))"
         strokeWidth={2}
         animationDuration={1000}
         padding={4}
       >
-        <div className="hidden h-6 text-xl font-semibold sm:block">
+        <div className="hidden text-sm font-medium sm:block">
           {siteMetadata.headerTitle}
         </div>
       </RoughNotation>

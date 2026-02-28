@@ -7,47 +7,30 @@ import SearchButton from "../search/search-button";
 import LogoHeader from "@/components/home/logo-header";
 ---
 
-<header class="flex items-center justify-between py-10">
+<header class="flex items-center justify-between py-6">
   <div>
     <a href="/" aria-label={siteMetadata.headerTitle} data-astro-reload>
       <LogoHeader client:only="react" />
     </a>
   </div>
-  <div class="flex items-center space-x-4 leading-5 sm:space-x-6">
+  <nav class="flex items-center gap-1">
     {
       navigation
         .filter((link) => link.href !== "/")
         .map((link) => (
           <a
             href={link.href}
-            class="hidden font-medium text-gray-900 dark:text-gray-100 sm:block"
+            class="hidden rounded-md px-3 py-1.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground sm:block"
             {...(link.href === "/blog" ? { "data-astro-reload": true } : {})}
           >
             {link.title}
           </a>
         ))
     }
-    <div class="flex items-center space-x-2">
+    <div class="flex items-center gap-1 ml-2">
       <SearchButton client:only="react" />
       <ThemeSwitch />
       <MobileNav client:only="react" />
     </div>
-  </div>
+  </nav>
 </header>
-
-<style>
-  .animate-fade-in {
-    animation: fadeIn 1s ease-in-out;
-  }
-
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(-10px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-</style>

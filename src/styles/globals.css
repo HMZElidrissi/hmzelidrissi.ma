@@ -12,7 +12,7 @@
   :root {
     /* Light Theme Colors */
     --background: 0 0% 100%;
-    --foreground: 0 0% 9%;
+    --foreground: 0 0% 3.9%;
 
     --card: 0 0% 100%;
     --card-foreground: 0 0% 3.9%;
@@ -20,8 +20,8 @@
     --popover: 0 0% 100%;
     --popover-foreground: 0 0% 3.9%;
 
-    --primary: 334 84% 45%;
-    --primary-foreground: 0 0% 100%;
+    --primary: 0 0% 9%;
+    --primary-foreground: 0 0% 98%;
 
     --secondary: 0 0% 96.1%;
     --secondary-foreground: 0 0% 9%;
@@ -42,36 +42,36 @@
     --input: 0 0% 89.8%;
     --ring: 0 0% 3.9%;
 
-    --radius: 0.5rem;
+    --radius: 0.375rem;
 
     /* Font family variables */
     --font-sans: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
-    --font-heading: "Tomorrow", ui-sans-serif, system-ui, sans-serif;
+    --font-heading: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
     --font-mono: "Space Grotesk", ui-monospace, SFMono-Regular, monospace;
   }
 
   .dark {
-    /* Dark Theme Colors */
-    --background: 0 0% 9%;
-    --foreground: 0 0% 100%;
+    /* Dark Theme */
+    --background: 0 0% 0%;
+    --foreground: 0 0% 98%;
 
-    --card: 0 0% 9%;
-    --card-foreground: 0 0% 100%;
+    --card: 0 0% 3.9%;
+    --card-foreground: 0 0% 98%;
 
-    --popover: 0 0% 9%;
-    --popover-foreground: 0 0% 100%;
+    --popover: 0 0% 3.9%;
+    --popover-foreground: 0 0% 98%;
 
-    --primary: 334 84% 45%;
-    --primary-foreground: 0 0% 100%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 0 0% 9%;
 
-    --secondary: 0 0% 18%;
-    --secondary-foreground: 0 0% 100%;
+    --secondary: 0 0% 14.9%;
+    --secondary-foreground: 0 0% 98%;
 
-    --muted: 0 0% 18%;
-    --muted-foreground: 0 0% 45.1%;
+    --muted: 0 0% 14.9%;
+    --muted-foreground: 0 0% 63.9%;
 
-    --accent: 0 0% 18%;
-    --accent-foreground: 0 0% 100%;
+    --accent: 0 0% 14.9%;
+    --accent-foreground: 0 0% 98%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
@@ -79,17 +79,13 @@
     --warning: 38 93% 54%;
     --warning-foreground: 0 0% 0%;
 
-    --border: 0 0% 18%;
-    --input: 0 0% 18%;
-    --ring: 0 0% 100%;
+    --border: 0 0% 14.9%;
+    --input: 0 0% 14.9%;
+    --ring: 0 0% 83.1%;
 
-    --radius: 0.5rem;
+    --radius: 0.375rem;
   }
 
-  /* Theme-specific animations */
-  .theme {
-    --animate-orbit: orbit calc(var(--duration) * 1s) linear infinite;
-  }
 }
 
 /* ==========================================================================
@@ -103,6 +99,9 @@
   body {
     @apply bg-background text-foreground;
     font-family: var(--font-sans);
+    font-feature-settings: "rlig" 1, "calt" 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   /* Shadcn UI Dialog is changing the way body scrollbar is behaving.
@@ -115,6 +114,15 @@
 
   html {
     scroll-behavior: smooth;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-sans);
+    letter-spacing: -0.02em;
+  }
+
+  code, kbd, pre, samp {
+    font-family: var(--font-mono);
   }
 }
 
@@ -133,7 +141,7 @@
 
   /* Footnotes styling */
   .footnotes {
-    @apply mt-12 border-t border-gray-200 pt-8 dark:border-gray-700;
+    @apply mt-12 border-t border-gray-200 pt-8 dark:border-gray-800;
   }
 
   .data-footnote-backref {
@@ -149,55 +157,34 @@
   .katex-display {
     overflow: auto hidden;
   }
+
 }
 
 /* ==========================================================================
    Utility Classes
    ========================================================================== */
 @layer utilities {
-  /* Background blur utility */
-  .bg-background-blur {
-    @apply bg-background/60 backdrop-blur-md;
-  }
-
-  /* Hide scrollbar utility */
-  .hide-scrollbar {
-    &::-webkit-scrollbar {
-      display: none;
-    }
-
-    /* Hide scrollbar for IE, Edge and Firefox */
-    & {
-      -ms-overflow-style: none; /* IE and Edge */
-      scrollbar-width: none; /* Firefox */
-    }
-  }
-
-  /* Font utility classes */
-  .font-space-grotesk {
-    font-family: var(--font-sans);
-  }
-
-  .font-tomorrow {
-    font-family: var(--font-heading);
-  }
-
-  .font-mono-space {
-    font-family: var(--font-mono);
-  }
-
   /* Grid pattern animation */
   .bg-grid-pattern {
     background-image:
-      linear-gradient(to right, #636161 1px, transparent 1px),
-      linear-gradient(to bottom, #636161 1px, transparent 1px);
-    background-size: 100px 100px; /* Smaller squares for mobile screens */
-    animation: move-grid 8s linear infinite 2s;
+      linear-gradient(to right, hsl(var(--foreground) / 0.06) 1px, transparent 1px),
+      linear-gradient(to bottom, hsl(var(--foreground) / 0.06) 1px, transparent 1px);
+    background-size: 100px 100px;
+    animation: move-grid 12s linear infinite;
+    /* Add a radial gradient mask to fade grid at the edges */
+    -webkit-mask-image: radial-gradient(ellipse at center, black 40%, transparent 80%);
+    mask-image: radial-gradient(ellipse at center, black 40%, transparent 80%);
+  }
+
+  .dark .bg-grid-pattern {
+    background-image:
+      linear-gradient(to right, hsl(var(--foreground) / 0.1) 1px, transparent 1px),
+      linear-gradient(to bottom, hsl(var(--foreground) / 0.1) 1px, transparent 1px);
   }
 
   @media (min-width: 768px) {
     .bg-grid-pattern {
-      background-size: 200px 200px; /* Larger squares for larger screens */
+      background-size: 200px 200px;
     }
   }
 
@@ -222,21 +209,7 @@ input:-webkit-autofill:focus {
     color 600000s 0s;
 }
 
-/* ==========================================================================
-   Animations
-   ========================================================================== */
-@keyframes spin-slow {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
 
-.animate-spin-slow {
-  animation: spin-slow 20s linear infinite;
-}
 
 /* ==========================================================================
    Theme Inline Animations

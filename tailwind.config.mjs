@@ -1,5 +1,6 @@
 import defaultTheme from "tailwindcss/defaultTheme";
 import colors from "tailwindcss/colors";
+import { fontFamily } from "tailwindcss/defaultTheme";
 
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -12,7 +13,7 @@ export default {
       black: colors.black,
       white: colors.white,
       gray: colors.neutral,
-      teal: colors.teal,
+      violet: colors.violet,
       border: "hsl(var(--border))",
       input: "hsl(var(--input))",
       ring: "hsl(var(--ring))",
@@ -21,14 +22,16 @@ export default {
       primary: {
         DEFAULT: "hsl(var(--primary))",
         foreground: "hsl(var(--primary-foreground))",
-        100: "#EBF8FF",
-        200: "#BEE3F8",
-        300: "#63B3ED",
-        400: "#4299E1",
-        500: "#3182CE",
-        600: "#0C57C1",
-        700: "#0A4361",
-        800: "#2C5282",
+        50: "#fafafa",
+        100: "#f5f5f5",
+        200: "#e5e5e5",
+        300: "#d4d4d4",
+        400: "#a3a3a3",
+        500: "#737373",
+        600: "#525252",
+        700: "#404040",
+        800: "#262626",
+        900: "#171717",
       },
       secondary: {
         DEFAULT: "hsl(var(--secondary))",
@@ -68,14 +71,14 @@ export default {
         "2xs": ["0.6rem", "0.8rem"],
       },
       fontFamily: {
-        sans: ["Space Grotesk", ...defaultTheme.fontFamily.sans],
-        heading: ["Tomorrow", ...defaultTheme.fontFamily.sans],
-        mono: ["Space Grotesk", ...defaultTheme.fontFamily.mono],
+        sans: ["Space Grotesk", ...fontFamily.sans],
+        mono: ["Space Grotesk", ...fontFamily.mono],
+        heading: ["Space Grotesk", ...fontFamily.sans],
       },
       borderRadius: {
         lg: "var(--radius)",
-        md: "calc(var(--radius) - 2px)",
-        sm: "calc(var(--radius) - 4px)",
+        md: "calc(var(--radius) - 1px)",
+        sm: "calc(var(--radius) - 2px)",
       },
       keyframes: {
         "accordion-down": {
@@ -109,6 +112,10 @@ export default {
           "0%": { transform: "rotate(0deg)" },
           "100%": { transform: "rotate(360deg)" },
         },
+        "fade-in": {
+          "0%": { opacity: "0", transform: "translateY(8px)" },
+          "100%": { opacity: "1", transform: "translateY(0)" },
+        },
       },
       backgroundSize: {
         "grid-sm": "100px 100px",
@@ -119,8 +126,9 @@ export default {
         "accordion-up": "accordion-up 0.2s ease-out",
         "spin-slow": "spin-slow 20s linear infinite",
         "loading-dot": "loadingDots 1.4s infinite",
-        "move-grid": "move-grid 8s linear infinite 2s",
+        "move-grid": "move-grid 12s linear infinite",
         orbit: "orbit calc(var(--duration) * 1s) linear infinite",
+        "fade-in": "fade-in 0.5s ease-out forwards",
       },
       lineHeight: {
         11: "2.75rem",
@@ -131,36 +139,58 @@ export default {
       typography: ({ theme }) => ({
         DEFAULT: {
           css: {
+            "--tw-prose-body": "hsl(var(--foreground))",
+            "--tw-prose-headings": "hsl(var(--foreground))",
+            "--tw-prose-links": "hsl(var(--foreground))",
+            "--tw-prose-bold": "hsl(var(--foreground))",
+            "--tw-prose-code": "hsl(var(--foreground))",
+            "--tw-prose-quotes": "hsl(var(--muted-foreground))",
+            "--tw-prose-hr": "hsl(var(--border))",
             a: {
-              color: theme("colors.primary.500"),
+              color: "hsl(var(--foreground))",
+              textDecoration: "underline",
+              textDecorationColor: "hsl(var(--border))",
+              textUnderlineOffset: "3px",
               "&:hover": {
-                color: `${theme("colors.primary.600")}`,
+                textDecorationColor: "hsl(var(--foreground))",
               },
-              code: { color: theme("colors.primary.400") },
+              code: { color: "hsl(var(--foreground))" },
             },
             "h1,h2": {
               fontWeight: "700",
-              letterSpacing: theme("letterSpacing.tight"),
+              letterSpacing: "-0.02em",
             },
             h3: {
               fontWeight: "600",
+              letterSpacing: "-0.015em",
             },
             code: {
-              color: theme("colors.indigo.500"),
+              color: "hsl(var(--foreground))",
+              backgroundColor: "hsl(var(--muted))",
+              borderRadius: "var(--radius)",
+              paddingLeft: "0.375rem",
+              paddingRight: "0.375rem",
+              paddingTop: "0.125rem",
+              paddingBottom: "0.125rem",
+              fontWeight: "400",
+              "&::before": { content: '""' },
+              "&::after": { content: '""' },
             },
           },
         },
         invert: {
           css: {
+            "--tw-prose-body": "hsl(var(--foreground))",
+            "--tw-prose-headings": "hsl(var(--foreground))",
             a: {
-              color: theme("colors.primary.500"),
+              color: "hsl(var(--foreground))",
               "&:hover": {
-                color: `${theme("colors.primary.400")}`,
+                color: "hsl(var(--foreground))",
               },
-              code: { color: theme("colors.primary.400") },
+              code: { color: "hsl(var(--foreground))" },
             },
             "h1,h2,h3,h4,h5,h6": {
-              color: theme("colors.gray.100"),
+              color: "hsl(var(--foreground))",
             },
           },
         },

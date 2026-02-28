@@ -7,7 +7,7 @@ interface Props {
 const { slug, x } = Astro.props;
 ---
 
-<div class="pb-6 pt-6 text-center text-gray-700 dark:text-gray-300">
+<div class="pb-6 pt-6 text-center text-muted-foreground">
   <p class="text-sm">
     Comments are disabled for now.
     {
@@ -16,7 +16,7 @@ const { slug, x } = Astro.props;
           href={`https://mobile.twitter.com/search?q=${encodeURIComponent(`https://hmzelidrissi.ma/${slug}`)}`}
           target="_blank"
           rel="noopener noreferrer"
-          class="text-primary-500 hover:text-primary-600 dark:text-teal-400 dark:hover:text-teal-500"
+          class="text-violet-600 hover:text-violet-700 dark:text-violet-400 dark:hover:text-violet-300 transition-colors"
         >
           Discuss on Twitter
         </a>

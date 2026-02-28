@@ -41,13 +41,13 @@ const featuredPost = showFeatured ? firstPost : undefined;
 const listPosts = showFeatured ? restPosts : nonDraftPosts;
 ---
 
-<div class="flex dark:text-white sm:space-x-24">
+<div class="flex sm:space-x-24">
   <div class="w-full">
     <BlogHeader client:load />
 
     {
       featuredPost && (
-        <div class="mb-12 overflow-hidden rounded-xl bg-gradient-to-br from-gray-50 to-white shadow-xl transition duration-300 ease-in-out hover:shadow-2xl dark:border-gray-800 dark:from-gray-900 dark:to-gray-800">
+        <div class="mb-12 overflow-hidden rounded-xl bg-card border border-border shadow-md transition-all duration-300 ease-in-out hover:shadow-lg">
           <article class="grid grid-cols-1 gap-0 md:grid-cols-2">
             <a
               href={`/blog/${featuredPost.slug}`}
@@ -72,12 +72,12 @@ const listPosts = showFeatured ? restPosts : nonDraftPosts;
                 <h2 class="mb-4 text-3xl font-bold leading-tight tracking-tight">
                   <a
                     href={`/blog/${featuredPost.slug}`}
-                    class="text-gray-900 hover:text-primary-500 dark:text-gray-100 dark:hover:text-teal-400"
+                    class="text-foreground transition-colors hover:text-violet-600 dark:hover:text-violet-400"
                   >
                     {featuredPost.title}
                   </a>
                 </h2>
-                <div class="mb-4 flex items-center text-sm text-gray-500 dark:text-gray-400">
+                <div class="mb-4 flex items-center text-sm text-muted-foreground">
                   <svg
                     class="mr-2 h-4 w-4"
                     fill="none"
@@ -95,13 +95,13 @@ const listPosts = showFeatured ? restPosts : nonDraftPosts;
                     {formatDate(featuredPost.date)}
                   </time>
                 </div>
-                <p class="prose mb-6 line-clamp-4 text-gray-600 dark:text-gray-300">
+                <p class="prose mb-6 line-clamp-4 text-muted-foreground">
                   {featuredPost.summary}
                 </p>
               </div>
               <a
                 href={`/blog/${featuredPost.slug}`}
-                class="mt-auto inline-flex items-center justify-center rounded-lg bg-gray-100 px-4 py-2 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-gray-700"
+                class="mt-auto inline-flex items-center justify-center rounded-lg bg-muted border border-border px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-accent"
               >
                 Read Featured Article
                 <svg
@@ -125,7 +125,7 @@ const listPosts = showFeatured ? restPosts : nonDraftPosts;
     }
 
     <div class="mt-12">
-      <h2 class="mb-8 text-2xl font-bold text-gray-900 dark:text-gray-100">
+      <h2 class="mb-8 text-2xl font-bold text-foreground">
         Latest Posts
       </h2>
       <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
@@ -133,7 +133,7 @@ const listPosts = showFeatured ? restPosts : nonDraftPosts;
           listPosts.map((post) => {
             const { slug, date, title, summary, tags, images } = post;
             return (
-              <article class="group flex flex-col overflow-hidden rounded-xl bg-gradient-to-br from-gray-50 to-white shadow-lg transition duration-300 hover:shadow-xl dark:border-gray-800 dark:from-gray-900 dark:to-gray-800">
+              <article class="group flex flex-col overflow-hidden rounded-xl border border-border bg-card shadow-sm transition-all duration-300 hover:shadow-md">
                 <a href={`/blog/${slug}`} class="relative h-48 overflow-hidden">
                   <Image
                     src={images[0] ?? ""}
@@ -153,12 +153,12 @@ const listPosts = showFeatured ? restPosts : nonDraftPosts;
                   <h3 class="mb-3 text-xl font-bold leading-tight">
                     <a
                       href={`/blog/${slug}`}
-                      class="text-gray-900 hover:text-primary-500 dark:text-gray-100 dark:hover:text-teal-400"
+                      class="text-foreground transition-colors hover:text-violet-600 dark:hover:text-violet-400"
                     >
                       {title}
                     </a>
                   </h3>
-                  <div class="mb-3 flex items-center text-sm text-gray-500 dark:text-gray-400">
+                  <div class="mb-3 flex items-center text-sm text-muted-foreground">
                     <svg
                       class="mr-2 h-4 w-4"
                       fill="none"
@@ -174,12 +174,12 @@ const listPosts = showFeatured ? restPosts : nonDraftPosts;
                     </svg>
                     <time datetime={date}>{formatDate(date)}</time>
                   </div>
-                  <p class="prose mb-4 line-clamp-4 flex-grow text-sm text-gray-600 dark:text-gray-300">
+                  <p class="prose mb-4 line-clamp-4 flex-grow text-sm text-muted-foreground">
                     {summary}
                   </p>
                   <a
                     href={`/blog/${slug}`}
-                    class="mt-auto inline-flex items-center justify-center rounded-lg bg-gray-100 px-4 py-2 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-gray-700"
+                    class="mt-auto inline-flex items-center justify-center rounded-lg bg-muted border border-border px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-accent"
                   >
                     Read more
                     <svg
@@ -216,7 +216,7 @@ const listPosts = showFeatured ? restPosts : nonDraftPosts;
                     : `/blog/page/${pagination.currentPage - 1}`
                 }
                 rel="prev"
-                class="text-primary-500 hover:text-primary-600 dark:text-teal-500 dark:hover:text-teal-400"
+                class="text-violet-600 hover:text-violet-700 dark:text-violet-400 dark:hover:text-violet-300 transition-colors"
               >
                 Previous
               </a>
@@ -232,7 +232,7 @@ const listPosts = showFeatured ? restPosts : nonDraftPosts;
               <a
                 href={`/blog/page/${pagination.currentPage + 1}`}
                 rel="next"
-                class="text-primary-500 hover:text-primary-600 dark:text-teal-500 dark:hover:text-teal-400"
+                class="text-violet-600 hover:text-violet-700 dark:text-violet-400 dark:hover:text-violet-300 transition-colors"
               >
                 Next
               </a>

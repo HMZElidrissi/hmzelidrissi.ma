@@ -47,16 +47,16 @@ const editUrl = (path: string) =>
 
 <SectionContainer>
   <article>
-    <div class="xl:divide-y xl:divide-gray-200 xl:dark:divide-gray-700">
+    <div class="xl:divide-y xl:divide-border">
       <header>
         <div
-          class="space-y-1 border-b border-gray-200 pb-10 text-center dark:border-gray-700"
+          class="space-y-1 border-b border-border pb-10 text-center"
         >
           <dl>
             <div class="flex items-center justify-center space-x-2">
               <dt class="sr-only">Published on</dt>
               <dd
-                class="text-base font-medium leading-6 text-gray-500 dark:text-gray-400"
+                class="text-base font-medium leading-6 text-muted-foreground"
               >
                 <time datetime={date}>{formatDate(date)}</time>
               </dd>
@@ -68,10 +68,10 @@ const editUrl = (path: string) =>
         </div>
       </header>
       <div
-        class="grid-rows-[auto_1fr] divide-y divide-gray-200 pb-8 dark:divide-gray-700 xl:grid xl:grid-cols-4 xl:gap-x-6 xl:divide-y-0"
+        class="grid-rows-[auto_1fr] divide-y divide-border pb-8 xl:grid xl:grid-cols-4 xl:gap-x-6 xl:divide-y-0"
       >
         <dl
-          class="pb-10 pt-6 xl:border-b xl:border-gray-200 xl:pt-11 xl:dark:border-gray-700"
+          class="pb-10 pt-6 xl:border-b xl:border-border xl:pt-11"
         >
           <dt class="sr-only">Authors</dt>
           <dd>
@@ -92,11 +92,11 @@ const editUrl = (path: string) =>
                     )}
                     <dl class="whitespace-nowrap text-sm font-medium leading-5">
                       <dt class="sr-only">Name</dt>
-                      <dd class="text-gray-900 dark:text-gray-100">
+                      <dd class="text-foreground">
                         by{" "}
                         <a
                           href={`/${author.authorBioLink}`}
-                          class="text-primary-500 hover:text-primary-600 dark:text-teal-400 dark:hover:text-teal-500"
+                          class="text-foreground underline decoration-border underline-offset-2 transition-colors hover:decoration-foreground"
                         >
                           {author.name}
                         </a>
@@ -109,27 +109,29 @@ const editUrl = (path: string) =>
           </dd>
         </dl>
         <div
-          class="divide-y divide-gray-200 dark:divide-gray-700 xl:col-span-3 xl:row-span-2 xl:pb-0"
+          class="divide-y divide-border xl:col-span-3 xl:row-span-2 xl:pb-0"
         >
           <div class="prose max-w-none pb-8 pt-10 dark:prose-invert">
             <slot />
           </div>
-          <div class="pb-6 pt-6 text-sm text-gray-700 dark:text-gray-300">
+          <div class="pb-6 pt-6 text-sm text-muted-foreground">
             <a
               href={editUrl(filePath)}
               target="_blank"
-              rel="noopener noreferrer">View on GitHub</a
+              rel="noopener noreferrer"
+              class="text-foreground underline decoration-border underline-offset-2 transition-colors hover:decoration-foreground"
+            >View on GitHub</a
             >
           </div>
         </div>
         <footer>
           <div
-            class="divide-gray-200 text-sm font-medium leading-5 dark:divide-gray-700 xl:col-start-1 xl:row-start-2 xl:divide-y"
+            class="divide-border text-sm font-medium leading-5 xl:col-start-1 xl:row-start-2 xl:divide-y"
           >
             {
               tags && (
                 <div class="py-4 xl:py-8">
-                  <h2 class="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">
+                  <h2 class="text-xs uppercase tracking-wide text-muted-foreground">
                     Tags
                   </h2>
                   <div class="flex flex-wrap">
@@ -145,20 +147,20 @@ const editUrl = (path: string) =>
                 <div class="flex justify-between py-4 xl:block xl:space-y-8 xl:py-8">
                   {prev && prev.path && (
                     <div>
-                      <h2 class="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">
+                      <h2 class="text-xs uppercase tracking-wide text-muted-foreground">
                         Previous Article
                       </h2>
-                      <div class="text-primary-500 hover:text-primary-600 dark:text-teal-400 dark:hover:text-teal-500">
+                      <div class="text-foreground underline decoration-border underline-offset-2 transition-colors hover:decoration-foreground">
                         <a href={`/${prev.path}`}>{prev.title}</a>
                       </div>
                     </div>
                   )}
                   {next && next.path && (
                     <div>
-                      <h2 class="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">
+                      <h2 class="text-xs uppercase tracking-wide text-muted-foreground">
                         Next Article
                       </h2>
-                      <div class="text-primary-500 hover:text-primary-600 dark:text-teal-400 dark:hover:text-teal-500">
+                      <div class="text-foreground underline decoration-border underline-offset-2 transition-colors hover:decoration-foreground">
                         <a href={`/${next.path}`}>{next.title}</a>
                       </div>
                     </div>
@@ -170,7 +172,7 @@ const editUrl = (path: string) =>
           <div class="pt-4 xl:pt-8">
             <a
               href={`/${basePath}`}
-              class="text-primary-500 hover:text-primary-600 hover:underline dark:text-teal-400 dark:hover:text-teal-500"
+              class="text-foreground underline decoration-border underline-offset-2 transition-colors hover:decoration-foreground"
               aria-label="Back to the blog"
             >
               &larr; Back to the blog

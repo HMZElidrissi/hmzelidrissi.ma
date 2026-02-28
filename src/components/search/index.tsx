@@ -210,12 +210,12 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
     <div className="fixed inset-0 z-50 flex items-start justify-center bg-black bg-opacity-50 pt-20">
       <div
         ref={modalRef}
-        className="relative mx-4 max-h-[80vh] w-full max-w-2xl overflow-hidden rounded-lg bg-white shadow-2xl dark:bg-gray-800"
+        className="relative mx-4 max-h-[80vh] w-full max-w-2xl overflow-hidden rounded-lg bg-card shadow-2xl border border-border"
       >
         {/* Search Input */}
-        <div className="flex items-center border-b border-gray-200 p-4 dark:border-gray-700">
+        <div className="flex items-center border-b border-border p-4">
           <svg
-            className="mr-3 h-5 w-5 text-gray-400"
+            className="mr-3 h-5 w-5 text-muted-foreground"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -233,11 +233,11 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Search posts..."
-            className="flex-1 border-none bg-transparent text-gray-900 placeholder-gray-500 outline-none dark:text-gray-100 dark:placeholder-gray-400"
+            className="flex-1 border-none bg-transparent text-foreground placeholder-muted-foreground outline-none"
           />
           <button
             onClick={onClose}
-            className="ml-3 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
+            className="ml-3 text-muted-foreground hover:text-foreground transition-colors"
           >
             <svg
               className="h-5 w-5"
@@ -262,7 +262,7 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
               <div className="text-red-500 dark:text-red-400 mb-2">
                 ⚠️ Search Unavailable
               </div>
-              <div className="mb-4 text-sm text-gray-600 dark:text-gray-300">
+              <div className="mb-4 text-sm text-foreground">
                 {searchError}
               </div>
               {searchError.includes("Run 'pnpm generate-search'") && (
@@ -272,7 +272,7 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
                   1. Open a terminal
                   <br />
                   2. Run:{" "}
-                  <code className="rounded bg-gray-100 px-1 py-0.5 dark:bg-gray-700">
+                  <code className="rounded bg-muted px-1 py-0.5 text-muted-foreground">
                     pnpm generate-search
                   </code>
                   <br />
@@ -283,34 +283,34 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
           )}
 
           {loading && !searchError && (
-            <div className="p-4 text-center text-gray-500 dark:text-gray-400">
+            <div className="p-4 text-center text-muted-foreground">
               Searching...
             </div>
           )}
 
           {!loading && !searchError && query.trim() && results.length === 0 && (
-            <div className="p-4 text-center text-gray-500 dark:text-gray-400">
+            <div className="p-4 text-center text-muted-foreground">
               No results found for "{query}"
             </div>
           )}
 
           {!loading && !searchError && results.length > 0 && (
-            <div className="divide-y divide-gray-200 dark:divide-gray-700">
+            <div className="divide-y divide-border">
               {results.map((result, index) => (
                 <a
                   key={index}
                   href={result.url}
                   onClick={onClose}
-                  className="block p-4 transition-colors hover:bg-gray-50 dark:hover:bg-gray-700"
+                  className="block p-4 transition-colors hover:bg-muted"
                 >
-                  <h3 className="mb-1 text-lg font-medium text-gray-900 dark:text-gray-100">
+                  <h3 className="mb-1 text-lg font-medium text-foreground">
                     {result.title}
                   </h3>
                   <p
-                    className="line-clamp-2 text-sm text-gray-600 dark:text-gray-400"
+                    className="line-clamp-2 text-sm text-muted-foreground"
                     dangerouslySetInnerHTML={{ __html: result.excerpt }}
                   />
-                  <div className="mt-2 text-xs text-gray-400 dark:text-gray-500">
+                  <div className="mt-2 text-xs text-muted-foreground">
                     {result.url}
                   </div>
                 </a>
@@ -319,7 +319,7 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
           )}
 
           {!query.trim() && !searchError && (
-            <div className="p-4 text-center text-gray-500 dark:text-gray-400">
+            <div className="p-4 text-center text-muted-foreground">
               Start typing to search...
             </div>
           )}

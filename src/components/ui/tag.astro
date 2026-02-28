@@ -9,14 +9,10 @@ const { text, className = "" } = Astro.props;
 
 <a
   href={`/tags/${text.toLowerCase().replace(/\s+/g, "-")}`}
-  class={`hover:bg-primary-50 dark:border-teal-800 dark:text-teal-300 dark:hover:border-teal-700 dark:hover:bg-teal-900/20 
-  dark:hover:text-teal-200 group relative inline-block overflow-hidden rounded-full border border-primary-300 px-2 py-0.5 
-  text-xs font-medium uppercase tracking-wide text-primary-600 transition-all duration-300 hover:border-primary-600 
-  hover:text-primary-700 ${className}`}
+  class={`group inline-flex items-center gap-1 rounded-md border border-border bg-muted px-2 py-0.5
+  text-xs font-medium text-muted-foreground transition-colors duration-150
+  hover:border-foreground/30 hover:bg-accent hover:text-foreground ${className}`}
 >
-  <span class="relative z-10">{text.split(" ").join("-")}</span>
-  <div
-    class="group-hover:animate-shine absolute inset-0 h-full w-full translate-x-[-100%] bg-gradient-to-r from-transparent via-primary-100/40 to-transparent dark:via-primary-500/5"
-  >
-  </div>
+  <span class="font-mono text-[10px] text-foreground/30">#</span>
+  <span>{text.split(" ").join("-")}</span>
 </a>

@@ -5,7 +5,6 @@ import tailwind from "@astrojs/tailwind";
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
 import robotsTxt from "astro-robots-txt";
-import vercel from "@astrojs/vercel";
 import pagefindIntegration from "./integrations/pagefind";
 
 import cloudflare from "@astrojs/cloudflare";

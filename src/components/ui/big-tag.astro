@@ -10,20 +10,13 @@ const normalizedTag = text.toLowerCase();
 
 <a
   href={`/tags/${normalizedTag.replace(/\s+/g, "-")}`}
-  class="group relative inline-flex items-center overflow-hidden"
+  class="group inline-flex items-center gap-1.5 rounded-md border border-border bg-muted px-3 py-1 text-sm font-medium text-muted-foreground transition-colors duration-150 hover:border-foreground/30 hover:bg-accent hover:text-foreground"
 >
-  <span
-    class="hover:bg-primary-50 relative z-10 inline-flex items-center overflow-hidden rounded-l-full border border-primary-200 px-4 py-1.5 text-sm font-medium uppercase tracking-wide text-primary-600 transition-all duration-300 hover:border-primary-300 hover:text-primary-700 dark:border-teal-800 dark:text-teal-300 dark:hover:border-teal-700 dark:hover:bg-teal-900/20 dark:hover:text-teal-200"
-  >
-    <span>{text.split(" ").join("-")}</span>
-    <span
-      class="absolute inset-0 h-full w-full translate-x-[-100%] bg-gradient-to-r from-transparent via-primary-100/40 to-transparent transition-transform duration-300 group-hover:translate-x-[100%] dark:via-teal-500/5"
-    >
-    </span>
-  </span>
+  <span class="font-mono text-xs text-foreground/30">#</span>
+  <span class="tracking-wide uppercase">{text.split(" ").join("-")}</span>
   {
     count !== undefined && (
-      <span class="group-hover:bg-primary-50 relative z-10 -ml-px inline-flex h-full items-center rounded-r-full border border-primary-200 px-3 py-1.5 text-sm font-medium text-gray-600 transition-all duration-300 group-hover:border-primary-300 dark:border-teal-800 dark:text-gray-300 dark:group-hover:border-teal-700 dark:group-hover:bg-teal-900/20">
+      <span class="ml-1 rounded-sm bg-foreground/10 px-1.5 py-0.5 text-xs font-medium text-foreground transition-colors duration-150 group-hover:bg-foreground group-hover:text-background">
         {count}
       </span>
     )

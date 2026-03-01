@@ -53,7 +53,9 @@ const editUrl = (path: string) =>
           <dl>
             <div>
               <dt class="sr-only">Published on</dt>
-              <dd class="text-sm font-mono uppercase tracking-tight text-muted-foreground">
+              <dd
+                class="font-mono text-sm uppercase tracking-tight text-muted-foreground"
+              >
                 <time datetime={date}>{formatDate(date)}</time>
               </dd>
             </div>
@@ -90,7 +92,7 @@ const editUrl = (path: string) =>
                         <span class="mr-1">by</span>
                         <a
                           href={`/${author.authorBioLink}`}
-                          class="font-medium text-foreground transition-colors hover:text-muted-foreground underline decoration-border underline-offset-4 hover:decoration-foreground"
+                          class="font-medium text-foreground underline decoration-border underline-offset-4 transition-colors hover:text-muted-foreground hover:decoration-foreground"
                         >
                           {author.name}
                         </a>
@@ -168,7 +170,7 @@ const editUrl = (path: string) =>
                       </h2>
                       <a
                         href={`/${prev.path}`}
-                        class="block font-medium text-foreground transition-colors group-hover:text-muted-foreground underline decoration-border underline-offset-4 hover:decoration-muted-foreground"
+                        class="block font-medium text-foreground underline decoration-border underline-offset-4 transition-colors hover:decoration-muted-foreground group-hover:text-muted-foreground"
                       >
                         &larr; {prev.title}
                       </a>
@@ -181,7 +183,7 @@ const editUrl = (path: string) =>
                       </h2>
                       <a
                         href={`/${next.path}`}
-                        class="block font-medium text-foreground transition-colors group-hover:text-muted-foreground underline decoration-border underline-offset-4 hover:decoration-muted-foreground"
+                        class="block font-medium text-foreground underline decoration-border underline-offset-4 transition-colors hover:decoration-muted-foreground group-hover:text-muted-foreground"
                       >
                         {next.title} &rarr;
                       </a>

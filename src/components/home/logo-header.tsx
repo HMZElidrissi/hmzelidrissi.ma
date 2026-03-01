@@ -86,9 +86,7 @@ export default function LogoHeader() {
           {siteMetadata.headerTitle}
         </div>
         {showNotation && (
-          <span
-            className="absolute -bottom-1 left-0 h-[2px] w-full origin-left scale-x-0 animate-[highlight_1s_ease-out_forwards] rounded-full bg-foreground"
-          />
+          <span className="absolute -bottom-1 left-0 h-[2px] w-full origin-left scale-x-0 animate-[highlight_1s_ease-out_forwards] rounded-full bg-foreground" />
         )}
       </div>
     </div>

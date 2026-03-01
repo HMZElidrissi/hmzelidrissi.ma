@@ -36,9 +36,9 @@ export default function Main({ aboutColor, contactColor }: MainProps) {
         </h1>
 
         <p className="mt-4 text-lg font-medium text-muted-foreground lg:text-xl">
-          DevOps <span className="mx-1 font-bold text-muted-foreground">·</span>{" "}
-          Cloud <span className="mx-1 font-bold text-muted-foreground">·</span>{" "}
-          Software Engineer
+          DevOps <span className="mx-1 font-bold text-violet-500">·</span> Cloud{" "}
+          <span className="mx-1 font-bold text-violet-500">·</span> Software
+          Engineer
         </p>
 
         <p className="mt-3 max-w-md text-base leading-relaxed text-muted-foreground">
@@ -65,7 +65,7 @@ export default function Main({ aboutColor, contactColor }: MainProps) {
                   className="absolute inset-0 -z-10 origin-left -rotate-1 scale-x-0 animate-[highlight_2s_ease-out_250ms_forwards] rounded-[255px_15px_225px_15px/15px_225px_15px_255px]"
                   style={{ backgroundColor: aboutColor }}
                 />
-                <span className="text-background relative z-10">about me</span>
+                <span className="relative z-10 text-background">about me</span>
               </span>
             </a>
           </span>
@@ -80,7 +80,7 @@ export default function Main({ aboutColor, contactColor }: MainProps) {
                   className="absolute inset-0 -z-10 origin-left -rotate-1 scale-x-0 animate-[highlight_2s_ease-out_250ms_forwards] rounded-[255px_15px_225px_15px/15px_225px_15px_255px]"
                   style={{ backgroundColor: contactColor }}
                 />
-                <span className="text-background relative z-10">
+                <span className="relative z-10 text-background">
                   contact me
                 </span>
               </span>

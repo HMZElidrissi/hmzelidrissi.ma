@@ -72,7 +72,7 @@ const listPosts = showFeatured ? restPosts : nonDraftPosts;
                 <h2 class="mb-4 text-3xl font-bold leading-tight tracking-tight">
                   <a
                     href={`/blog/${featuredPost.slug}`}
-                    class="text-foreground transition-colors hover:text-muted-foreground underline decoration-border underline-offset-4 hover:decoration-muted-foreground"
+                    class="text-foreground underline decoration-border underline-offset-4 transition-colors hover:text-muted-foreground hover:decoration-muted-foreground"
                   >
                     {featuredPost.title}
                   </a>
@@ -151,7 +151,7 @@ const listPosts = showFeatured ? restPosts : nonDraftPosts;
                   <h3 class="mb-3 text-xl font-bold leading-tight">
                     <a
                       href={`/blog/${slug}`}
-                      class="text-foreground transition-colors hover:text-muted-foreground underline decoration-border underline-offset-4 hover:decoration-muted-foreground"
+                      class="text-foreground underline decoration-border underline-offset-4 transition-colors hover:text-muted-foreground hover:decoration-muted-foreground"
                     >
                       {title}
                     </a>

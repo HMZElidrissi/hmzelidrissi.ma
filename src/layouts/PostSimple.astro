@@ -33,7 +33,9 @@ function formatDate(date: string, locale: string = "en-US") {
         <dl>
           <div>
             <dt class="sr-only">Published on</dt>
-            <dd class="text-sm font-mono uppercase tracking-tight text-muted-foreground">
+            <dd
+              class="font-mono text-sm uppercase tracking-tight text-muted-foreground"
+            >
               <time datetime={date}>{formatDate(date)}</time>
             </dd>
           </div>

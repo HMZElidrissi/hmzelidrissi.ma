@@ -1,11 +1,6 @@
 {
-  // Enable Prettier as default formatter
   "editor.defaultFormatter": "esbenp.prettier-vscode",
-
-  // Format on save
   "editor.formatOnSave": true,
-
-  // File associations for Astro
   "files.associations": {
     "*.astro": "astro",
     "*.astro.ts": "typescriptreact",
@@ -13,8 +8,6 @@
     "**/_headers": "plaintext",
     "**/public/_headers": "plaintext"
   },
-
-  // Enable for specific file types
   "[javascript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
@@ -45,8 +38,6 @@
   "[html]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-
-  // Disable YAML validation for Cloudflare headers file
   "yaml.validate": true,
   "yaml.customTags": [],
   "[yaml]": {
@@ -60,7 +51,9 @@
       "strings": false
     }
   },
-
-  // Disable diagnostics for _headers file (Cloudflare Pages format, not YAML)
-  "problems.showCurrentInStatus": true
+  "problems.showCurrentInStatus": true,
+  "editor.formatOnSaveMode": "file",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.oxc": "explicit"
+  }
 }

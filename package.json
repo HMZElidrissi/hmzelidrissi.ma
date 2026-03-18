@@ -9,10 +9,11 @@
     "preview": "astro preview",
     "astro": "astro",
     "check": "astro check",
-    "format": "prettier --write .",
-    "format:check": "prettier --check .",
+    "format": "vp fmt .",
+    "format:check": "vp fmt --check .",
     "lint": "eslint .",
-    "lint:fix": "eslint . --fix"
+    "lint:fix": "eslint . --fix",
+    "prepare": "vp config"
   },
   "packageManager": "pnpm@9.9.0",
   "dependencies": {
@@ -68,9 +69,13 @@
   },
   "devDependencies": {
     "@tailwindcss/typography": "0.5.16",
-    "prettier": "^3.6.2",
-    "prettier-plugin-astro": "^0.14.1",
-    "prettier-plugin-tailwindcss": "^0.6.14",
-    "wrangler": "^3.0.0"
+    "wrangler": "^3.0.0",
+    "vite-plus": "latest"
+  },
+  "pnpm": {
+    "overrides": {
+      "vite": "npm:@voidzero-dev/vite-plus-core@latest",
+      "vitest": "npm:@voidzero-dev/vite-plus-test@latest"
+    }
   }
 }

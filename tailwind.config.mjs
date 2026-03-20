@@ -63,6 +63,12 @@ export default {
       },
     },
     extend: {
+      colors: {
+        blue: colors.blue,
+        emerald: colors.emerald,
+        amber: colors.amber,
+        red: colors.red,
+      },
       screens: {
         "2xs": "360px",
         xs: "480px",

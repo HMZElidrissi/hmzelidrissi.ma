@@ -3,6 +3,7 @@ import Image from "@/components/ui/image.astro";
 import PageTitle from "@/components/ui/page-title.astro";
 import SectionContainer from "@/components/ui/section-container.astro";
 import Tag from "@/components/ui/tag.astro";
+import TableOfContents from "@/components/ui/table-of-contents.astro";
 
 interface Author {
   name: string;
@@ -45,6 +46,15 @@ const editUrl = (path: string) =>
   `https://github.com/hmzelidrissi/hmzelidrissi.ma/blob/main/src/content/blog/${path}`;
 ---
 
+<div class="relative w-full">
+  {/* Absolute far-right container for TOC, completely outside the main article body container */}
+  <aside class="hidden xl:block absolute left-[100%] ml-4 2xl:ml-12 top-0 h-full w-56 pt-[12rem] z-10">
+    <div class="sticky top-24 max-h-[calc(100vh-8rem)] overflow-y-auto pr-2 pb-8
+      [scrollbar-width:thin] [scrollbar-color:hsl(var(--border))_transparent]">
+      <TableOfContents />
+    </div>
+  </aside>
+
 <SectionContainer>
   <article>
     <div class="xl:divide-y xl:divide-border">
@@ -65,17 +75,106 @@ const editUrl = (path: string) =>
           </div>
         </div>
       </header>
-      <div
-        class="grid-rows-[auto_1fr] divide-y divide-border pb-8 xl:grid xl:grid-cols-4 xl:gap-x-6 xl:divide-y-0"
-      >
-        <dl class="pb-10 pt-6 xl:border-b xl:border-border xl:pt-11">
-          <dt class="sr-only">Authors</dt>
-          <dd>
-            <ul
-              class="flex flex-wrap justify-center gap-4 sm:space-x-12 xl:block xl:space-x-0 xl:space-y-8"
-            >
-              {
-                authorDetails.map((author) => (
+      <div class="pb-8 xl:grid xl:grid-cols-4 xl:gap-x-8">
+        {/* Left Column: Meta, Tags, Navigation */}
+        <aside class="hidden xl:block xl:col-span-1 xl:pt-11 xl:border-r xl:border-border/50 xl:pr-6">
+          <div class="sticky top-20 space-y-8">
+            <dl>
+              <dt class="sr-only">Authors</dt>
+              <dd>
+                <ul class="flex flex-col space-y-6">
+                  {authorDetails.map((author) => (
+                    <li class="flex items-center space-x-3">
+                      {author.avatar && (
+                        <Image
+                          src={author.avatar}
+                          width={40}
+                          height={40}
+                          alt="avatar"
+                          className="h-10 w-10 rounded-full"
+                        />
+                      )}
+                      <dl class="text-sm font-mono leading-tight">
+                        <dt class="sr-only">Name</dt>
+                        <dd class="text-muted-foreground">
+                          <span class="block text-xs uppercase mb-0.5 opacity-70">Written by</span>
+                          <a
+                            href={`/${author.authorBioLink}`}
+                            class="font-medium text-foreground transition-colors hover:text-muted-foreground"
+                          >
+                            {author.name}
+                          </a>
+                        </dd>
+                      </dl>
+                    </li>
+                  ))}
+                </ul>
+              </dd>
+            </dl>
+
+            {tags && (
+              <div>
+                <h2 class="mb-3 font-mono text-xs uppercase tracking-tight text-muted-foreground">
+                  Tags
+                </h2>
+                <div class="flex flex-wrap gap-2">
+                  {tags.map((tag) => (
+                    <Tag text={tag} />
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {(next || prev) && (
+              <div class="space-y-6 pt-6 border-t border-border">
+                {prev && prev.path && (
+                  <div>
+                    <h2 class="mb-2 font-mono text-xs uppercase tracking-tight text-muted-foreground">
+                      Previous
+                    </h2>
+                    <a
+                      href={`/${prev.path}`}
+                      class="block font-medium text-foreground transition-colors hover:text-muted-foreground"
+                    >
+                      &larr; {prev.title}
+                    </a>
+                  </div>
+                )}
+                {next && next.path && (
+                  <div>
+                    <h2 class="mb-2 font-mono text-xs uppercase tracking-tight text-muted-foreground">
+                      Next
+                    </h2>
+                    <a
+                      href={`/${next.path}`}
+                      class="block font-medium text-foreground transition-colors hover:text-muted-foreground"
+                    >
+                      {next.title} &rarr;
+                    </a>
+                  </div>
+                )}
+              </div>
+            )}
+
+            <div class="pt-6 border-t border-border">
+              <a
+                href={`/${basePath}`}
+                class="inline-flex items-center gap-2 font-mono text-sm text-muted-foreground transition-colors hover:text-foreground"
+              >
+                &larr; Back to the blog
+              </a>
+            </div>
+          </div>
+        </aside>
+
+        {/* Center Column: Content */}
+        <div class="xl:col-span-3 xl:px-4">
+          {/* Mobile Authors (hidden on xl) */}
+          <dl class="pb-10 pt-6 xl:hidden border-b border-border">
+            <dt class="sr-only">Authors</dt>
+            <dd>
+              <ul class="flex flex-wrap justify-center gap-4 sm:space-x-12">
+                {authorDetails.map((author) => (
                   <li class="flex items-center space-x-2">
                     {author.avatar && (
                       <Image
@@ -92,23 +191,45 @@ const editUrl = (path: string) =>
                         <span class="mr-1">by</span>
                         <a
                           href={`/${author.authorBioLink}`}
-                          class="font-medium text-foreground underline decoration-border underline-offset-4 transition-colors hover:text-muted-foreground hover:decoration-foreground"
+                          class="font-medium text-foreground underline decoration-border underline-offset-4"
                         >
                           {author.name}
                         </a>
                       </dd>
                     </dl>
                   </li>
-                ))
-              }
-            </ul>
-          </dd>
-        </dl>
-        <div class="divide-y divide-border xl:col-span-3 xl:row-span-2 xl:pb-0">
+                ))}
+              </ul>
+            </dd>
+          </dl>
+
+          {/* Mobile Table of Contents (hidden on xl) */}
+          <div class="xl:hidden border-b border-border">
+            <details class="group [&_summary::-webkit-details-marker]:hidden">
+              <summary class="flex cursor-pointer items-center justify-between py-6 font-mono text-sm uppercase tracking-tight text-muted-foreground outline-none transition-colors hover:text-foreground">
+                <span class="flex items-center gap-2">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4">
+                    <path d="M4 6h16M4 12h16M4 18h7"/>
+                  </svg>
+                  Table of Contents
+                </span>
+                <span class="transition duration-300 group-open:-rotate-180">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4">
+                    <path d="m6 9 6 6 6-6"/>
+                  </svg>
+                </span>
+              </summary>
+              <div class="pb-6 animate-in slide-in-from-top-2">
+                <TableOfContents />
+              </div>
+            </details>
+          </div>
+
           <div class="prose max-w-none pb-8 pt-10 dark:prose-invert">
             <slot />
           </div>
-          <div class="pb-6 pt-6 text-sm">
+
+          <div class="pb-6 pt-6 text-sm border-t border-border">
             <a
               href={editUrl(filePath)}
               target="_blank"
@@ -116,85 +237,46 @@ const editUrl = (path: string) =>
               class="inline-flex items-center gap-1 font-mono text-sm text-muted-foreground transition-colors hover:text-foreground"
             >
               View on GitHub
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="h-3 w-3"
-                viewBox="0 0 20 20"
-                fill="currentColor"
-              >
-                <path
-                  d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"
-                ></path>
-                <path
-                  d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"
-                ></path>
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z" />
+                <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z" />
               </svg>
             </a>
           </div>
+
+          {/* Mobile Footer elements (hidden on xl) */}
+          <footer class="xl:hidden border-t border-border divide-y divide-border text-sm font-medium leading-5">
+            {tags && (
+              <div class="py-4">
+                <h2 class="mb-2 font-mono text-xs uppercase tracking-tight text-muted-foreground">Tags</h2>
+                <div class="mt-2 flex flex-wrap gap-2">
+                  {tags.map((tag) => <Tag text={tag} />)}
+                </div>
+              </div>
+            )}
+            {(next || prev) && (
+              <div class="flex justify-between py-4">
+                {prev && (
+                  <a href={`/${prev.path}`} class="text-foreground transition hover:text-muted-foreground">
+                    &larr; {prev.title}
+                  </a>
+                )}
+                {next && (
+                  <a href={`/${next.path}`} class="text-foreground transition hover:text-muted-foreground">
+                    {next.title} &rarr;
+                  </a>
+                )}
+              </div>
+            )}
+            <div class="pt-4">
+              <a href={`/${basePath}`} class="text-muted-foreground hover:text-foreground">
+                &larr; Back to the blog
+              </a>
+            </div>
+          </footer>
         </div>
-        <footer>
-          <div class="pt-4 xl:pt-8">
-            <a
-              href={`/${basePath}`}
-              class="inline-flex items-center gap-2 font-mono text-sm text-muted-foreground transition-colors hover:text-foreground"
-              aria-label="Back to the blog"
-            >
-              <span class="font-mono text-muted-foreground">&larr;</span>
-              Back to the blog
-            </a>
-          </div>
-          <div
-            class="divide-border text-sm font-medium leading-5 xl:col-start-1 xl:row-start-2 xl:divide-y"
-          >
-            {
-              tags && (
-                <div class="py-4 xl:py-8">
-                  <h2 class="mb-2 font-mono text-xs uppercase tracking-tight text-muted-foreground">
-                    Tags
-                  </h2>
-                  <div class="mt-2 flex flex-wrap gap-2">
-                    {tags.map((tag) => (
-                      <Tag text={tag} />
-                    ))}
-                  </div>
-                </div>
-              )
-            }
-            {
-              (next || prev) && (
-                <div class="flex justify-between py-4 xl:block xl:space-y-8 xl:py-8">
-                  {prev && prev.path && (
-                    <div class="group relative">
-                      <h2 class="mb-1 font-mono text-xs uppercase tracking-tight text-muted-foreground">
-                        Previous Article
-                      </h2>
-                      <a
-                        href={`/${prev.path}`}
-                        class="block font-medium text-foreground underline decoration-border underline-offset-4 transition-colors hover:decoration-muted-foreground group-hover:text-muted-foreground"
-                      >
-                        &larr; {prev.title}
-                      </a>
-                    </div>
-                  )}
-                  {next && next.path && (
-                    <div class="group relative">
-                      <h2 class="mb-1 font-mono text-xs uppercase tracking-tight text-muted-foreground">
-                        Next Article
-                      </h2>
-                      <a
-                        href={`/${next.path}`}
-                        class="block font-medium text-foreground underline decoration-border underline-offset-4 transition-colors hover:decoration-muted-foreground group-hover:text-muted-foreground"
-                      >
-                        {next.title} &rarr;
-                      </a>
-                    </div>
-                  )}
-                </div>
-              )
-            }
-          </div>
-        </footer>
       </div>
     </div>
   </article>
 </SectionContainer>
+</div>

@@ -1,0 +1,164 @@
+---
+// TableOfContents.astro
+// Rendered server-side; active-state highlighting is handled client-side via IntersectionObserver.
+---
+
+<nav class="toc-container" aria-label="Table of contents">
+  <p class="toc-label">On this page</p>
+  <ul class="toc-list"></ul>
+</nav>
+
+<style>
+
+  .toc-label {
+    font-family: var(--font-mono, monospace);
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: hsl(var(--muted-foreground));
+    margin-bottom: 0.75rem;
+    margin-top: 0;
+  }
+
+  .toc-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+  }
+
+  :global(.toc-item) {
+    display: block;
+  }
+
+  :global(.toc-link) {
+    display: block;
+    font-size: 0.8125rem;
+    line-height: 1.5;
+    color: hsl(var(--muted-foreground));
+    text-decoration: none;
+    border-left: 2px solid transparent;
+    padding: 0.2rem 0.6rem;
+    transition: color 150ms ease, border-color 150ms ease;
+    border-radius: 0 4px 4px 0;
+  }
+
+  :global(.toc-link:hover) {
+    color: hsl(var(--foreground));
+    border-left-color: hsl(var(--border));
+  }
+
+  :global(.toc-link.active) {
+    color: hsl(var(--foreground));
+    border-left-color: hsl(var(--foreground));
+    font-weight: 500;
+  }
+
+  :global(.toc-link.depth-3) {
+    padding-left: 1.25rem;
+    font-size: 0.77rem;
+  }
+
+  :global(.toc-link.depth-4) {
+    padding-left: 2rem;
+    font-size: 0.75rem;
+  }
+</style>
+
+<script>
+  function buildToc() {
+    const article = document.querySelector("article .prose");
+    if (!article) return;
+
+    const headings = Array.from(
+      article.querySelectorAll("h2, h3, h4")
+    ) as HTMLElement[];
+
+    if (headings.length === 0) return;
+
+    const lists = document.querySelectorAll(".toc-list");
+    if (lists.length === 0) return;
+
+    // Auto-generate IDs for headings that don't have one
+    headings.forEach((h) => {
+      if (!h.id) {
+        h.id = h.textContent!
+          .trim()
+          .toLowerCase()
+          .replace(/[^\w\s-]/g, "")
+          .replace(/\s+/g, "-")
+          .replace(/-+/g, "-");
+      }
+    });
+
+    // Build the lists
+    lists.forEach(list => {
+      list.innerHTML = "";
+      headings.forEach((h) => {
+        const depth = parseInt(h.tagName[1]);
+        const li = document.createElement("li");
+        li.className = "toc-item";
+
+        const a = document.createElement("a");
+        a.href = `#${h.id}`;
+        a.textContent = h.textContent!.trim();
+        a.className = `toc-link depth-${depth}`;
+
+        a.addEventListener("click", (e) => {
+          e.preventDefault();
+          h.scrollIntoView({ behavior: "smooth", block: "start" });
+          history.pushState(null, "", `#${h.id}`);
+        });
+
+        li.appendChild(a);
+        list.appendChild(li);
+      });
+    });
+
+    // IntersectionObserver for active state
+    const headingEls = headings;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            lists.forEach(list => {
+              const links = list.querySelectorAll<HTMLAnchorElement>(".toc-link");
+              links.forEach((l) => l.classList.remove("active"));
+              
+              const active = list.querySelector<HTMLAnchorElement>(
+                `a[href="#${entry.target.id}"]`
+              );
+              if (active) {
+                active.classList.add("active");
+                // Only scroll if the container is meant to be scrollable (usually desktop sidebar)
+                const container = active.closest('.toc-container');
+                if (container && window.getComputedStyle(container).maxHeight !== 'none') {
+                  active.scrollIntoView({ block: "nearest" });
+                }
+              }
+            });
+          }
+        });
+      },
+      {
+        rootMargin: "-10% 0px -80% 0px",
+        threshold: 0,
+      }
+    );
+
+    headingEls.forEach((h) => observer.observe(h));
+  }
+
+  // Support both standard loads and Astro view transitions
+  document.addEventListener("astro:page-load", buildToc);
+  
+  // Fallback for standard load if view transitions aren't used
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", buildToc);
+  } else {
+    buildToc();
+  }
+</script>

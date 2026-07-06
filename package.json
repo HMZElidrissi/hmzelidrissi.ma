@@ -71,11 +71,5 @@
     "@tailwindcss/typography": "0.5.16",
     "vite-plus": "latest",
     "wrangler": "^3.0.0"
-  },
-  "pnpm": {
-    "overrides": {
-      "vite": "npm:@voidzero-dev/vite-plus-core@latest",
-      "vitest": "npm:@voidzero-dev/vite-plus-test@latest"
-    }
   }
 }

@@ -259,12 +259,12 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
         <div className="max-h-96 overflow-y-auto">
           {searchError && (
             <div className="p-4 text-center">
-              <div className="text-red-500 dark:text-red-400 mb-2">
+              <div className="mb-2 text-red-500 dark:text-red-400">
                 ⚠️ Search Unavailable
               </div>
               <div className="mb-4 text-sm text-foreground">{searchError}</div>
               {searchError.includes("Run 'pnpm generate-search'") && (
-                <div className="text-blue-600 dark:text-blue-400 text-sm">
+                <div className="text-sm text-blue-600 dark:text-blue-400">
                   <strong>How to fix:</strong>
                   <br />
                   1. Open a terminal

@@ -4,4 +4,5 @@ export const navigation = [
   { href: "/tags", title: "by topic~" },
   { href: "/projects", title: "~projects" },
   { href: "/whoami", title: "who am i~" },
+  { href: "/contact", title: "~contact" },
 ];

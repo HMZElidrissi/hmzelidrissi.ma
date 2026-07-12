@@ -1,4 +1,3 @@
-import { siteMetadata } from "@/config/siteMetadata";
 import { OrbitingCircles } from "@/components/ui/orbiting-circles";
 
 import {
@@ -73,7 +72,13 @@ export default function Main({ aboutColor, contactColor }: MainProps) {
           <span className="text-nowrap text-muted-foreground">
             <a
               className="ml-2 font-normal text-background"
-              href={`mailto:${siteMetadata.email}`}
+              href="/contact"
+              onClick={(e) => {
+                e.preventDefault();
+                if (window.location.pathname !== "/contact") {
+                  navigate("/contact");
+                }
+              }}
             >
               <span className="relative inline-block px-1">
                 <span

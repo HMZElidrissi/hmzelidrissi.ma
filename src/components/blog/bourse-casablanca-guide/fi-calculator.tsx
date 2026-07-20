@@ -12,21 +12,24 @@ interface ChartPoint {
 }
 
 export default function FICalculator() {
-  const [spend, setSpend] = useState(60000);
-  const [income, setIncome] = useState(120000);
+  const [spend, setSpend] = useState(5000); // monthly MAD
+  const [income, setIncome] = useState(10000); // monthly MAD
   const [rate, setRate] = useState(8);
 
-  const invested = Math.max(0, income - spend);
-  const savingsRate = income > 0 ? Math.round((invested / income) * 100) : 0;
-  const target = spend * 25;
+  const monthlyInvested = Math.max(0, income - spend);
+  const annualInvested = monthlyInvested * 12;
+  const annualSpend = spend * 12;
+  const savingsRate =
+    income > 0 ? Math.round((monthlyInvested / income) * 100) : 0;
+  const target = annualSpend * 25;
   const r = rate / 100;
 
-  // Years to FI
+  // Years to FI (compounding annually on annualized contributions)
   let bal = 0,
     yrs = 0;
   while (bal < target && yrs < 60) {
     yrs++;
-    bal = bal * (1 + r) + invested;
+    bal = bal * (1 + r) + annualInvested;
   }
   const yearsToFI = bal >= target ? yrs : null;
 
@@ -36,7 +39,7 @@ export default function FICalculator() {
   const chartMax = Math.min(yearsToFI ? yearsToFI + 5 : 40, 45);
   for (let y = 0; y <= chartMax; y++) {
     chartPoints.push({ y, val: Math.round(b2) });
-    b2 = b2 * (1 + r) + invested;
+    b2 = b2 * (1 + r) + annualInvested;
   }
   const maxVal = Math.max(...chartPoints.map((p) => p.val), target);
   const W = 500,
@@ -62,22 +65,22 @@ export default function FICalculator() {
 
   const sliders = [
     {
-      label: "Annual spending (MAD)",
+      label: "Monthly spending (MAD)",
       id: "spend",
       val: spend,
       set: setSpend,
-      min: 20000,
-      max: 200000,
-      step: 5000,
+      min: 2000,
+      max: 17000,
+      step: 500,
     },
     {
-      label: "Annual income (MAD)",
+      label: "Monthly income (MAD)",
       id: "income",
       val: income,
       set: setIncome,
-      min: 40000,
-      max: 400000,
-      step: 5000,
+      min: 3500,
+      max: 33000,
+      step: 500,
     },
     {
       label: "Expected return (%)",
@@ -117,7 +120,7 @@ export default function FICalculator() {
             <div className="text-sm font-semibold text-foreground">
               {id === "rate"
                 ? `${val}%`
-                : `${((val as number) / 1000).toFixed(0)}K MAD`}
+                : `${((val as number) / 1000).toFixed(1)}K MAD`}
             </div>
           </div>
         ))}
@@ -127,7 +130,7 @@ export default function FICalculator() {
       <div className="mb-6 grid grid-cols-1 gap-3 sm:grid-cols-3">
         {[
           {
-            label: "FI target (25× spending)",
+            label: "FI target (25× annual spending)",
             value: fmt(target) + " MAD",
             sub: "your number to hit",
           },
@@ -140,7 +143,7 @@ export default function FICalculator() {
             label: "Years to FI",
             value: yearsToFI ? `~${yearsToFI} yrs` : "60+ yrs",
             sub:
-              invested <= 0
+              monthlyInvested <= 0
                 ? "spend less than you earn!"
                 : "at this savings rate",
           },
